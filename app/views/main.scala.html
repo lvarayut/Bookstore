@@ -5,6 +5,7 @@
 <html>
 <head>
     <title>@title</title>
+    <link rel="stylesheet" href='@routes.WebJarAssets.at(WebJarAssets.locate("css/bootstrap.min.css"))'>
     <link rel="stylesheet" media="screen" href="@routes.Assets.at(" stylesheets
     /main.css")">
     <link rel="shortcut icon" type="image/png" href="@routes.Assets.at(" images
@@ -13,6 +14,42 @@
     /jquery-1.9.0.min.js")" type="text/javascript"></script>
     </head>
     <body>
-        @content
+        <!--@content-->
+        <div class="site-wrapper">
+
+            <div class="site-wrapper-inner">
+
+                <div class="cover-container">
+
+                    <div class="masthead clearfix">
+                        <div class="inner">
+                            <h3 class="masthead-brand">BookStore</h3>
+                            <ul class="nav masthead-nav">
+                                <li class="active"><a href="#">Home</a></li>
+                                <li><a href="#">Lists</a></li>
+                                <li><a href="#">Contact</a></li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="inner cover">
+                        <h1 class="cover-heading">Welcome to BookStore!</h1>
+                        <p class="lead">Bookstore has various kinds of books available for you. Order it now.</p>
+                        <p class="lead">
+                            <a href="#" class="btn btn-lg btn-default">See more details</a>
+                        </p>
+                    </div>
+
+                    <div class="mastfoot">
+                        <div class="inner">
+                            <p>&#064; 2014 BookStorem. See entire project on  <a href="https://github.com/lvarayut/Bookstore">Github</a>.</p>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
     </body>
 </html>
