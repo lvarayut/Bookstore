@@ -3,7 +3,8 @@ name := "BookStore"
 version := "1.0-SNAPSHOT"
 
 resolvers ++= Seq(
-  "play-vaadin-integration Snapshots" at "http://henrikerola.github.io/repository/snapshots/"
+  "play-vaadin-integration Snapshots" at "http://henrikerola.github.io/repository/snapshots/",
+  "Sonatype Snapshots" at "http://oss.sonatype.org/content/repositories/snapshots/"
 )
 
 libraryDependencies ++= Seq(
@@ -17,7 +18,9 @@ libraryDependencies ++= Seq(
   "org.vaadin.playintegration" %% "play-vaadin-integration" % "0.1-SNAPSHOT",
   // Webjar for bootstrap
   "org.webjars" %% "webjars-play" % "2.2.1-2",
-  "org.webjars" % "bootstrap" % "3.1.0"
+  "org.webjars" % "bootstrap" % "3.1.0",
+  //Cassandra Plugin
+  "com.github.filosganga" %% "play-cassandra" % "1.0-SNAPSHOT"
 )
 
 play.Project.playJavaSettings
