@@ -1,0 +1,9 @@
+@(books: java.lang.Iterable[Book])
+
+<h1>All the books needed for our project!</h1>
+
+<ul>
+    @for(book <- books.iterator()){
+        <li>@book.getName()</li>
+    }
+</ul>
