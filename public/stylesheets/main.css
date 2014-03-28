@@ -108,7 +108,7 @@ body {
  */
 
 .cover {
-  padding: 0 20px;
+  padding: 100px 50px;
 }
 .cover .btn-lg {
   padding: 10px 20px;
@@ -135,6 +135,7 @@ body {
   .masthead {
     position: fixed;
     top: 0;
+
   }
   .mastfoot {
     position: fixed;

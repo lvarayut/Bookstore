@@ -1,4 +1,4 @@
-@(title: String)
+@(title: String)(body: Html)
 
 <!DOCTYPE html>
 
@@ -21,7 +21,7 @@
                         <div class="inner">
                             <h3 class="masthead-brand">BookStore</h3>
                             <ul class="nav masthead-nav">
-                                <li class="active"><a href="#">Home</a></li>
+                                <li class="active"><a href="@routes.Application.index()">Home</a></li>
                                 <li><a href="@routes.Application.bookList()">Lists</a></li>
                                 <li><a href="#">Contact</a></li>
                             </ul>
@@ -29,11 +29,7 @@
                     </div>
 
                     <div class="inner cover">
-                        <h1 class="cover-heading">Welcome to BookStore!</h1>
-                        <p class="lead">Bookstore has various kinds of books available for you. Order it now.</p>
-                        <p class="lead">
-                            <a href="#" class="btn btn-lg btn-default">See more details</a>
-                        </p>
+                            @body
                     </div>
 
                     <div class="mastfoot">

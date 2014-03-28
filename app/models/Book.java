@@ -15,12 +15,15 @@ public class Book {
     private String name;
     private String author;
     private Date publicationDate;
-
+    private String description;
+    private String imagePath;
     @JsonCreator
-    public Book(@JsonProperty("name")String name, @JsonProperty("author")String author, @JsonProperty("publicationDate")Date publicationDate) {
+    public Book(@JsonProperty("name")String name, @JsonProperty("author")String author, @JsonProperty("publicationDate")Date publicationDate, @JsonProperty("description")String description, @JsonProperty("imagePath")String imagePath) {
         this.name = name;
         this.author = author;
         this.publicationDate = publicationDate;
+        this.description = description;
+        this.imagePath = imagePath;
     }
 
     public String getId() {
@@ -55,6 +58,22 @@ public class Book {
         this.publicationDate = publicationDate;
     }
 
+    public String getImagePath() {
+        return imagePath;
+    }
+
+    public void setImagePath(String imagePath) {
+        this.imagePath = imagePath;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
     public static MongoCollection books(){
         return PlayJongo.jongo().getCollection("books");
     }
@@ -72,8 +91,8 @@ public class Book {
     }
 
     public static Iterable<Book> findAll(){
-        Iterable<Book> books = books().find().as(Book.class);
-        return books;
+        Iterable<Book> allBooks = books().find().as(Book.class);
+        return allBooks;
     }
 
     public static Book findByName(String name){
