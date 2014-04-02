@@ -9,6 +9,8 @@ GET     /play                       controllers.Application.indexDefault()
 
 GET     /lists                      controllers.Application.bookList()
 
+GET     /order                      controllers.Application.buy(bookName)
+
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.at(path="/public", file)
 

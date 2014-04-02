@@ -1,9 +1,14 @@
 package models;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import org.jongo.MongoCollection;
 import uk.co.panaxiom.playjongo.PlayJongo;
 
+/*
+* User is an account for persons
+* in the application
+*/
 
 public class User {
 
@@ -12,8 +17,21 @@ public class User {
 
     private String name;
 
-    public User(String name) {
+    private Account account;
+
+    @JsonCreator
+    public User(@JsonProperty("name") String name, @JsonProperty("account") Account account) {
         this.name = name;
+        this.account = account;
+    }
+
+    // Get users collection
+    public static MongoCollection users() {
+        return PlayJongo.getCollection("users");
+    }
+
+    public static User findByName(String name) {
+        return users().findOne("{name: #}", name).as(User.class);
     }
 
     public String getId() {
@@ -32,25 +50,24 @@ public class User {
         this.name = name;
     }
 
-    // Get users collection
-    public static MongoCollection users() {
-        return PlayJongo.getCollection("users");
+    public Account getAccount() {
+        return account;
     }
 
-    public void  insert() {
+    public void setAccount(Account account) {
+        this.account = account;
+    }
+
+    public void insert() {
         users().save(this);
     }
 
-    public void updateName(String name){
-        users().update("{name: #}",this.getName()).with("{name:#}",name);
+    public void updateName(String name) {
+        users().update("{name: #}", this.getName()).with("{name:#}", name);
     }
 
     public void remove() {
         users().remove(this.getId());
-    }
-
-    public static User findByName(String name) {
-        return users().findOne("{name: #}", name).as(User.class);
     }
 
     @Override

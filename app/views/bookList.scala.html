@@ -10,7 +10,11 @@
                     <div class="caption">
                         <h3>@book.getName()</h3>
                         <p>@book.getDescription()</p>
-                        <p><a href="#" class="btn btn-primary" role="button" style="vertical-align:bottom">Order now!</a>
+
+                        <p class="glyphicon glyphicon-euro"> @book.getPrice()</p>
+
+                        <p><a href="@routes.Application.buy(book.getName)" class="btn btn-primary" role="button"
+                              style="vertical-align:bottom">Order now!</a>
                     </div>
                 </div>
             </div>
