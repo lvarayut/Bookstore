@@ -18,23 +18,29 @@ public class Application extends Controller {
     public static Result index() {
         // Initialize books
         init();
-        return ok(index.render(""));
+        User varayut = User.findByName("varayut");
+        return ok(index.render("BookStore", varayut));
     }
 
     public static Result bookList() {
         Iterable<Book> books = Stock.findAllInStock("stock1");
-        return ok(bookList.render(books));
+        User varayut = User.findByName("varayut");
+        return ok(bookList.render(books, varayut));
     }
 
-    public static Result buy(String bookName) {
+    public static Result buy(String bookName, float bookPrice) {
         Stock bookStock = Stock.findByName("stock1");
-        // Remove money from buyer
-
-        // Add money to seller
-
-        // Remove from stock
-        bookStock.removeBook(bookStock, bookName);
-        return ok(bookList.render(bookStock.getBooks()));
+        User varayut = User.findByName("varayut");
+        User bookStore = User.findByName("bookstore");
+        if (varayut.isHaveCredit(bookPrice)) {
+            // Remove money from buyer
+            varayut.buy(bookPrice);
+            // Add money to seller
+            bookStore.sell(bookPrice);
+            // Remove a book from a stock
+            bookStock.removeBook(bookStock, bookName);
+        }
+        return ok(bookList.render(bookStock.getBooks(), varayut));
     }
 
     private static void init() {
@@ -66,6 +72,14 @@ public class Application extends Controller {
         ));
         if (Stock.findByName("stock1") == null) {
             bookStock.insert();
+        }
+        if (User.findByName("varayut") == null) {
+            Account varayutAccount = new Account(100);
+            User varayut = new User("varayut", varayutAccount);
+            Account bookStoreAccount = new Account(0);
+            User bookStore = new User("bookstore", bookStoreAccount);
+            varayut.insert();
+            bookStore.insert();
         }
     }
 

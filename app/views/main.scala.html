@@ -1,4 +1,4 @@
-@(title: String)(body: Html)
+@(title: String)(user: User)(body: Html)
 
 <!DOCTYPE html>
 
@@ -14,7 +14,7 @@
     /jquery-1.9.0.min.js")" type="text/javascript"></script>
     </head>
     <body>
-        <p class="navbar-text navbar-right">Signed in as Mark Otto</p>
+        @navbar(user)
         <div class="site-wrapper">
 
             <div class="site-wrapper-inner">

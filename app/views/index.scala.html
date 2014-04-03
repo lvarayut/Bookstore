@@ -1,9 +1,9 @@
-@(title: String)
+@(title: String)(user: User)
 
-@main(title){
-    <h1 class="cover-heading">Welcome to BookStore!</h1>
-    <p class="lead">Bookstore has various kinds of books available for you. Order now.</p>
-    <p class="lead">
-        <a href="@routes.Application.bookList()" class="btn btn-lg btn-default">See more details</a>
-    </p>
+@main(title)(user){
+<h1 class="cover-heading">Welcome to BookStore!</h1>
+<p class="lead">Bookstore has various kinds of books available for you. Order now.</p>
+<p class="lead">
+    <a href="@routes.Application.bookList()" class="btn btn-lg btn-default">See more details</a>
+</p>
 }

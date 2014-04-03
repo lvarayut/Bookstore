@@ -66,9 +66,31 @@ public class User {
         users().update("{name: #}", this.getName()).with("{name:#}", name);
     }
 
+    public void updateAccount(User user, float balance) {
+        users().update("{name: #}", this.getName()).with("{$set: {account.balance: #}}", user.getAccount().getBalance());
+    }
+
+
     public void remove() {
         users().remove(this.getId());
     }
+
+    public void buy(float bookPrice) {
+        if (isHaveCredit(bookPrice)) {
+            this.getAccount().withdraw(bookPrice);
+            updateAccount(this, bookPrice);
+        }
+    }
+
+    public void sell(float bookPrice) {
+        this.getAccount().deposit(bookPrice);
+        updateAccount(this, bookPrice);
+    }
+
+    public boolean isHaveCredit(float bookPrice) {
+        return this.getAccount().getBalance() >= bookPrice;
+    }
+
 
     @Override
     public String toString() {

@@ -10,7 +10,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 public class Account {
     @JsonProperty("_id")
     private String id;
-    private int balance;
+    private float balance;
 
     @JsonCreator
     public Account(@JsonProperty("balance") int balance) {
@@ -25,11 +25,19 @@ public class Account {
         this.id = id;
     }
 
-    public int getBalance() {
+    public float getBalance() {
         return balance;
     }
 
-    public void setBalance(int balance) {
+    public void setBalance(float balance) {
         this.balance = balance;
+    }
+
+    public void deposit(float money) {
+        this.setBalance(this.getBalance() + money);
+    }
+
+    public void withdraw(float money) {
+        this.setBalance(this.getBalance() - money);
     }
 }
