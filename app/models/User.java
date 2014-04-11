@@ -90,12 +90,12 @@ public class User {
         users().update("{name: #}", this.getName()).with("{$set: {account.balance: #}}", user.getAccount().getBalance());
     }
 
-    public void updateTransactionStatus(String transactionId, String command) {
+    public void updateTransactionStatus(String userName, String transactionId, String command) {
         if (command.equals("push")) {
             this.addTransactionStatus(transactionId);
-            users().update("{$and: [{name: #},{transactionStatus:{$ne:#}}]}", this.getName(), transactionId).with("{$#: {transactionStatus:#}}", command, transactionId);
+            users().update("{$and: [{name: #},{transactionStatus:{$ne:#}}]}", userName, transactionId).with("{$#: {transactionStatus:#}}", command, transactionId);
         } else {
-            users().update("{name: #}", this.getName()).with("{$#: {transactionStatus:#}}", command, transactionId);
+            users().update("{name: #}", userName).with("{$#: {transactionStatus:#}}", command, transactionId);
             this.removeTransactionStatus(transactionId);
         }
     }
@@ -105,7 +105,7 @@ public class User {
         users().remove(this.getId());
     }
 
-    public void buy(float bookPrice) {
+    public boolean buy(float bookPrice) {
         // Create a transaction
         Transaction transaction = new Transaction(this.getName(), "bookstore", bookPrice, "initial");
         transaction.insert();
@@ -116,16 +116,37 @@ public class User {
             this.getAccount().withdraw(bookPrice);
             // Update Account
             updateAccount(this, bookPrice);
-            updateTransactionStatus(transaction.getId(), "push");
+            updateTransactionStatus(this.getName(),transaction.getId(), "push");
+            updateTransactionStatus("bookstore",transaction.getId(), "push");
             printOut();
+            // In case of accidence
+//            try{
+//                throw new RuntimeException();
+//            }catch (Exception e){
+//                //Roll back
+//                // Change status
+//                transaction.updateStatus("cancelling");
+//                transaction.printOut();
+//                this.getAccount().deposit(bookPrice);
+//                updateAccount(this, bookPrice);
+//                // Remove transactions in the list
+//                updateTransactionStatus(this.getName(),transaction.getId(), "pull");
+//                updateTransactionStatus("bookstore",transaction.getId(), "pull");
+//                printOut();
+//                transaction.updateStatus("cancelled");
+//                transaction.printOut();
+//                if(true) return false;
+//            }
             // Change status
             transaction.updateStatus("committed");
             transaction.printOut();
-            updateTransactionStatus(transaction.getId(), "pull");
+            updateTransactionStatus(this.getName(),transaction.getId(), "pull");
+            updateTransactionStatus("bookstore",transaction.getId(), "pull");
             printOut();
             transaction.updateStatus("done");
             transaction.printOut();
         }
+        return true;
     }
 
     public void sell(float bookPrice) {

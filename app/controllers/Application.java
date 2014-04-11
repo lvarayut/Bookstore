@@ -34,7 +34,7 @@ public class Application extends Controller {
         User bookStore = User.findByName("bookstore");
         if (varayut.isHaveCredit(bookPrice)) {
             // Remove money from buyer
-            varayut.buy(bookPrice);
+            if(!varayut.buy(bookPrice))return ok(bookList.render(bookStock.getBooks(), varayut)) ;
             // Add money to seller
             bookStore.sell(bookPrice);
             // Remove a book from a stock
