@@ -3,13 +3,11 @@
 # ~~~~
 
 # Home page
-GET     /                           controllers.Application.index()
+GET     /                           controllers.Introduction.introduction()
 
-GET     /play                       controllers.Application.indexDefault()
-
-GET     /lists                      controllers.Application.bookList()
-
-GET     /order                      controllers.Application.buy(bookName,bookPrice: Float)
+#GET     /lists                      controllers.Application.bookList()
+#
+#GET     /order                      controllers.Application.buy(bookName,bookPrice: Float)
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.at(path="/public", file)

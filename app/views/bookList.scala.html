@@ -1,28 +1,28 @@
-@(books: java.lang.Iterable[Book])(user: User)
+@*@(books: java.lang.Iterable[Book])(user: User)*@
 
-@main("BookList")(user){
-<h1>All the books needed for our project!</h1>
-<div class="row">
-    @for(book <- books.iterator()){
-    <div class="col-sm-6 col-md-4">
-        <div class="thumbnail" style="height: 435px">
-            <img width="150" height="150" src="@book.getImagePath()" alt="...">
+@*@main("BookList")(user){*@
+@*<h1>All the books needed for our project!</h1>*@
+@*<div class="row">*@
+    @*@for(book <- books.iterator()){*@
+    @*<div class="col-sm-6 col-md-4">*@
+        @*<div class="thumbnail" style="height: 435px">*@
+            @*<img width="150" height="150" src="@book.getImagePath()" alt="...">*@
 
-            <div class="caption">
-                <h3>@book.getName()</h3>
+            @*<div class="caption">*@
+                @*<h3>@book.getName()</h3>*@
 
-                <p>@book.getDescription()</p>
+                @*<p>@book.getDescription()</p>*@
 
-                <p class="glyphicon glyphicon-euro"> @book.getPrice()</p>
+                @*<p class="glyphicon glyphicon-euro"> @book.getPrice()</p>*@
 
-                <p><a href="@routes.Application.buy(book.getName(),book.getPrice())" class="btn btn-primary"
-                      role="button"
-                      style="vertical-align:bottom">Order now!</a>
-            </div>
-        </div>
-    </div>
-    }
-</div>
+                @*<p><a href="@routes.Application.buy(book.getName(),book.getPrice())" class="btn btn-primary"*@
+                      @*role="button"*@
+                      @*style="vertical-align:bottom">Order now!</a>*@
+            @*</div>*@
+        @*</div>*@
+    @*</div>*@
+    @*}*@
+@*</div>*@
 
 
-}
+@*}*@

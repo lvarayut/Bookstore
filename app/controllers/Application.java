@@ -11,37 +11,38 @@ import java.util.Date;
 
 public class Application extends Controller {
 
-    public static Result indexDefault() {
-        return ok(indexDefault.render("Your new application is ready."));
-    }
 
-    public static Result index() {
-        // Initialize books
-        init();
-        User varayut = User.findByName("varayut");
-        return ok(index.render("BookStore", varayut));
-    }
-
-    public static Result bookList() {
-        Iterable<Book> books = Stock.findAllInStock("stock1");
-        User varayut = User.findByName("varayut");
-        return ok(bookList.render(books, varayut));
-    }
-
-    public static Result buy(String bookName, float bookPrice) {
-        Stock bookStock = Stock.findByName("stock1");
-        User varayut = User.findByName("varayut");
-        User bookStore = User.findByName("bookstore");
-        if (varayut.isHaveCredit(bookPrice)) {
-            // Remove money from buyer
-            if(!varayut.buy(bookPrice))return ok(bookList.render(bookStock.getBooks(), varayut)) ;
-            // Add money to seller
-            bookStore.sell(bookPrice);
-            // Remove a book from a stock
-            bookStock.removeBook(bookStock, bookName);
-        }
-        return ok(bookList.render(bookStock.getBooks(), varayut));
-    }
+//    public static Result index() {
+//        // Initialize books
+//        init();
+//        User varayut = User.findByName("varayut");
+//        return ok(index.render(varayut));
+//    }
+//
+//    public static Result login(){
+//        return ok(signUp.render());
+//    }
+//
+//    public static Result bookList() {
+//        Iterable<Book> books = Stock.findAllInStock("stock1");
+//        User varayut = User.findByName("varayut");
+//        return ok(bookList.render(books, varayut));
+//    }
+//
+//    public static Result buy(String bookName, float bookPrice) {
+//        Stock bookStock = Stock.findByName("stock1");
+//        User varayut = User.findByName("varayut");
+//        User bookStore = User.findByName("bookstore");
+//        if (varayut.isHaveCredit(bookPrice)) {
+//            // Remove money from buyer
+//            if(!varayut.buy(bookPrice))return ok(bookList.render(bookStock.getBooks(), varayut)) ;
+//            // Add money to seller
+//            bookStore.sell(bookPrice);
+//            // Remove a book from a stock
+//            bookStock.removeBook(bookStock, bookName);
+//        }
+//        return ok(bookList.render(bookStock.getBooks(), varayut));
+//    }
 
     private static void init() {
         ArrayList<Book> books = new ArrayList<Book>();
