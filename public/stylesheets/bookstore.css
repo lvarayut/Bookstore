@@ -1,5 +1,5 @@
 /*
- * Introduction page
+ * Global introduction
  */
 .intro-form-container{
     display: table;
@@ -12,15 +12,24 @@
     vertical-align: middle;
     color: #EEEEEE;
 }
-.intro-form-signup {
+
+/*
+ * Sign up
+ */
+
+.signup-form-signup {
     max-width: 330px;
     padding: 15px;
     margin: 0 auto;
 }
-.intro-form-title {
+.signup-form-title {
     margin: 20px 0;
     text-align: center;
 }
+
+/*
+ * Navbar head
+*/
 
 .navbar-brand{
     color: #FFFFFF;
@@ -30,6 +39,15 @@
 .navbar-brand:hover{
     color: #B3B3B3;
 }
+
+.navbar-head-btn{
+    position: relative;
+    z-index: 1031;
+    margin-left: 0;
+}
+
+/*Introduction section*/
+
 #signup-section{
     background: url('../images/bookstore.jpg') no-repeat center center fixed;
     -webkit-background-size: cover;

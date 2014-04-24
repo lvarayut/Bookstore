@@ -13,7 +13,7 @@
     <link rel="stylesheet" href='@routes.WebJarAssets.at(WebJarAssets.locate("css/bootstrap.min.css"))'>
     <link rel="stylesheet" href='@routes.Assets.at("stylesheets/jquery.fullPage.css")'>
     <link rel="stylesheet" href='@routes.Assets.at("stylesheets/bookstore.css")'>
-    <link rel="shortcut icon" type='image/png" href="@routes.Assets.at("images/favicon.png")'>
+    <link rel="shortcut icon" type="image/png" href='@routes.Assets.at("images/favicon.png")'>
 
     @*HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries*@
     @*WARNING: Respond.js doesn't work if you view the page via file:// *@
@@ -30,9 +30,10 @@
                 <div class="navbar-header">
                     <a class="navbar-brand" href="#">BookStore</a>
                 </div>
-            @navbarHead
             </div>
+            @navbarHead
         </div>
+        @navbarMenu
         @*<nav>@navbar(user)</nav>*@
         @*<div class="container">*@
             @content
