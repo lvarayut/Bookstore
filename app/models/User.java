@@ -18,18 +18,20 @@ public class User {
 
     @JsonProperty("_id")
     private String id;
-
     private String name;
-
+    private String email;
+    private String password;
+    private String username;
+    private String country;
+    private int age;
     private Account account;
-
-    private ArrayList<String> transactionStatus;
+//    private ArrayList<String> transactionStatus;
 
     @JsonCreator
-    public User(@JsonProperty("name") String name, @JsonProperty("account") Account account) {
-        this.name = name;
-        this.account = account;
-        this.transactionStatus = new ArrayList<String>();
+    public User(@JsonProperty("email") String email, @JsonProperty("password") String password, @JsonProperty("username") String username) {
+        this.email = email;
+        this.password = password;
+        this.username = username;
     }
 
     // Get users collection
@@ -65,17 +67,61 @@ public class User {
         this.account = account;
     }
 
-    public ArrayList<String> getTransactionStatus() {
-        return transactionStatus;
+    public String getEmail() {
+        return email;
     }
 
-    public void addTransactionStatus(String transaction) {
-        this.getTransactionStatus().add(transaction);
+    public void setEmail(String email) {
+        this.email = email;
     }
 
-    public void removeTransactionStatus(String transaction) {
-        this.getTransactionStatus().remove(transaction);
+    public String getPassword() {
+        return password;
     }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getCountry() {
+        return country;
+    }
+
+    public void setCountry(String country) {
+        this.country = country;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
+    }
+
+    public void signUp(){
+        insert();
+    }
+
+    //    public ArrayList<String> getTransactionStatus() {
+//        return transactionStatus;
+//    }
+//
+//    public void addTransactionStatus(String transaction) {
+//        this.getTransactionStatus().add(transaction);
+//    }
+//
+//    public void removeTransactionStatus(String transaction) {
+//        this.getTransactionStatus().remove(transaction);
+//    }
 
     public void insert() {
         users().save(this);
@@ -89,15 +135,15 @@ public class User {
         users().update("{name: #}", this.getName()).with("{$set: {account.balance: #}}", user.getAccount().getBalance());
     }
 
-    public void updateTransactionStatus(String userName, String transactionId, String command) {
-        if (command.equals("push")) {
-            this.addTransactionStatus(transactionId);
-            users().update("{$and: [{name: #},{transactionStatus:{$ne:#}}]}", userName, transactionId).with("{$#: {transactionStatus:#}}", command, transactionId);
-        } else {
-            users().update("{name: #}", userName).with("{$#: {transactionStatus:#}}", command, transactionId);
-            this.removeTransactionStatus(transactionId);
-        }
-    }
+//    public void updateTransactionStatus(String userName, String transactionId, String command) {
+//        if (command.equals("push")) {
+//            this.addTransactionStatus(transactionId);
+//            users().update("{$and: [{name: #},{transactionStatus:{$ne:#}}]}", userName, transactionId).with("{$#: {transactionStatus:#}}", command, transactionId);
+//        } else {
+//            users().update("{name: #}", userName).with("{$#: {transactionStatus:#}}", command, transactionId);
+//            this.removeTransactionStatus(transactionId);
+//        }
+//    }
 
 
     public void remove() {
@@ -106,18 +152,18 @@ public class User {
 
     public boolean buy(float bookPrice) {
         // Create a transaction
-        Transaction transaction = new Transaction(this.getName(), "bookstore", bookPrice, "initial");
-        transaction.insert();
-        transaction.printOut();
-        if (isHaveCredit(bookPrice)) {
-            transaction.updateStatus("pending");
-            transaction.printOut();
-            this.getAccount().withdraw(bookPrice);
-            // Update Account
-            updateAccount(this, bookPrice);
-            updateTransactionStatus(this.getName(),transaction.getId(), "push");
-            updateTransactionStatus("bookstore",transaction.getId(), "push");
-            printOut();
+//        Transaction transaction = new Transaction(this.getName(), "bookstore", bookPrice, "initial");
+//        transaction.insert();
+//        transaction.printOut();
+//        if (isHaveCredit(bookPrice)) {
+//            transaction.updateStatus("pending");
+//            transaction.printOut();
+//            this.getAccount().withdraw(bookPrice);
+//            // Update Account
+//            updateAccount(this, bookPrice);
+//            updateTransactionStatus(this.getName(), transaction.getId(), "push");
+//            updateTransactionStatus("bookstore", transaction.getId(), "push");
+//            printOut();
             // In case of accidence
 //            try{
 //                throw new RuntimeException();
@@ -137,15 +183,15 @@ public class User {
 //                if(true) return false;
 //            }
             // Change status
-            transaction.updateStatus("committed");
-            transaction.printOut();
-            updateTransactionStatus(this.getName(),transaction.getId(), "pull");
-            updateTransactionStatus("bookstore",transaction.getId(), "pull");
-            printOut();
-            transaction.updateStatus("done");
-            transaction.printOut();
-        }
-        return true;
+//            transaction.updateStatus("committed");
+//            transaction.printOut();
+//            updateTransactionStatus(this.getName(), transaction.getId(), "pull");
+//            updateTransactionStatus("bookstore", transaction.getId(), "pull");
+//            printOut();
+//            transaction.updateStatus("done");
+//            transaction.printOut();
+//        }
+         return true;
     }
 
     public void sell(float bookPrice) {
@@ -164,7 +210,6 @@ public class User {
                 "id='" + id + '\'' +
                 ", name='" + name + '\'' +
                 ", account=" + account +
-                ", transactionStatus=" + transactionStatus +
                 '}';
     }
 
