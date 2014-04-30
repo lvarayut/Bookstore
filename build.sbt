@@ -6,7 +6,12 @@ resolvers ++= Seq(
   "play-vaadin-integration Snapshots" at "http://henrikerola.github.io/repository/snapshots/",
   "Vaadin addons" at "http://maven.vaadin.com/vaadin-addons",
   // Cassandra
-  "Sonatype Snapshots" at "http://oss.sonatype.org/content/repositories/snapshots/"
+  "Sonatype Snapshots" at "http://oss.sonatype.org/content/repositories/snapshots/",
+  // Play-authenticate plugin
+  Resolver.url("play-easymail (release)", url("http://joscha.github.com/play-easymail/repo/releases/"))(Resolver.ivyStylePatterns),
+  Resolver.url("play-easymail (snapshot)", url("http://joscha.github.com/play-easymail/repo/snapshots/"))(Resolver.ivyStylePatterns),
+  Resolver.url("play-authenticate (release)", url("http://joscha.github.com/play-authenticate/repo/releases/"))(Resolver.ivyStylePatterns),
+  Resolver.url("play-authenticate (snapshot)", url("http://joscha.github.com/play-authenticate/repo/snapshots/"))(Resolver.ivyStylePatterns)
 )
 
 libraryDependencies ++= Seq(
@@ -31,7 +36,9 @@ libraryDependencies ++= Seq(
   "com.fasterxml.jackson.core" % "jackson-core" % "2.1.0" force(),
   "org.mongodb" % "mongo-java-driver" % "2.11.3",
   "org.jongo" % "jongo" % "1.0",
-  "uk.co.panaxiom" %% "play-jongo" % "0.6.0-jongo1.0"
+  "uk.co.panaxiom" %% "play-jongo" % "0.6.0-jongo1.0",
+  // Play-authenticate plugin
+  "com.feth" %% "play-authenticate" % "0.5.2-SNAPSHOT"
 )
 
 play.Project.playJavaSettings

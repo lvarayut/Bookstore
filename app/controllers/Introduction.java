@@ -24,4 +24,9 @@ public class Introduction extends Controller {
         return ok(introduction.render());
     }
 
+    public static Result oAuthDenied(final String providerKey) {
+        flash("FLASH_ERROR_KEY","You need to accept the OAuth connection in order to use this website!");
+        return ok(introduction.render());
+    }
+
 }

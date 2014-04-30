@@ -3,16 +3,22 @@
 # ~~~~
 
 # Home page
-GET     /                           controllers.Introduction.introduction()
+GET         /                                     controllers.Introduction.introduction()
 
-POST     /sign-up                    controllers.Introduction.signUp()
+POST        /sign-up                              controllers.Introduction.signUp()
 
 #GET     /lists                      controllers.Application.bookList()
 #
 #GET     /order                      controllers.Application.buy(bookName,bookPrice: Float)
 
+GET         /logout                               com.feth.play.module.pa.controllers.Authenticate.logout
+
+GET         /authenticate/:provider               com.feth.play.module.pa.controllers.Authenticate.authenticate(provider: String)
+
+GET         /authenticate/:provider/denied        controllers.Introduction.oAuthDenied(provider: String)
+
 # Map static resources from the /public folder to the /assets URL path
-GET     /assets/*file               controllers.Assets.at(path="/public", file)
+GET         /assets/*file                         controllers.Assets.at(path="/public", file)
 
 # Webjar for Bootstrap
-GET     /webjars/*file                    controllers.WebJarAssets.at(file)
+GET         /webjars/*file                        controllers.WebJarAssets.at(file)
