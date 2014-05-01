@@ -1,13 +1,13 @@
 /*
  * Global introduction
  */
-.intro-form-container{
+.intro-container{
     display: table;
     position: absolute;
     height: 80%;
     width: 100%;
 }
-.intro-form-wrapper{
+.intro-wrapper{
     display: table-cell;
     vertical-align: middle;
     color: #EEEEEE;
@@ -24,6 +24,11 @@
 }
 .signup-form-title {
     margin: 20px 0;
+    text-align: center;
+}
+.signup-provider{
+    max-width: 350px;
+    margin: 0 auto;
     text-align: center;
 }
 
@@ -46,7 +51,7 @@
     margin-left: 0;
 }
 
-/*Introduction section*/
+/*FullpageJs section*/
 
 #signup-section{
     background: url('../images/bookstore.jpg') no-repeat center center fixed;
