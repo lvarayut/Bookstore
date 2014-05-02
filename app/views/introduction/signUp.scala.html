@@ -1,11 +1,5 @@
-@import com.feth.play.module.pa.views.html._
 <div class="container">
     <a class="navbar-text pull-right btn btn-md btn-success navbar-head-btn" href="#" role="button">Sign in</a>
-    @currentAuth() { auth =>
-        @if(auth != null) {
-            <a href="@com.feth.play.module.pa.controllers.routes.Authenticate.logout">Logout</a>
-        }
-    }
 </div>
 <div class="intro-container">
     <div class="intro-wrapper">
@@ -22,13 +16,11 @@
         <div class="signup-provider">
             <hr>
             <h5>Or sign up with one of these accounts?</h5>
-            @forProviders() { p =>
-                <a class="btn btn-social-icon btn-google-plus" href="@p.getUrl()"><i class="fa fa-google-plus"></i></a>
+                <a class="btn btn-social-icon btn-google-plus" href=""><i class="fa fa-google-plus"></i></a>
                 <a class="btn btn-social-icon btn-facebook"><i class="fa fa-facebook"></i></a>
                 <a class="btn btn-social-icon btn-twitter"><i class="fa fa-twitter"></i></a>
-            }
+
         </div>
     </div>
-
 </div>
 
