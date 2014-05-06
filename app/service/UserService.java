@@ -1,5 +1,6 @@
 package service;
 
+import models.User;
 import play.Application;
 import play.Logger;
 import scala.Option;
@@ -64,6 +65,8 @@ public class UserService extends BaseUserService {
         // this sample returns the same user object, but you could return an instance of your own class
         // here as long as it implements the Identity interface. This will allow you to use your own class in the
         // protected actions and event callbacks. The same goes for the doFind(UserId userId) method.
+        models.User user = new models.User(identity.email().toString(),"",identity.fullName());
+
         return identity;
     }
 

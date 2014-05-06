@@ -5,7 +5,7 @@
 # Home page
 GET         /                                     controllers.Introduction.introduction()
 
-POST        /sign-up                              controllers.Introduction.signUp()
+#POST        /sign-up                              controllers.Introduction.signUp()
 
 #GET     /lists                      controllers.Application.bookList()
 #
