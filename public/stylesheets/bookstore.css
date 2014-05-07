@@ -70,24 +70,38 @@
 /*FullpageJs section*/
 
 #signup-section{
-    background: url('../images/bookstore.jpg') no-repeat center center fixed;
+    background: url('../images/bg_bookstore1.jpg') no-repeat center center fixed;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
     background-size: cover;
 }
 #showcase-section{
-    background: url('../images/bookstore1.jpg') no-repeat center center fixed;
+    background: url('../images/bg_bookstore2.jpg') no-repeat center center fixed;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
     background-size: cover;
 }
 #contactus-section{
-    background: url('../images/bookstore.jpg') no-repeat center center fixed;
+    background: url('../images/bg_bookstore3.jpg') no-repeat center center fixed;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
     background-size: cover;
 }
 
+/*
+ * Footer
+*/
+
+.credit div h5 a,
+.credit div h5 a:hover{
+    color: #ffffff;
+    text-shadow: 0px 0px 2px #000;
+    opacity: 0.7;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 60px;
+}
