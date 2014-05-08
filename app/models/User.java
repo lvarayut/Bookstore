@@ -6,9 +6,11 @@ import com.avaje.ebean.ExpressionList;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import org.jongo.MongoCollection;
+import securesocial.core.Identity;
 import uk.co.panaxiom.playjongo.PlayJongo;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /*
 * User is an account for persons
@@ -26,13 +28,21 @@ public class User {
     private String country;
     private int age;
     private Account account;
+    public List<Identity> identities;
 //    private ArrayList<String> transactionStatus;
+
+    @JsonCreator
+    public User(){
+
+        identities = new ArrayList<Identity>();
+    }
 
     @JsonCreator
     public User(@JsonProperty("email") String email, @JsonProperty("password") String password, @JsonProperty("username") String username) {
         this.email = email;
         this.password = password;
         this.username = username;
+        identities = new ArrayList<Identity>();
     }
 
     // Get users collection
@@ -108,9 +118,38 @@ public class User {
         this.age = age;
     }
 
+    public List<Identity> getIdentities() {
+        return identities;
+    }
+
+    public void setIdentities(List<Identity> identities) {
+        this.identities = identities;
+    }
+
     public void signUp(){
         insert();
     }
+
+    public void insert() {
+        users().save(this);
+    }
+
+    public void remove() {
+        users().remove(this.getId());
+    }
+
+    public void updateName(String name) {
+        users().update("{name: #}", this.getName()).with("{name:#}", name);
+    }
+
+    public void updateAccount(User user, float balance) {
+        users().update("{name: #}", this.getName()).with("{$set: {account.balance: #}}", user.getAccount().getBalance());
+    }
+
+    public static Iterable<User> findAllUsers(){
+        return users().find().as(User.class);
+    }
+
 
     //    public ArrayList<String> getTransactionStatus() {
 //        return transactionStatus;
@@ -124,17 +163,6 @@ public class User {
 //        this.getTransactionStatus().remove(transaction);
 //    }
 
-    public void insert() {
-        users().save(this);
-    }
-
-    public void updateName(String name) {
-        users().update("{name: #}", this.getName()).with("{name:#}", name);
-    }
-
-    public void updateAccount(User user, float balance) {
-        users().update("{name: #}", this.getName()).with("{$set: {account.balance: #}}", user.getAccount().getBalance());
-    }
 
 //    public void updateTransactionStatus(String userName, String transactionId, String command) {
 //        if (command.equals("push")) {
@@ -147,9 +175,6 @@ public class User {
 //    }
 
 
-    public void remove() {
-        users().remove(this.getId());
-    }
 
     public boolean buy(float bookPrice) {
         // Create a transaction
@@ -214,8 +239,8 @@ public class User {
                 '}';
     }
 
-    public void printOut() {
-        Iterable<User> users = users().find().as(User.class);
+    public void printAllUsers() {
+        Iterable<User> users = this.findAllUsers();
         for (User user : users) {
             System.out.println(user.toString());
         }
