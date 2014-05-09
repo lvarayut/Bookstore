@@ -28,9 +28,10 @@ public class UserService extends BaseUserService {
     @Override
     public Identity doSave(Identity identity) {
         User found = null;
-
+        User.printAllUsers();
+        Iterable<User> x = User.findAllUsers();
         for ( User u : User.findAllUsers() ) {
-            if (u.getEmail().equals(identity.email())) {
+            if (u.getEmail().equals(identity.email().get())) {
                 found = u;
                 break;
             }
@@ -43,8 +44,12 @@ public class UserService extends BaseUserService {
             user.setUsername(identity.firstName());
             user.setName(identity.fullName());
             user.setEmail(identity.email().get());
-            user.setPassword(identity.passwordInfo().get().password());
-            user.getIdentities().add(identity);
+            user.setIdentity(identity);
+            // In case of using third party provider, they don't have a password.
+            if(identity.passwordInfo().nonEmpty()){
+                user.setPassword(identity.passwordInfo().get().password());
+            }
+
             // Persist the user to DB
             user.insert();
         }
@@ -52,18 +57,11 @@ public class UserService extends BaseUserService {
         return identity;
     }
 
-
-    @Override
-    public void doSave(Token token) {
-        tokens.put(token.uuid,token);
-    }
-
-
     public void doLink(Identity current, Identity to) {
         User target = null;
 
-        for ( User u: users.values() ) {
-            if ( u.identities.contains(current) ) {
+        for ( User u: User.findAllUsers() ) {
+            if ( u.getIdentity() == current ) {
                 target = u;
                 break;
             }
@@ -73,10 +71,12 @@ public class UserService extends BaseUserService {
             // this should not happen
             throw new RuntimeException("Can't find a user for identity: " + current.identityId());
         }
-        if ( !target.identities.contains(to)) target.identities.add(to);
+        if ( !(target.getIdentity() == to)) target.setIdentity(to);
     }
 
-
+    /*
+    * Find a requested user for the login system
+    * */
     @Override
     public Identity doFind(IdentityId userId) {
         if(logger.isDebugEnabled()){
@@ -84,15 +84,12 @@ public class UserService extends BaseUserService {
         }
         Identity found = null;
 
-        for ( User u: users.values() ) {
-            for ( Identity i : u.identities ) {
-                if ( i.identityId().equals(userId) ) {
-                    found = i;
+        for ( User u: User.findAllUsers() ) {
+                if ( u.getIdentity().identityId().userId() == userId.userId() ) {
+                    found = u.getIdentity();
                     break;
                 }
-            }
         }
-
         return found;
     }
 
@@ -101,22 +98,30 @@ public class UserService extends BaseUserService {
         return tokens.get(tokenId);
     }
 
+
+    /*
+    * Verify an exist user before signing up
+    * */
     @Override
     public Identity doFindByEmailAndProvider(String email, String providerId) {
         Identity result = null;
-        for( User user : users.values() ) {
-            for ( Identity identity : user.identities ) {
-                Option<String> optionalEmail = identity.email();
-                if ( identity.identityId().providerId().equals(providerId) &&
-                        optionalEmail.isDefined() &&
-                        optionalEmail.get().equalsIgnoreCase(email))
+        for( User user : User.findAllUsers() ) {
+            String optionalEmail = user.getEmail();
+            if ( user.getIdentity().identityId().providerId().equals(providerId))
                 {
-                    result = identity;
+                    result = user.getIdentity();
                     break;
                 }
             }
-        }
+
         return result;
+    }
+
+
+
+    @Override
+    public void doSave(Token token) {
+        tokens.put(token.uuid,token);
     }
 
     @Override
@@ -141,8 +146,8 @@ public class UserService extends BaseUserService {
     public User userForIdentity(Identity identity) {
         User result = null;
 
-        for ( User u : users.values() ) {
-            if ( u.identities.contains(identity) ) {
+        for ( User u : User.findAllUsers() ) {
+            if ( u.getIdentity() == identity ) {
                 result = u;
                 break;
             }

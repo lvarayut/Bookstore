@@ -5,9 +5,11 @@ import ch.qos.logback.core.net.SyslogOutputStream;
 import com.avaje.ebean.ExpressionList;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import org.jongo.MongoCollection;
 import securesocial.core.Identity;
 import uk.co.panaxiom.playjongo.PlayJongo;
+import securesocial.core.SocialUser;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,13 +30,11 @@ public class User {
     private String country;
     private int age;
     private Account account;
-    public List<Identity> identities;
+    private Identity identity;
 //    private ArrayList<String> transactionStatus;
-
     @JsonCreator
     public User(){
 
-        identities = new ArrayList<Identity>();
     }
 
     @JsonCreator
@@ -42,7 +42,6 @@ public class User {
         this.email = email;
         this.password = password;
         this.username = username;
-        identities = new ArrayList<Identity>();
     }
 
     // Get users collection
@@ -118,12 +117,12 @@ public class User {
         this.age = age;
     }
 
-    public List<Identity> getIdentities() {
-        return identities;
+    public Identity getIdentity() {
+        return identity;
     }
 
-    public void setIdentities(List<Identity> identities) {
-        this.identities = identities;
+    public void setIdentity(Identity identity) {
+        this.identity = identity;
     }
 
     public void signUp(){
@@ -239,8 +238,8 @@ public class User {
                 '}';
     }
 
-    public void printAllUsers() {
-        Iterable<User> users = this.findAllUsers();
+    public static void printAllUsers() {
+        Iterable<User> users = findAllUsers();
         for (User user : users) {
             System.out.println(user.toString());
         }
