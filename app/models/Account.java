@@ -12,6 +12,8 @@ public class Account {
     private String id;
     private float balance;
 
+    public Account(){}
+
     @JsonCreator
     public Account(@JsonProperty("balance") int balance) {
         this.balance = balance;

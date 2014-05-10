@@ -4,12 +4,13 @@ import akka.io.Inet;
 import ch.qos.logback.core.net.SyslogOutputStream;
 import com.avaje.ebean.ExpressionList;
 import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
+import models.SecureSocial.Password;
 import org.jongo.MongoCollection;
 import securesocial.core.Identity;
 import uk.co.panaxiom.playjongo.PlayJongo;
-import securesocial.core.SocialUser;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,24 +24,36 @@ public class User {
 
     @JsonProperty("_id")
     private String id;
-    private String name;
+    @JsonProperty("userid")
+    private String userid;
+    @JsonProperty("provider")
+    private String provider;
+    @JsonProperty("firstname")
+    private String firstname;
+    @JsonProperty("lastname")
+    private String lastname;
+    @JsonProperty("email")
     private String email;
-    private String password;
+    @JsonProperty("authmethod")
+    private String authmethod;
+    // Shouldn't be the same name with the exist class; Password
+    @JsonProperty("pwd")
+    private Password pwd;
+    @JsonProperty("username")
     private String username;
+    @JsonProperty("country")
     private String country;
+    @JsonProperty("age")
     private int age;
-    private Account account;
-    private Identity identity;
+//    @JsonProperty("account")
+//    private Account account;
 //    private ArrayList<String> transactionStatus;
-    @JsonCreator
-    public User(){
 
+    public User(){
     }
 
-    @JsonCreator
     public User(@JsonProperty("email") String email, @JsonProperty("password") String password, @JsonProperty("username") String username) {
         this.email = email;
-        this.password = password;
         this.username = username;
     }
 
@@ -61,20 +74,36 @@ public class User {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getUserid() {
+        return userid;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setUserid(String userid) {
+        this.userid = userid;
     }
 
-    public Account getAccount() {
-        return account;
+    public String getProvider() {
+        return provider;
     }
 
-    public void setAccount(Account account) {
-        this.account = account;
+    public void setProvider(String provider) {
+        this.provider = provider;
+    }
+
+    public String getFirstname() {
+        return firstname;
+    }
+
+    public void setFirstname(String firstname) {
+        this.firstname = firstname;
+    }
+
+    public String getLastname() {
+        return lastname;
+    }
+
+    public void setLastname(String lastname) {
+        this.lastname = lastname;
     }
 
     public String getEmail() {
@@ -85,12 +114,20 @@ public class User {
         this.email = email;
     }
 
-    public String getPassword() {
-        return password;
+    public String getAuthmethod() {
+        return authmethod;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public void setAuthmethod(String authmethod) {
+        this.authmethod = authmethod;
+    }
+
+    public Password getPwd() {
+        return pwd;
+    }
+
+    public void setPwd(Password pwd) {
+        this.pwd = pwd;
     }
 
     public String getUsername() {
@@ -116,14 +153,14 @@ public class User {
     public void setAge(int age) {
         this.age = age;
     }
-
-    public Identity getIdentity() {
-        return identity;
-    }
-
-    public void setIdentity(Identity identity) {
-        this.identity = identity;
-    }
+//
+//    public Account getAccount() {
+//        return account;
+//    }
+//
+//    public void setAccount(Account account) {
+//        this.account = account;
+//    }
 
     public void signUp(){
         insert();
@@ -137,13 +174,13 @@ public class User {
         users().remove(this.getId());
     }
 
-    public void updateName(String name) {
-        users().update("{name: #}", this.getName()).with("{name:#}", name);
-    }
-
-    public void updateAccount(User user, float balance) {
-        users().update("{name: #}", this.getName()).with("{$set: {account.balance: #}}", user.getAccount().getBalance());
-    }
+//    public void updateName(String name) {
+//        users().update("{name: #}", this.getName()).with("{name:#}", name);
+//    }
+//
+//    public void updateAccount(User user, float balance) {
+//        users().update("{name: #}", this.getName()).with("{$set: {account.balance: #}}", user.getAccount().getBalance());
+//    }
 
     public static Iterable<User> findAllUsers(){
         return users().find().as(User.class);
@@ -175,7 +212,7 @@ public class User {
 
 
 
-    public boolean buy(float bookPrice) {
+//    public boolean buy(float bookPrice) {
         // Create a transaction
 //        Transaction transaction = new Transaction(this.getName(), "bookstore", bookPrice, "initial");
 //        transaction.insert();
@@ -216,25 +253,29 @@ public class User {
 //            transaction.updateStatus("done");
 //            transaction.printOut();
 //        }
-         return true;
-    }
+//         return true;
+//    }
 
-    public void sell(float bookPrice) {
-        this.getAccount().deposit(bookPrice);
-        updateAccount(this, bookPrice);
-    }
+//    public void sell(float bookPrice) {
+//        this.getAccount().deposit(bookPrice);
+//        updateAccount(this, bookPrice);
+//    }
 
-    public boolean isHaveCredit(float bookPrice) {
-        return this.getAccount().getBalance() >= bookPrice;
-    }
-
+//    public boolean isHaveCredit(float bookPrice) {
+//        return this.getAccount().getBalance() >= bookPrice;
+//    }
 
     @Override
     public String toString() {
         return "User{" +
-                "id='" + id + '\'' +
-                ", name='" + name + '\'' +
-                ", account=" + account +
+                "userid='" + userid + '\'' +
+                ", provider='" + provider + '\'' +
+                ", firstname='" + firstname + '\'' +
+                ", lastname='" + lastname + '\'' +
+                ", email='" + email + '\'' +
+                ", authmethod='" + authmethod + '\'' +
+                ", country='" + country + '\'' +
+                ", age=" + age +
                 '}';
     }
 
