@@ -5,7 +5,10 @@
     <body>
         <p>Hello @user.firstName,</p>
 
-        <p>You tried to sign up but you already have an account with us.  If you don't remember your password please go
-            <a href="@securesocial.core.providers.utils.RoutesHelper.startResetPassword().absoluteURL(IdentityProvider.sslEnabled)(request)">here</a> to reset it.</p>
+        <p>You have tried to sign up, however, you already have an account with us by using providers; Google, Facebook, or Twitter.</p>
+        <p>Please try to  <a href="@securesocial.core.providers.utils.RoutesHelper.login.absoluteURL(IdentityProvider.sslEnabled)(request)">Sign in</a> using one of the mentioned providers above.</p>
+        <p>Best regards,</p>
+        <p>BookStore</p>
+            @*<a href="@securesocial.core.providers.utils.RoutesHelper.startResetPassword().absoluteURL(IdentityProvider.sslEnabled)(request)">here</a> to reset it.</p>*@
     </body>
 </html>

@@ -120,6 +120,7 @@ public class UserService extends BaseUserService {
 
     /**
      * Verify an exist user before signing up
+     * by using UserPasswordProvider
      * @param email
      * @param providerId
      * @return
@@ -130,9 +131,10 @@ public class UserService extends BaseUserService {
             logger.debug("Finding user by mail " + email);
         }
         Identity result = null;
+        // If a user already signed up using the social providers,
+        // he/she shouldn't be able to sign up again.
         for (User user : User.findAllUsers()) {
-            if(user.getEmail().equals(email) &&
-                    user.getProvider().equals(providerId)){
+            if(user.getEmail().equals(email)){
                 result = this.createUser(user);
                 break;
             }
