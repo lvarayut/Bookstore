@@ -1,9 +1,22 @@
-@*@(user: User)*@
+@base() {
+    <div class="navbar navbar-default navbar-static-top" role="navigation">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#">BookStore</a>
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="#">LVarayut</a></li>
+                </ul>
+            </div><!--/.nav-collapse -->
+        </div>
+    </div>
+} {
 
-@*@main()(user){*@
-@*<h1 class="cover-heading">Welcome to BookStore!</h1>*@
-@*<p class="lead">Bookstore has various kinds of books available for you. Order now.</p>*@
-@*<p class="lead">*@
-    @*<a href="@routes.Application.bookList()" class="btn btn-lg btn-default">See more details</a>*@
-@*</p>*@
-@*}*@
+}()

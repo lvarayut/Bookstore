@@ -1,4 +1,4 @@
-@(title: String = "BookStore")(navbarHead:Html = Html.empty)(navbarMenu:Html = Html.empty)(content: Html = Html.empty)(footer:Html = Html.empty)
+@(title: String = "BookStore")(navbarMenu:Html = Html.empty)(content: Html = Html.empty)(footer:Html = Html.empty)
 
 <!DOCTYPE html>
 
@@ -27,14 +27,6 @@
 
     </head>
     <body>
-        <div class="navbar navbar-fixed-top" role="navigation">
-            <div class="container">
-                <div class="navbar-header">
-                    <a class="navbar-brand" href="@routes.Introduction.introduction()">BookStore</a>
-                </div>
-            </div>
-            @navbarHead
-        </div>
         @navbarMenu
         @*<nav>@navbar(user)</nav>*@
         @*<div class="container">*@

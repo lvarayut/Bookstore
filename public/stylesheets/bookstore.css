@@ -52,16 +52,16 @@
  * Navbar head
 */
 
-.navbar-brand{
+.intro-navbar-brand{
     color: #FFFFFF;
     text-shadow: 0 -1px 0 rgba(0,0,0,.75);
     font-size: 20px;
 }
-.navbar-brand:hover{
-    color: #B3B3B3;
+.intro-navbar-brand:hover{
+    color: #C7C7C7;
 }
 
-.navbar-head-btn{
+.intro-navbar-head-btn{
     position: relative;
     z-index: 1031;
     margin-left: 0;
