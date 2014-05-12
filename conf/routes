@@ -6,7 +6,7 @@
 
 GET         /                                   controllers.BookStore.index()
 
-GET         /introduction                              controllers.Introduction.introduction()
+GET         /introduction                       controllers.Introduction.introduction()
 
 #POST        /sign-up                              controllers.Introduction.signUp()
 
