@@ -19,8 +19,7 @@ public class Introduction extends Controller {
         String email = form.get("email")[0];
         String username = form.get("username")[0];
         String password = form.get("password")[0];
-        User user = new User(email,username,password);
-        user.signUp();
+        //user.signUp();
         return ok(introduction.render());
     }
 

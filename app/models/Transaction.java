@@ -8,17 +8,11 @@ import uk.co.panaxiom.playjongo.PlayJongo;
 public class Transaction {
     @JsonProperty("_id")
     private String id;
-    private String source;
-    private String destination;
-    private float value;
+    @JsonProperty("orderProduct")
+    private Order orderProduct;
     private String status;
 
-    @JsonCreator
-    public Transaction(@JsonProperty("source") String source, @JsonProperty("destination") String destination, @JsonProperty("value") float value, @JsonProperty("status") String status) {
-        this.source = source;
-        this.destination = destination;
-        this.value = value;
-        this.status = status;
+    public Transaction() {
     }
 
     // Get users collection
@@ -34,28 +28,12 @@ public class Transaction {
         this.id = id;
     }
 
-    public String getSource() {
-        return source;
+    public Order getOrderProduct() {
+        return orderProduct;
     }
 
-    public void setSource(String source) {
-        this.source = source;
-    }
-
-    public String getDestination() {
-        return destination;
-    }
-
-    public void setDestination(String destination) {
-        this.destination = destination;
-    }
-
-    public float getValue() {
-        return value;
-    }
-
-    public void setValue(float value) {
-        this.value = value;
+    public void setOrderProduct(Order orderProduct) {
+        this.orderProduct = orderProduct;
     }
 
     public String getStatus() {
@@ -78,9 +56,7 @@ public class Transaction {
     public String toString() {
         return "Transaction{" +
                 "id='" + id + '\'' +
-                ", source='" + source + '\'' +
-                ", destination='" + destination + '\'' +
-                ", value=" + value +
+                ", orderProduct=" + orderProduct +
                 ", status='" + status + '\'' +
                 '}';
     }

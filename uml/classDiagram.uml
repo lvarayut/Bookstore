@@ -3,30 +3,88 @@
   <ID>JAVA</ID>
   <OriginalElement />
   <nodes>
-    <node x="921.0" y="542.0">models.Stock</node>
-    <node x="282.15724137931045" y="0.004137931034481568">models.Account</node>
-    <node x="851.0" y="0.0">models.Book</node>
-    <node x="0.0" y="248.0">models.User</node>
-    <node x="0.0" y="1079.0">models.Transaction</node>
+    <node x="146.0" y="10.5">models.Role</node>
+    <node x="247.25" y="741.0">models.Delivery</node>
+    <node x="0.0" y="21.0">models.Account</node>
+    <node x="203.52272727272728" y="557.0">models.Order</node>
+    <node x="420.25" y="257.5">models.Product</node>
+    <node x="424.75" y="567.5">models.Book</node>
+    <node x="14.25" y="163.0">models.User</node>
+    <node x="81.25" y="772.5">models.Transaction</node>
+    <node x="641.75" y="567.5">models.Inventory</node>
+    <node x="621.5" y="0.0">models.Address</node>
   </nodes>
   <notes />
   <edges>
-    <edge source="models.User" target="models.Account">
-      <point x="0.0" y="-393.0" />
-      <point x="0.0" y="99.0" />
+    <edge source="models.Order" target="models.User">
+      <point x="-62.0" y="-67.0" />
+      <point x="234.52272727272728" y="532.0" />
+      <point x="110.75" y="532.0" />
+      <point x="-96.5" y="172.0" />
     </edge>
-    <edge source="models.Stock" target="models.Book">
-      <point x="0.0" y="-172.5" />
-      <point x="0.0" y="246.0" />
+    <edge source="models.Inventory" target="models.Product">
+      <point x="-41.5" y="-56.5" />
+      <point x="683.25" y="532.0" />
+      <point x="591.9166666666667" y="532.0" />
+      <point x="68.66666666666669" y="77.5" />
+    </edge>
+    <edge source="models.User" target="models.Address">
+      <point x="144.75" y="-172.0" />
+      <point x="352.0" y="138.0" />
+      <point x="669.75" y="138.0" />
+      <point x="-48.25" y="56.5" />
+    </edge>
+    <edge source="models.User" target="models.Account">
+      <point x="-144.75" y="-172.0" />
+      <point x="0.0" y="35.5" />
+    </edge>
+    <edge source="models.Delivery" target="models.Order">
+      <point x="0.0" y="-77.5" />
+      <point x="350.25" y="716.0" />
+      <point x="343.02272727272725" y="716.0" />
+      <point x="46.5" y="67.0" />
+    </edge>
+    <edge source="models.User" target="models.Order">
+      <point x="96.5" y="172.0" />
+      <point x="303.75" y="532.0" />
+      <point x="296.52272727272725" y="532.0" />
+      <point x="0.0" y="-67.0" />
+    </edge>
+    <edge source="models.Book" target="models.Product">
+      <point x="0.0" y="-56.5" />
+      <point x="0.0" y="77.5" />
+    </edge>
+    <edge source="models.Inventory" target="models.Address">
+      <point x="41.5" y="-56.5" />
+      <point x="48.25" y="56.5" />
+    </edge>
+    <edge source="models.Transaction" target="models.Order">
+      <point x="0.0" y="-46.0" />
+      <point x="154.25" y="716.0" />
+      <point x="250.02272727272728" y="716.0" />
+      <point x="-46.5" y="67.0" />
+    </edge>
+    <edge source="models.Role" target="models.User">
+      <point x="36.5" y="46.0" />
+      <point x="48.25" y="-172.0" />
+    </edge>
+    <edge source="models.User" target="models.Role">
+      <point x="-48.25" y="-172.0" />
+      <point x="159.0" y="138.0" />
+      <point x="182.5" y="138.0" />
+      <point x="-36.5" y="46.0" />
+    </edge>
+    <edge source="models.Order" target="models.Product">
+      <point x="62.0" y="-67.0" />
+      <point x="358.52272727272725" y="532.0" />
+      <point x="454.5833333333333" y="532.0" />
+      <point x="-68.66666666666669" y="77.5" />
     </edge>
   </edges>
-  <settings layout="Hierarchic Group" zoom="0.46713917525773196" x="688.5" y="763.0" />
-  <SelectedNodes>
-    <node>models.Account</node>
-  </SelectedNodes>
+  <settings layout="Hierarchic Group" zoom="0.9334061135371179" x="408.28304093567255" y="528.0" />
+  <SelectedNodes />
   <Categories>
     <Category>Fields</Category>
-    <Category>Methods</Category>
   </Categories>
   <SCOPE>All</SCOPE>
   <VISIBILITY>private</VISIBILITY>

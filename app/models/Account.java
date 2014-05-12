@@ -10,6 +10,9 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 public class Account {
     @JsonProperty("_id")
     private String id;
+    @JsonProperty("type")
+    private String type;
+    @JsonProperty("balance")
     private float balance;
 
     public Account(){}
@@ -27,6 +30,14 @@ public class Account {
         this.id = id;
     }
 
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
     public float getBalance() {
         return balance;
     }
@@ -41,5 +52,14 @@ public class Account {
 
     public void withdraw(float money) {
         this.setBalance(this.getBalance() - money);
+    }
+
+    @Override
+    public String toString() {
+        return "Account{" +
+                "id='" + id + '\'' +
+                ", type='" + type + '\'' +
+                ", balance=" + balance +
+                '}';
     }
 }

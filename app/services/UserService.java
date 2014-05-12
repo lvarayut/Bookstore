@@ -1,4 +1,4 @@
-package service;
+package services;
 
 import models.SecureSocial.Password;
 import models.User;
@@ -11,11 +11,11 @@ import securesocial.core.java.Token;
 import java.util.*;
 
 /**
- * UserService is a service that acts as a controller
+ * UserService is a services that acts as a controller
  * gluing between SecureSocial plugin and the User class
  */
 public class UserService extends BaseUserService {
-    public Logger.ALogger logger = play.Logger.of("app.service.UserService");
+    public Logger.ALogger logger = play.Logger.of("app.services.UserService");
     private HashMap<String, Token> tokens = new HashMap<String, Token>();
 
     /**

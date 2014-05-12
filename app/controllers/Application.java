@@ -24,13 +24,13 @@ public class Application extends Controller {
 //    }
 //
 //    public static Result bookList() {
-//        Iterable<Book> books = Stock.findAllInStock("stock1");
+//        Iterable<Book> books = Inventory.findAllInStock("stock1");
 //        User varayut = User.findByName("varayut");
 //        return ok(bookList.render(books, varayut));
 //    }
 //
 //    public static Result buy(String bookName, float bookPrice) {
-//        Stock bookStock = Stock.findByName("stock1");
+//        Inventory bookStock = Inventory.findByName("stock1");
 //        User varayut = User.findByName("varayut");
 //        User bookStore = User.findByName("bookstore");
 //        if (varayut.isHaveCredit(bookPrice)) {
@@ -46,7 +46,7 @@ public class Application extends Controller {
 
     private static void init() {
 //        ArrayList<Book> books = new ArrayList<Book>();
-//        Stock bookStock = new Stock("stock1", books);
+//        Inventory bookStock = new Inventory("stock1", books);
 //        books.add(new Book(
 //                "MongoDB",
 //                "Kristina Chodorow",
@@ -71,7 +71,7 @@ public class Application extends Controller {
 //                "http://www.packtpub.com/sites/default/files/4524OS_Bootstrap%20Site%20Blueprints_Frontcover.jpg",
 //                40
 //        ));
-//        if (Stock.findByName("stock1") == null) {
+//        if (Inventory.findByName("stock1") == null) {
 //            bookStock.insert();
 //        }
 //        if (User.findByName("varayut") == null) {

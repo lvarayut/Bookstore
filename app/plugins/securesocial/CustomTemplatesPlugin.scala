@@ -1,4 +1,4 @@
-package plugin.securesocial
+package plugins.securesocial
 
 import securesocial.controllers.TemplatesPlugin
 

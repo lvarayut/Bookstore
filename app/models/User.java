@@ -41,29 +41,29 @@ public class User {
     private Password pwd;
     @JsonProperty("username")
     private String username;
-    @JsonProperty("country")
-    private String country;
+    @JsonProperty("phoneno")
+    private String phoneno;
     @JsonProperty("age")
     private int age;
-//    @JsonProperty("account")
-//    private Account account;
-//    private ArrayList<String> transactionStatus;
+    @JsonProperty("accounts")
+    private List<Account> accounts;
+    @JsonProperty("roles")
+    private List<Role> roles;
+    @JsonProperty("orders")
+    private List<Order> orders;
+    @JsonProperty("contact")
+    private Address contact;
+
 
     public User(){
-    }
-
-    public User(@JsonProperty("email") String email, @JsonProperty("password") String password, @JsonProperty("username") String username) {
-        this.email = email;
-        this.username = username;
+        accounts = new ArrayList<Account>();
+        roles = new ArrayList<Role>();
+        orders = new ArrayList<Order>();
     }
 
     // Get users collection
     public static MongoCollection users() {
         return PlayJongo.getCollection("users");
-    }
-
-    public static User findByName(String name) {
-        return users().findOne("{name: #}", name).as(User.class);
     }
 
     public String getId() {
@@ -138,12 +138,12 @@ public class User {
         this.username = username;
     }
 
-    public String getCountry() {
-        return country;
+    public String getPhoneno() {
+        return phoneno;
     }
 
-    public void setCountry(String country) {
-        this.country = country;
+    public void setPhoneno(String phoneno) {
+        this.phoneno = phoneno;
     }
 
     public int getAge() {
@@ -153,6 +153,39 @@ public class User {
     public void setAge(int age) {
         this.age = age;
     }
+
+    public List<Account> getAccounts() {
+        return accounts;
+    }
+
+    public void setAccounts(List<Account> accounts) {
+        this.accounts = accounts;
+    }
+
+    public List<Role> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(List<Role> roles) {
+        this.roles = roles;
+    }
+
+    public List<Order> getOrders() {
+        return orders;
+    }
+
+    public void setOrders(List<Order> orders) {
+        this.orders = orders;
+    }
+
+    public Address getContact() {
+        return contact;
+    }
+
+    public void setContact(Address contact) {
+        this.contact = contact;
+    }
+
 //
 //    public Account getAccount() {
 //        return account;
@@ -265,17 +298,25 @@ public class User {
 //        return this.getAccount().getBalance() >= bookPrice;
 //    }
 
+
     @Override
     public String toString() {
         return "User{" +
-                "userid='" + userid + '\'' +
+                "id='" + id + '\'' +
+                ", userid='" + userid + '\'' +
                 ", provider='" + provider + '\'' +
                 ", firstname='" + firstname + '\'' +
                 ", lastname='" + lastname + '\'' +
                 ", email='" + email + '\'' +
                 ", authmethod='" + authmethod + '\'' +
-                ", country='" + country + '\'' +
+                ", pwd=" + pwd +
+                ", username='" + username + '\'' +
+                ", phoneno='" + phoneno + '\'' +
                 ", age=" + age +
+                ", accounts=" + accounts +
+                ", roles=" + roles +
+                ", orders=" + orders +
+                ", contact=" + contact +
                 '}';
     }
 

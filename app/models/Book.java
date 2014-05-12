@@ -5,47 +5,25 @@ import com.fasterxml.jackson.annotation.*;
 import org.jongo.*;
 import uk.co.panaxiom.playjongo.*;
 
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
 /*
 * Book is a product of our store
 */
-public class Book {
+public class Book extends Product{
 
-    @JsonProperty("_id")
-    private String id;
-    private String name;
+    @JsonProperty("author")
     private String author;
+    @JsonProperty("publicationDate")
     private Date publicationDate;
-    private String description;
-    private String imagePath;
-    private float price;
+    @JsonProperty("image")
+    private byte[] image;
+    @JsonProperty("numPage")
+    private int numPage;
 
-    @JsonCreator
-    public Book(@JsonProperty("name") String name, @JsonProperty("author") String author, @JsonProperty("publicationDate") Date publicationDate, @JsonProperty("description") String description, @JsonProperty("imagePath") String imagePath, @JsonProperty("price") float price) {
-        this.name = name;
-        this.author = author;
-        this.publicationDate = publicationDate;
-        this.description = description;
-        this.imagePath = imagePath;
-        this.price = price;
-    }
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
+    public Book() {
     }
 
     public String getAuthor() {
@@ -64,28 +42,20 @@ public class Book {
         this.publicationDate = publicationDate;
     }
 
-    public String getImagePath() {
-        return imagePath;
+    public byte[] getImage() {
+        return image;
     }
 
-    public void setImagePath(String imagePath) {
-        this.imagePath = imagePath;
+    public void setImage(byte[] image) {
+        this.image = image;
     }
 
-    public String getDescription() {
-        return description;
+    public int getNumPage() {
+        return numPage;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public float getPrice() {
-        return price;
-    }
-
-    public void setPrice(float price) {
-        this.price = price;
+    public void setNumPage(int numPage) {
+        this.numPage = numPage;
     }
 
     //    public static MongoCollection books(){
@@ -108,9 +78,11 @@ public class Book {
     @Override
     public String toString() {
         return "Book{" +
-                "name='" + name + '\'' +
-                ", author='" + author + '\'' +
+                super.toString() +
+                "author='" + author + '\'' +
                 ", publicationDate=" + publicationDate +
-                '}';
+                ", image=" + Arrays.toString(image) +
+                ", numPage=" + numPage +
+                "} " + super.toString();
     }
 }
