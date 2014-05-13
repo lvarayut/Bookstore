@@ -92,7 +92,7 @@
 }
 
 /*
- * Footer
+ * Credit
 */
 
 .credit div h5 a,
@@ -104,4 +104,24 @@
     bottom: 0;
     width: 100%;
     height: 60px;
+}
+
+/*
+ * Navbar
+*/
+.navbar-collapse ul{
+    text-align: center;
+}
+
+.navbar-collapse ul li{
+    display: inline-block;
+    vertical-align: top;
+}
+
+/*
+ * Sidebar
+ */
+.sidebar{
+    background-color: #f8f8f8;
+    border-color: #e7e7e7;
 }
