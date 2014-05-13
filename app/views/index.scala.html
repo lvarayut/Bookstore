@@ -1,6 +1,6 @@
 @base("BookStore: Online shopping") {
     @*Navbar*@
-    <div class="navbar navbar-default navbar-static-top" role="navigation">
+    <div class="navbar navbar-default" role="navigation">
         <div class="container">
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
                 <span class="sr-only">Toggle navigation</span>
@@ -68,17 +68,36 @@
         @*Content*@
         <div class="row">
             @*Left sidebar filters*@
-            <div class="sidebar col-xs-12 col-sm-2 col-md-2">
+            <div class="col-xs-12 col-sm-2 col-md-2">
+                <h5>Most Popular</h5>
+                <ul class="list-unstyled">
+                    <li><i class="fa fa-minus-square-o"></i><a href="#"> Best seller of the Month</a></li>
+                    <li><i class="fa fa-minus-square-o"></i><a href="#"> Best seller of the Year</a></li>
+                </ul>
                 <h5>New Release</h5>
                 <ul class="list-unstyled">
-                    <li><i class="glyphicon glyphicon-minus"></i><a href="#"> Last month</a></li>
-                    <li><i class="glyphicon glyphicon-minus"></i><a href="#"> Last 3 months</a></li>
-                    <li><i class="glyphicon glyphicon-minus"></i><a href="#"> Last 6 months</a></li>
+                    <li><i class="fa fa-minus-square-o"></i><a href="#"> Last month</a></li>
+                    <li><i class="fa fa-minus-square-o"></i><a href="#"> Last 3 months</a></li>
+                    <li><i class="fa fa-minus-square-o"></i><a href="#"> Last 6 months</a></li>
+                </ul>
+                <h5>Filters By</h5>
+                <ul class="list-unstyled">
+                    <li><i class="fa fa-minus-square-o"></i><a href="#"> Language</a></li>
+                    <li><i class="fa fa-minus-square-o"></i><a href="#"> Star</a></li>
+                    <li><i class="fa fa-minus-square-o"></i><a href="#"> Shipping</a></li>
+                </ul>
+                <h5>Mocup</h5>
+                <ul class="list-unstyled">
+                    <li><i class="fa fa-minus-square-o"></i><a href="#"> Lorem Ipsum</a></li>
+                    <li><i class="fa fa-minus-square-o"></i><a href="#"> Neque</a></li>
+                    <li><i class="fa fa-minus-square-o"></i><a href="#"> quisquam</a></li>
+                    <li><i class="fa fa-minus-square-o"></i><a href="#"> dolorem</a></li>
+                    <li><i class="fa fa-minus-square-o"></i><a href="#"> ipsum</a></li>
+                    <li><i class="fa fa-minus-square-o"></i><a href="#"> dolor</a></li>
                 </ul>
             </div>
             @*Book panel*@
             <div class="col-xs-12 col-sm-10 col-md-10">
-
             </div>
         </div>
     </div>

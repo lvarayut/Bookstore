@@ -1,3 +1,8 @@
+html{
+    /*Fix bootstrap bug*/
+    overflow-y: scroll;
+}
+
 /*
  * Global introduction
  */
@@ -118,10 +123,5 @@
     vertical-align: top;
 }
 
-/*
- * Sidebar
- */
-.sidebar{
-    background-color: #f8f8f8;
-    border-color: #e7e7e7;
-}
+
+
