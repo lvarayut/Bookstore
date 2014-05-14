@@ -127,3 +127,11 @@ html{
     text-align: left !important;
     min-width: 100%;
 }
+
+/*
+ * Book panel
+ */
+.star{
+   color:#FCDB03;
+   text-shadow: 0 0 0.1px black;
+}

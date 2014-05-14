@@ -3,6 +3,7 @@ package controllers;
 import play.mvc.*;
 import models.*;
 import views.html.*;
+import views.html.main.*;
 import interceptors.WithProvider;
 import securesocial.core.Identity;
 import securesocial.core.java.SecureSocial;

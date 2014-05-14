@@ -2,6 +2,8 @@ package models;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import java.util.Arrays;
+
 public class Product {
     @JsonProperty("_id")
     protected String id;
@@ -15,6 +17,8 @@ public class Product {
     protected String company;
     @JsonProperty("price")
     protected float price;
+    @JsonProperty("image")
+    protected byte[] image;
 
     public Product() {
     }
@@ -67,6 +71,15 @@ public class Product {
         this.price = price;
     }
 
+    public byte[] getImage() {
+        return image;
+    }
+
+    public void setImage(byte[] image) {
+        this.image = image;
+    }
+
+
     @Override
     public String toString() {
         return  "id='" + id + '\'' +
@@ -74,6 +87,7 @@ public class Product {
                 ", type='" + type + '\'' +
                 ", description='" + description + '\'' +
                 ", company='" + company + '\'' +
-                ", price=" + price;
+                ", price=" + price +
+                ", image=" + Arrays.toString(image);
     }
 }

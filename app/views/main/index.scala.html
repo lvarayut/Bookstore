@@ -1,0 +1,20 @@
+@*@(identity:securesocial.core.Identity)*@
+@base("BookStore: Online shopping") {
+    @*Navbar*@
+    @navbar()
+} {
+    @*Search bar*@
+    <div class="container">
+        @searchbar()
+        @*Content*@
+        <div class="row">
+            @*Left sidebar filters*@
+            @sidebar()
+            @*Book panel*@
+            @bookpanel()
+        </div>
+    </div>
+} {
+    @*Footer*@
+    @footer()
+}()

@@ -18,8 +18,6 @@ public class Book extends Product{
     private String author;
     @JsonProperty("publicationDate")
     private Date publicationDate;
-    @JsonProperty("image")
-    private byte[] image;
     @JsonProperty("numPage")
     private int numPage;
 
@@ -40,14 +38,6 @@ public class Book extends Product{
 
     public void setPublicationDate(Date publicationDate) {
         this.publicationDate = publicationDate;
-    }
-
-    public byte[] getImage() {
-        return image;
-    }
-
-    public void setImage(byte[] image) {
-        this.image = image;
     }
 
     public int getNumPage() {
@@ -81,7 +71,6 @@ public class Book extends Product{
                 super.toString() +
                 "author='" + author + '\'' +
                 ", publicationDate=" + publicationDate +
-                ", image=" + Arrays.toString(image) +
                 ", numPage=" + numPage +
                 "} " + super.toString();
     }
