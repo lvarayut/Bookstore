@@ -123,5 +123,7 @@ html{
     vertical-align: top;
 }
 
-
-
+.navbar-dropdown-menu{
+    text-align: left !important;
+    min-width: 100%;
+}

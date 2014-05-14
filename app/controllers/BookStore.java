@@ -3,9 +3,15 @@ package controllers;
 import play.mvc.*;
 import models.*;
 import views.html.*;
-public class BookStore extends Controller{
+import interceptors.WithProvider;
+import securesocial.core.Identity;
+import securesocial.core.java.SecureSocial;
 
-   public static Result index(){
+public class BookStore extends Controller{
+    //@SecureSocial.SecuredAction(authorization = WithProvider.class, params = {})
+    public static Result index(){
+       //Identity user = (Identity) ctx().args.get(SecureSocial.USER_KEY);
+       //return ok(index.render(user));
         return ok(index.render());
    }
 }
