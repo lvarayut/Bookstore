@@ -132,6 +132,9 @@ html{
  * Book panel
  */
 .star{
-   color:#FCDB03;
-   text-shadow: 0 0 0.1px black;
+   text-align: center;
+}
+.star i{
+    color:#FCDB03;
+    text-shadow: 0 0 0.1px black;
 }
