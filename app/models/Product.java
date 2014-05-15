@@ -1,11 +1,14 @@
 package models;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
+import org.jongo.marshall.jackson.oid.ObjectId;
 
 import java.util.Arrays;
 
+@JsonTypeInfo(use= JsonTypeInfo.Id.CLASS,property="_class")
 public class Product {
-    @JsonProperty("_id")
+    @ObjectId
     protected String id;
     @JsonProperty("name")
     protected String name;
@@ -19,6 +22,8 @@ public class Product {
     protected float price;
     @JsonProperty("image")
     protected byte[] image;
+    @JsonProperty("star")
+    protected float star;
 
     public Product() {
     }
@@ -79,15 +84,25 @@ public class Product {
         this.image = image;
     }
 
+    public float getStar() {
+        return star;
+    }
+
+    public void setStar(float star) {
+        this.star = star;
+    }
 
     @Override
     public String toString() {
-        return  "id='" + id + '\'' +
+        return "Product{" +
+                "id='" + id + '\'' +
                 ", name='" + name + '\'' +
                 ", type='" + type + '\'' +
                 ", description='" + description + '\'' +
                 ", company='" + company + '\'' +
                 ", price=" + price +
-                ", image=" + Arrays.toString(image);
+                ", image=" + Arrays.toString(image) +
+                ", star=" + star +
+                '}';
     }
 }

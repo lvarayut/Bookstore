@@ -14,6 +14,8 @@ import java.util.List;
 */
 public class Book extends Product{
 
+    @JsonProperty("category")
+    private String category;
     @JsonProperty("author")
     private String author;
     @JsonProperty("publicationDate")
@@ -22,6 +24,14 @@ public class Book extends Product{
     private int numPage;
 
     public Book() {
+    }
+
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
     }
 
     public String getAuthor() {
@@ -48,28 +58,11 @@ public class Book extends Product{
         this.numPage = numPage;
     }
 
-    //    public static MongoCollection books(){
-//        return PlayJongo.jongo().getCollection("books");
-//    }
-//
-//    public void insert(){
-//        books().save(this);
-//    }
-
-//    public void updateName(String name){
-//        books().update("{name: #}",this.getName()).with("{name:#}",name);
-//    }
-//
-//    public void remove(){
-//        books().remove(this.getId());
-//    }
-
-
     @Override
     public String toString() {
         return "Book{" +
-                super.toString() +
-                "author='" + author + '\'' +
+                "category='" + category + '\'' +
+                ", author='" + author + '\'' +
                 ", publicationDate=" + publicationDate +
                 ", numPage=" + numPage +
                 "} " + super.toString();

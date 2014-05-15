@@ -4,6 +4,7 @@ import models.SecureSocial.Password;
 import models.User;
 import play.Application;
 import play.Logger;
+import repositories.UserRepository;
 import scala.Option;
 import securesocial.core.*;
 import securesocial.core.java.BaseUserService;
@@ -34,7 +35,7 @@ public class UserService extends BaseUserService {
     public Identity doSave(Identity identity) {
         User found = null;
         // Verify an existing user
-        for (User u : User.findAllUsers()) {
+        for (User u : UserRepository.findAll()) {
             if (identity.email().isDefined() && u.getEmail().equals(identity.email().get())) {
                 found = u;
                 break;
@@ -63,13 +64,13 @@ public class UserService extends BaseUserService {
             user.setUsername(identity.firstName());
 
             // Persist the user to DB
-            user.insert();
+            UserRepository.insert(user);
         }
 
         return identity;
     }
 
-    public void doLink(Identity current, Identity to) {
+//    public void doLink(Identity current, Identity to) {
 //        User target = null;
 //
 //        for (User u : User.findAllUsers()) {
@@ -84,7 +85,7 @@ public class UserService extends BaseUserService {
 //            throw new RuntimeException("Can't find a user for identity: " + current.identityId());
 //        }
 //        if (!target.getIdentities().contains(to)) target.getIdentities().add((MySocialUser)to);
-    }
+//    }
 
     /**
      * Find a requested user for the login system
@@ -97,7 +98,7 @@ public class UserService extends BaseUserService {
             logger.debug("Finding user " + userId);
         }
         Identity found = null;
-        for (User u : User.findAllUsers()) {
+        for (User u : UserRepository.findAll()) {
                 if (u.getUserid().equals(userId.userId()) && u.getProvider().equals(userId.providerId())) {
                     found = this.createUser(u);
                     break;
@@ -133,7 +134,7 @@ public class UserService extends BaseUserService {
         Identity result = null;
         // If a user already signed up using the social providers,
         // he/she shouldn't be able to sign up again.
-        for (User user : User.findAllUsers()) {
+        for (User user : UserRepository.findAll()) {
             if(user.getEmail().equals(email)){
                 result = this.createUser(user);
                 break;
@@ -173,23 +174,6 @@ public class UserService extends BaseUserService {
             }
         }
     }
-
-    /**
-     * A helper method not part of the UserService interface.
-     */
-
-//    public User userForIdentity(Identity identity) {
-//        User result = null;
-//
-//        for (User u : User.findAllUsers()) {
-//            if ( u.getIdentities().contains(identity)) {
-//                result = u;
-//                break;
-//            }
-//        }
-//
-//        return result;
-//    }
 
     /**
      * Create a SocailUser object from the given User

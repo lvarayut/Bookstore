@@ -195,17 +195,8 @@ public class User {
 //        this.account = account;
 //    }
 
-    public void signUp(){
-        insert();
-    }
 
-    public void insert() {
-        users().save(this);
-    }
 
-    public void remove() {
-        users().remove(this.getId());
-    }
 
 //    public void updateName(String name) {
 //        users().update("{name: #}", this.getName()).with("{name:#}", name);
@@ -215,9 +206,7 @@ public class User {
 //        users().update("{name: #}", this.getName()).with("{$set: {account.balance: #}}", user.getAccount().getBalance());
 //    }
 
-    public static Iterable<User> findAllUsers(){
-        return users().find().as(User.class);
-    }
+
 
 
     //    public ArrayList<String> getTransactionStatus() {
@@ -319,15 +308,5 @@ public class User {
                 ", contact=" + contact +
                 '}';
     }
-
-    public static void printAllUsers() {
-        Iterable<User> users = findAllUsers();
-        for (User user : users) {
-            System.out.println(user.toString());
-        }
-
-    }
-
-
 
 }
