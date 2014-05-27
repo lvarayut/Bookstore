@@ -11,11 +11,9 @@ public class Role {
     private String id;
     @JsonProperty("name")
     private String name;
-    @JsonProperty("users")
-    private List<User> users;
 
     public Role() {
-        users = new ArrayList<User>();
+
     }
 
     public String getId() {

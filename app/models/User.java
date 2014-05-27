@@ -47,10 +47,10 @@ public class User {
     private int age;
     @JsonProperty("accounts")
     private List<Account> accounts;
+    @JsonProperty("addresses")
+    private List<Address> addresses;
     @JsonProperty("roles")
     private List<Role> roles;
-    @JsonProperty("orders")
-    private List<Order> orders;
     @JsonProperty("contact")
     private Address contact;
 
@@ -58,7 +58,7 @@ public class User {
     public User(){
         accounts = new ArrayList<Account>();
         roles = new ArrayList<Role>();
-        orders = new ArrayList<Order>();
+        addresses = new ArrayList<Address>();
     }
 
     // Get users collection
@@ -162,20 +162,20 @@ public class User {
         this.accounts = accounts;
     }
 
+    public List<Address> getAddresses() {
+        return addresses;
+    }
+
+    public void setAddresses(List<Address> addresses) {
+        this.addresses = addresses;
+    }
+
     public List<Role> getRoles() {
         return roles;
     }
 
     public void setRoles(List<Role> roles) {
         this.roles = roles;
-    }
-
-    public List<Order> getOrders() {
-        return orders;
-    }
-
-    public void setOrders(List<Order> orders) {
-        this.orders = orders;
     }
 
     public Address getContact() {
@@ -304,7 +304,6 @@ public class User {
                 ", age=" + age +
                 ", accounts=" + accounts +
                 ", roles=" + roles +
-                ", orders=" + orders +
                 ", contact=" + contact +
                 '}';
     }
