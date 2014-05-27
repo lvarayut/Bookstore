@@ -1,20 +1,119 @@
-<form class="form-inline" role="form" style="">
-    <div class="form-group">
-        <div class="btn-group">
-            <button type="button" class="btn btn-default  dropdown-toggle" data-toggle="dropdown">
-                            Categories <span class="caret"></span></button>
-            <ul class="dropdown-menu" role="menu">
-                <li><a href="#">Computer</a></li>
-                <li class="divider"></li>
-                <li><a href="#">Fiction</a></li>
-                <li class="divider"></li>
-                <li><a href="#">History</a></li>
-            </ul>
-        </div>
+<form class="form-inline" role="form">
+    <div class="form-group col-xs-12 col-sm-6 col-md-8 col-sm-push-3 col-md-push-2 ">
+        <input type="text" name="search" class="form-control " placeholder="Book name, Author, ISBN"
+               style="width:100%;">
     </div>
-    <div class="form-group">
-        <input type="text" name="search" class="form-control " placeholder="Book name, Author, ISBN" required="" style="width : 600px;">
+
+    <!-- Visible for xs browser size -->
+    <div class="btn-group col-xs-4 visible-xs bs-filter-container">
+        <button type="button" class="btn btn-default  dropdown-toggle" data-toggle="dropdown" style="width:100%;">
+            Filters <span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu" role="menu">
+            <h6>Most Popular</h6>
+            <li class="checkbox">
+                <a>
+                    <label>
+                        <input type="checkbox" value="">
+                        Best seller of the Month
+                    </label>
+                </a>
+            </li>
+            <li class="checkbox">
+                <a>
+                    <label>
+                        <input type="checkbox" value="">
+                        Best seller of the Year
+                    </label>
+                </a>
+            </li>
+            <h6>New Release</h6>
+            <li class="checkbox">
+                <a>
+                    <label>
+                        <input type="checkbox" value="">
+                        Last Month
+                    </label>
+                </a>
+            </li>
+            <li class="checkbox">
+                <a>
+                    <label>
+                        <input type="checkbox" value="">
+                        Last 3 months
+                    </label>
+                </a>
+            </li>
+            <li class="checkbox">
+                <a>
+                    <label>
+                        <input type="checkbox" value="">
+                        Last 6 months
+                    </label>
+                </a>
+            </li>
+            <h6>Rating</h6>
+            <li class="checkbox">
+                <a>
+                    <label>
+                        <input type="checkbox" value="">
+                        </i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i
+                            class="fa fa-star"></i> & Up
+                    </label>
+                </a>
+            </li>
+            <li class="checkbox">
+                <a>
+                    <label>
+                        <input type="checkbox" value="">
+                        <i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i> & Up
+                    </label>
+                </a>
+            </li>
+            <li class="checkbox">
+                <a>
+                    <label>
+                        <input type="checkbox" value="">
+                        <i class="fa fa-star"></i><i class="fa fa-star"></i> & Up
+                    </label>
+                </a>
+            </li>
+            <h6>Language</h6>
+            <li class="checkbox">
+                <a>
+                    <label>
+                        <input type="checkbox" value="">
+                        French
+                    </label>
+                </a>
+            </li>
+            <li class="checkbox">
+                <a>
+                    <label>
+                        <input type="checkbox" value="">
+                        Foreign
+                    </label>
+                </a>
+            </li>
+        </ul>
     </div>
-    <button class="btn btn-md btn-primary " type="submit">
-                    Search <i class="glyphicon glyphicon-search"></i></button>
+
+    <div class="btn-group col-xs-4 col-sm-3 col-md-2 col-sm-pull-6 col-md-pull-8">
+        <button type="button" class="btn btn-default  dropdown-toggle" data-toggle="dropdown" style="width:100%;">
+            Categories <span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu" role="menu">
+            <li><a href="#">Computer</a></li>
+            <li class="divider"></li>
+            <li><a href="#">Fiction</a></li>
+            <li class="divider"></li>
+            <li><a href="#">History</a></li>
+        </ul>
+    </div>
+
+    <button class="btn btn-md btn-primary col-xs-4 col-sm-3 col-md-2" type="submit">
+        Search <i class="glyphicon glyphicon-search"></i>
+    </button>
+
 </form>
+

@@ -28,7 +28,7 @@ libraryDependencies ++= Seq(
   "org.vaadin.addons" % "scaladin" % "3.0.0",
   // Webjar for bootstrap
   "org.webjars" %% "webjars-play" % "2.2.1-2",
-  "org.webjars" % "bootstrap" % "3.1.0",
+  "org.webjars" % "bootstrap" % "3.1.1",
   //Cassandra Plugin
   //"com.github.filosganga" %% "play-cassandra" % "1.0-SNAPSHOT",
   // Jongo, MongoDb Java driver wrapper
@@ -40,9 +40,11 @@ libraryDependencies ++= Seq(
   "org.jongo" % "jongo" % "1.0",
   "uk.co.panaxiom" %% "play-jongo" % "0.6.0-jongo1.0",
   // SecureSocial
-  "ws.securesocial" %% "securesocial" % "2.1.3"
+  "ws.securesocial" %% "securesocial" % "2.1.3",
   // Play-authenticate plugin
   //"com.feth" %% "play-authenticate" % "0.5.2-SNAPSHOT"
+  // AngularJS
+  "org.webjars" % "angularjs" % "1.3.0-beta.8"
 )
 
 play.Project.playJavaSettings

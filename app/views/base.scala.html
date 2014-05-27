@@ -20,57 +20,20 @@
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
-      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
-
-
     </head>
     <body>
         @navbarMenu
-        @*<nav>@navbar(user)</nav>*@
-        @*<div class="container">*@
-            @content
-        @*</div>*@
-        @*<div class="site-wrapper">*@
-
-           @*<div class="site-wrapper-inner">*@
-
-                @*<div class="cover-container">*@
-
-                   @*<div class="masthead clearfix">*@
-                        @*<div class="inner">*@
-                           @*<h3 class="masthead-brand">BookStore</h3>*@
-                            @*<ul class="nav masthead-nav">-->*@
-                                @*<li class="active"><a href="@routes.Application.index()">Home</a></li>*@
-                                @*<li><a href="@routes.Application.bookList()">Lists</a></li>*@
-                                @*<li><a href="#">Contact</a></li>*@
-                            @*</ul>*@
-                        @*</div>*@
-                    @*</div>*@
-
-                    @*<div class="inner cover">*@
-                            @*@body*@
-                    @*</div>*@
-
-                    @*<div class="mastfoot">*@
-                        @*<div class="inner">*@
-                            @*<p>&#064; 2014 BookStore. See entire project on  <a href="https://github.com/lvarayut/Bookstore">Github</a>.</p>*@
-                        @*</div>*@
-                    @*</div>*@
-
-                @*</div>*@
-
-            @*</div>*@
-
-        @*</div>*@
-
+        @content
         <footer>
             @footer
         </footer>
         <!-- Javascript -->
         <script src='@routes.Assets.at("javascripts/jquery-1.11.0.min.js")'></script>
         <script src='@routes.WebJarAssets.at(WebJarAssets.locate("js/bootstrap.min.js"))'></script>
+        <script src='@routes.WebJarAssets.at(WebJarAssets.locate("angular.min.js"))'></script>
         <script src='@routes.Assets.at("javascripts/bookstore.js")'></script>
         @javascript
     </body>

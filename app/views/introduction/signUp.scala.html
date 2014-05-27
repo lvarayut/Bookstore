@@ -1,19 +1,19 @@
 <div class="container">
     @signInButton()
 </div>
-<div class="intro-container">
-    <div class="intro-wrapper">
+<div class="bs-intro-container">
+    <div class="bs-intro-wrapper">
         <div class="signup-form-title">
             <h1>Welcome to BookStore!</h1>
             <h4>Bookstore has various kinds of books available for you.</h4>
         </div>
-        <form class="signup-form-signup" role="form" method="POST" action="@securesocial.controllers.routes.Registration.startSignUp()">
+        <form class="bs-signup-form-signup" role="form" method="POST" action="@securesocial.controllers.routes.Registration.startSignUp()">
             <input type="email" name="email" class="form-control" placeholder="Email address" required="">
             <input type="password" name="password" class="form-control" placeholder="Password" required="" disabled>
             <input type="text" name="username" class="form-control" placeholder="Username" required="" disabled>
             <button class="btn btn-lg btn-primary btn-block" type="submit" style="margin-top: 5px;">Sign up</button>
         </form>
-        <div class="signup-provider">
+        <div class="bs-signup-provider">
             <hr>
             <h5>Or sign up with one of these accounts?</h5>
             <a class="btn btn-social-icon btn-google-plus" href="/authenticate/google"><i class="fa fa-google-plus"></i></a>

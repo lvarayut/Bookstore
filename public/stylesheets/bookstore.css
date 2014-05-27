@@ -6,13 +6,13 @@ html{
 /*
  * Global introduction
  */
-.intro-container{
+.bs-intro-container{
     display: table;
     position: absolute;
     height: 80%;
     width: 100%;
 }
-.intro-wrapper{
+.bs-intro-wrapper{
     display: table-cell;
     vertical-align: middle;
     color: #EEEEEE;
@@ -22,16 +22,16 @@ html{
  * Sign up
  */
 
-.signup-form-signup {
+.bs-signup-form-signup {
     max-width: 330px;
     padding: 15px;
     margin: 0 auto;
 }
-.signup-form-title {
+.bs-signup-form-title {
     margin: 20px 0;
     text-align: center;
 }
-.signup-provider{
+.bs-signup-provider{
     max-width: 350px;
     margin: 0 auto;
     text-align: center;
@@ -41,13 +41,13 @@ html{
  * Sign in
  */
 
-.left-inner-addon {
+.bs-left-inner-addon {
     position: relative;
 }
-.left-inner-addon input {
+.bs-left-inner-addon input {
     padding-left: 30px;
 }
-.left-inner-addon i {
+.bs-left-inner-addon i {
     position: absolute;
     padding: 10px 12px;
     pointer-events: none;
@@ -57,16 +57,16 @@ html{
  * Navbar head
 */
 
-.intro-navbar-brand{
+.bs-intro-navbar-brand{
     color: #FFFFFF;
     text-shadow: 0 -1px 0 rgba(0,0,0,.75);
     font-size: 20px;
 }
-.intro-navbar-brand:hover{
+.bs-intro-navbar-brand:hover{
     color: #C7C7C7;
 }
 
-.intro-navbar-head-btn{
+.bs-intro-navbar-head-btn{
     position: relative;
     z-index: 1031;
     margin-left: 0;
@@ -100,8 +100,8 @@ html{
  * Credit
 */
 
-.credit div h5 a,
-.credit div h5 a:hover{
+.bs-credit div h5 a,
+.bs-credit div h5 a:hover{
     color: #ffffff;
     text-shadow: 0px 0px 2px #000;
     opacity: 0.7;
@@ -114,27 +114,182 @@ html{
 /*
  * Navbar
 */
-.navbar-collapse ul{
+.bs-navbar-collapse ul{
     text-align: center;
 }
 
-.navbar-collapse ul li{
+.bs-navbar-collapse ul li{
     display: inline-block;
     vertical-align: top;
 }
 
-.navbar-dropdown-menu{
+.bs-navbar-dropdown-menu{
     text-align: left !important;
     min-width: 100%;
 }
 
+.bs-navbar-dropdown-container{
+    min-width: 300px;
+}
+
+
+/*
+ * Navbar WishList
+ */
+
+ .bs-navbar-wishlist-header{
+   text-align: left;
+   padding: 5px 10px;
+   border-bottom: solid 1px #C7C7C7;
+}
+
+.bs-navbar-wishlist-header h5{
+    margin: 0;
+    font-weight: bold;
+    display: inline-block;
+}
+
+.bs-navbar-wishlist-header a{
+    float:right;
+    color: #777;
+}
+
+.bs-navbar-wishlist-header a:hover{
+    color: #333;
+}
+
+.bs-navbar-wishlist-body{
+    padding: 5px;
+    text-align: left;
+}
+
+.bs-navbar-wishlist-body .clearfix{
+}
+
+.bs-navbar-wishlist-body a{
+    display: block;
+    color: #333;
+    padding-bottom: 5px;
+    border-bottom: solid 1px #C7C7C7;
+    margin: 5px 0;
+    /*Force the a tag to contain the float element; img tag*/
+    overflow: auto;
+}
+
+.bs-navbar-wishlist-body a:hover{
+    color: #000;
+    background-color: #f5f5f5;
+    text-decoration: none;
+}
+
+.bs-navbar-wishlist-body a:last-child{
+    border-bottom: 0;
+    padding-bottom: 0;
+    margin-bottom: 0;
+}
+
+/*
+ * Search bar
+ */
+ .bs-searchbar-container > .form-inline > div {
+    padding: 0 0;
+    padding-right: 5px;
+}
+
+/*
+ * Filter dropdown
+ */
+ .bs-filter-container > ul > h6{
+    font-weight: bold;
+    padding: 0 10px;
+ }
+
+ .bs-filter-container > ul > li {
+    font-size: 0.9em;
+ }
+
+ .bs-filter-container > ul > li  input{
+    margin: 0 0;
+    margin-top: 3px;
+ }
+
+/*
+ * Filter side
+ */
+ .bs-filter-side-container > h5{
+    font-weight: bold;
+ }
+
+ .bs-filter-side-container > ul > li > a{
+    color: #333;
+ }
+
+ .bs-filter-side-container > ul > li > a:hover{
+    color: #000;
+    text-decoration: none;
+ }
+
+
 /*
  * Book panel
  */
-.star{
-   text-align: center;
+
+.bs-book-container .caption > *{
+    margin: 2px;
+    text-overflow:ellipsis;
+    overflow: hidden;
+    white-space:nowrap;
 }
-.star i{
+
+.bs-book-container .title{
+    font-weight: bold;
+}
+
+.bs-book-container a{
+    text-decoration: none;
+}
+
+.bs-book-container .a:hover,
+.bs-book-container .thumbnail:hover{
+    background-color: #f5f5f5;
+}
+
+.bs-book-container .img-responsive{
+    max-height: 100%;
+}
+
+.bs-book-container .thumbnail > .caption > .bs-price{
+    color: #3a6d0f;
+}
+
+.bs-rating i{
     color:#FCDB03;
     text-shadow: 0 0 0.1px black;
 }
+
+/*
+ * Spinner
+ */
+ #ajaxloader{
+    font-size: 1.5em;
+    text-align: center;
+    display: none;
+ }
+
+ /*
+  * Book details
+  */
+  .bs-detail-container > div:first-child > img{
+    display: block;
+    margin: 0 auto;
+  }
+
+  .bs-recommendation-container{
+
+  }
+
+ @media(min-width:768px){
+    .bs-detail-char{
+        border-right: solid #c7c7c7 1px;
+    }
+ }
