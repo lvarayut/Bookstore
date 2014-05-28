@@ -13,17 +13,24 @@ $(".bs-navbar-wishlist-body a span").html(function(index,currentText){
 });
 
 
-$(window).scroll(function(){
-	if($(window).scrollTop() === $(document).height() - $(window).height()){
-		$("#ajaxloader").show();
-		//$.ajax({
-		// 	url: ""
-		// 	sucess: function(html){
-
-		// 	}
-		// });
-	}
-	else{
-		$("#ajaxloader").hide();
-	}
+//AngularJS
+var app = angular.module("BookStore",["infinite-scroll"]);
+//app.directive("scroll",function($window){
+//    return function(scope, element, attrs){
+//        angular.element($window).bind("scroll", function(){
+//            if($(window).scrollTop() > ($(document).height() - $(window).height())*0.7){
+//                $("#ajaxloader").show();
+//            }
+//            else{
+//                $("#ajaxloader").hide();
+//            }
+//            scope.$apply();
+//        })
+//    };
+//});
+app.controller("BookStoreController",function($scope,$http){
+        $scope.loadBooks = function(){
+            console.log("Run");
+            $("#ajaxloader").show();
+        };
 });

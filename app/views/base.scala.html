@@ -2,7 +2,7 @@
 
 <!DOCTYPE html>
 
-<html lang="en">
+<html lang="en" ng-app="BookStore">
 <head>
     <title>@title</title>
     <meta charset="utf-8">
@@ -24,7 +24,7 @@
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
     </head>
-    <body>
+    <body ng-controller="BookStoreController" infinite-scroll="loadBooks()">
         @navbarMenu
         @content
         <footer>
@@ -34,6 +34,7 @@
         <script src='@routes.Assets.at("javascripts/jquery-1.11.0.min.js")'></script>
         <script src='@routes.WebJarAssets.at(WebJarAssets.locate("js/bootstrap.min.js"))'></script>
         <script src='@routes.WebJarAssets.at(WebJarAssets.locate("angular.min.js"))'></script>
+        <script src='@routes.Assets.at("javascripts/ng-infinite-scroll.min.js")'></script>
         <script src='@routes.Assets.at("javascripts/bookstore.js")'></script>
         @javascript
     </body>
