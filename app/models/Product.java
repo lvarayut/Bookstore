@@ -22,8 +22,8 @@ public class Product {
     protected float price;
     @JsonProperty("image")
     protected byte[] image;
-    @JsonProperty("star")
-    protected float star;
+    @JsonProperty("rating")
+    protected float rating;
 
     public Product() {
     }
@@ -84,12 +84,12 @@ public class Product {
         this.image = image;
     }
 
-    public float getStar() {
-        return star;
+    public float getRating() {
+        return rating;
     }
 
-    public void setStar(float star) {
-        this.star = star;
+    public void setRating(float rating) {
+        this.rating = rating;
     }
 
     @Override
@@ -102,7 +102,7 @@ public class Product {
                 ", company='" + company + '\'' +
                 ", price=" + price +
                 ", image=" + Arrays.toString(image) +
-                ", star=" + star +
+                ", rating=" + rating +
                 '}';
     }
 }

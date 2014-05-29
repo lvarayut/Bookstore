@@ -1,4 +1,5 @@
 @*@(identity:securesocial.core.Identity)*@
+@(products: List[Product])
 @base("BookStore: Online shopping") {
     @*Navbar*@
     @*@navbar(identity)*@
@@ -15,7 +16,7 @@
             @*Left sidebar filters*@
             @sidebar()
             @*Book panel*@
-            @bookpanel()
+            @bookpanel(products)
         </div>
     </div>
 } {

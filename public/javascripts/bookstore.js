@@ -13,7 +13,7 @@ $(".bs-navbar-wishlist-body a span").html(function(index,currentText){
 });
 
 
-//AngularJS
+// AngularJS
 var app = angular.module("BookStore",["infinite-scroll"]);
 //app.directive("scroll",function($window){
 //    return function(scope, element, attrs){
@@ -28,9 +28,34 @@ var app = angular.module("BookStore",["infinite-scroll"]);
 //        })
 //    };
 //});
-app.controller("BookStoreController",function($scope,$http){
+app.controller("BookStoreController",function($scope, $http){
+        var busy = false;
+        var count = 0;
+
+        // Load more books from DB
         $scope.loadBooks = function(){
-            console.log("Run");
+            if(busy)return;
+            busy = true;
             $("#ajaxloader").show();
+            var responsePromise = $http.get("/loadBooks/"+count);
+            responsePromise.success(function(data, status, header, config){
+            	if(typeof $scope.products == 'undefined'){
+            		$scope.products = data;
+            	}
+            	else{
+            		$scope.products = $scope.products.concat(data);
+            	}
+                $("#ajaxloader").hide();
+                console.log("Books are fetched out!");
+                busy = false;
+            });
+            responsePromise.error(function(data, status, header, config){
+            	console.log("There are some errors occured during the fetching products from the database");
+            });
         };
+
+        // Number of rating 
+        $scope.getRating = function(rating){
+        	return new Array(parseInt(rating));
+        }
 });

@@ -1,3 +1,4 @@
+@(products: List[Product])
 <div class="col-xs-12 col-sm-10 col-md-10 bs-book-container">
     <div class="col-sm-6 col-md-3">
         <a href="order.html">
@@ -111,7 +112,21 @@
             </div>
         </a>
     </div>
-
+    <div class="col-sm-6 col-md-3" ng-repeat="product in products">
+        <a href="#">
+            <div class="thumbnail">
+                <img class="img-responsive" ng-src="">
+                <div class="caption">
+                    <h5 class="title">{{ product.name }}</h5>
+                    <small>{{ product.company }}</small>
+                    <p class="bs-rating"><i class="fa fa-star" ng-repeat="i in range(1, product.rating) track by $index"></i></p>
+                    <small>Paper back</small>
+                    <small class="bs-price"><i class="glyphicon glyphicon-euro"></i>{{ product.price | number : 2 }}</small>
+                </div>
+            </div>
+        </a>
+   </div>
+   
     <div id="ajaxloader">
         <i class="fa fa-spinner fa-spin"></i>
     </div>

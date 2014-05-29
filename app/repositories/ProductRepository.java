@@ -27,4 +27,10 @@ public class ProductRepository {
         return products().find().as(Product.class);
     }
 
+    public static Iterable<Product> findBySkip(int count){
+        // Fetch only 8 products once
+        int fetchedNum = 8;
+        return products().find().skip(count*fetchedNum).limit(fetchedNum).as(Product.class);
+    }
+
 }
