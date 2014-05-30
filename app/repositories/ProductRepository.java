@@ -1,17 +1,36 @@
 package repositories;
 
 
+import com.mongodb.gridfs.GridFS;
+import com.mongodb.gridfs.GridFSDBFile;
+import com.mongodb.gridfs.GridFSInputFile;
 import models.Product;
 import org.jongo.MongoCollection;
 import uk.co.panaxiom.playjongo.PlayJongo;
 
+import java.io.File;
+import java.io.IOException;
+import java.util.List;
+import java.util.regex.Pattern;
+
 public class ProductRepository {
+
+    private static int FETCHEDNUMBER = 8;
 
     public static MongoCollection products() {
         return PlayJongo.jongo().getCollection("products");
     }
 
     public static void insert(Product product){
+        GridFS gfs = PlayJongo.gridfs();
+        File imagePath = new File(product.getImagePath());
+        try {
+            GridFSInputFile gfsFile = gfs.createFile(imagePath);
+            gfsFile.setFilename(product.getName());
+            gfsFile.save();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         products().save(product);
     }
 
@@ -29,8 +48,20 @@ public class ProductRepository {
 
     public static Iterable<Product> findBySkip(int count){
         // Fetch only 8 products once
-        int fetchedNum = 8;
-        return products().find().skip(count*fetchedNum).limit(fetchedNum).as(Product.class);
+        return products().find().skip(count*FETCHEDNUMBER).limit(FETCHEDNUMBER).as(Product.class);
     }
+
+    public static Iterable<Product> findByName(String name){
+        return products().find("{ name : # }", Pattern.compile(name, Pattern.CASE_INSENSITIVE)).limit(FETCHEDNUMBER).as(Product.class);
+    }
+
+//    public static String findImage(String name){
+//        GridFS gfs = PlayJongo.gridfs();
+//        List<GridFSDBFile> gfsDBFile = gfs.find(name);
+//        String imageBytes = "";
+//        for(int i=0; i<gfsDBFile.size();i++){
+//            imageBytes += gfsDBFile.get(0).getInputStream().read();
+//        }
+//    }
 
 }

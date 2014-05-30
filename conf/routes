@@ -5,13 +5,9 @@
 # Home page
 
 GET         /                              controllers.BookStore.index()
-
 GET         /introduction                  controllers.Introduction.introduction()
-
 #POST        /sign-up                              controllers.Introduction.signUp()
-
 #GET     /lists                      controllers.Application.bookList()
-#
 #GET     /order                      controllers.Application.buy(bookName,bookPrice: Float)
 
 # Login page
@@ -36,7 +32,8 @@ POST        /authenticate/:provider        securesocial.controllers.ProviderCont
 GET         /not-authorized                securesocial.controllers.ProviderController.notAuthorized
 
 # AngularJS 
-GET			/loadBooks/:count			   controllers.BookStore.loadBooks(count: Int)
+GET			/loadProducts/:count		   controllers.BookStore.loadProducts(count: Int)
+GET         /searchProducts/:name          controllers.BookStore.searchProducts(name: String)
 
 # Map static resources from the /public folder to the /assets URL path
 GET         /assets/*file                  controllers.Assets.at(path="/public", file)

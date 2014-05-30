@@ -1,6 +1,6 @@
 <form class="form-inline" role="form">
     <div class="form-group col-xs-12 col-sm-6 col-md-8 col-sm-push-3 col-md-push-2 ">
-        <input type="text" name="search" class="form-control " placeholder="Book name, Author, ISBN"
+        <input ng-model="searchBox" type="text" name="search" class="form-control " placeholder="Book name, Author, ISBN"
                style="width:100%;">
     </div>
 
@@ -111,7 +111,7 @@
         </ul>
     </div>
 
-    <button class="btn btn-md btn-primary col-xs-4 col-sm-3 col-md-2" type="submit">
+    <button class="btn btn-md btn-primary col-xs-4 col-sm-3 col-md-2" ng-click="searchProducts(searchBox)" type="submit">
         Search <i class="glyphicon glyphicon-search"></i>
     </button>
 

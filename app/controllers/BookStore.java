@@ -26,8 +26,13 @@ public class BookStore extends Controller{
      * scrolls to the bottom of the page
      * @return JSON
      */
-   public static Result loadBooks(int count){
+   public static Result loadProducts(int count){
         List<Product> products = Util.iterableToList(ProductRepository.findBySkip(count));
        return ok(Json.toJson(products));
    }
+
+    public static Result searchProducts(String name){
+        List<Product> products = Util.iterableToList(ProductRepository.findByName(name));
+        return ok(Json.toJson(products));
+    }
 }

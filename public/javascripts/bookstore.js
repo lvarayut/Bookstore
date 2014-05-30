@@ -37,7 +37,7 @@ app.controller("BookStoreController",function($scope, $http){
             if(busy)return;
             busy = true;
             $("#ajaxloader").show();
-            var responsePromise = $http.get("/loadBooks/"+count);
+            var responsePromise = $http.get("/loadProducts/"+count);
             responsePromise.success(function(data, status, header, config){
             	if(typeof $scope.products == 'undefined'){
             		$scope.products = data;
@@ -50,12 +50,23 @@ app.controller("BookStoreController",function($scope, $http){
                 busy = false;
             });
             responsePromise.error(function(data, status, header, config){
-            	console.log("There are some errors occured during the fetching products from the database");
+            	console.log("Error: There are some errors occurred during the fetching products from the database");
             });
         };
 
         // Number of rating 
         $scope.getRating = function(rating){
         	return new Array(parseInt(rating));
+        }
+
+        $scope.searchProducts = function(name){
+            var responsePromise = $http.get("/searchProducts/"+name);
+            responsePromise.success(function(data, status, header, config){
+                $scope.products = data;
+            });
+            responsePromise.error(function(data, status, header, config){
+                $scope.products = [];
+                console.log("Error: No data found")
+            });
         }
 });

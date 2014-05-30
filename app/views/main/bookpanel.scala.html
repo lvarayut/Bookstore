@@ -119,7 +119,7 @@
                 <div class="caption">
                     <h5 class="title">{{ product.name }}</h5>
                     <small>{{ product.company }}</small>
-                    <p class="bs-rating"><i class="fa fa-star" ng-repeat="i in range(1, product.rating) track by $index"></i></p>
+                    <p class="bs-rating"><i class="fa fa-star" ng-repeat="i in getRating(product.rating) track by $index"></i></p>
                     <small>Paper back</small>
                     <small class="bs-price"><i class="glyphicon glyphicon-euro"></i>{{ product.price | number : 2 }}</small>
                 </div>

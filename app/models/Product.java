@@ -20,8 +20,8 @@ public class Product {
     protected String company;
     @JsonProperty("price")
     protected float price;
-    @JsonProperty("image")
-    protected byte[] image;
+    @JsonProperty("imagePath")
+    protected String imagePath;
     @JsonProperty("rating")
     protected float rating;
 
@@ -76,12 +76,12 @@ public class Product {
         this.price = price;
     }
 
-    public byte[] getImage() {
-        return image;
+    public String getImagePath() {
+        return imagePath;
     }
 
-    public void setImage(byte[] image) {
-        this.image = image;
+    public void setImagePath(String imagePath) {
+        this.imagePath = imagePath;
     }
 
     public float getRating() {
@@ -101,7 +101,7 @@ public class Product {
                 ", description='" + description + '\'' +
                 ", company='" + company + '\'' +
                 ", price=" + price +
-                ", image=" + Arrays.toString(image) +
+                ", image=" + imagePath +
                 ", rating=" + rating +
                 '}';
     }
