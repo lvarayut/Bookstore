@@ -10,6 +10,8 @@ import uk.co.panaxiom.playjongo.PlayJongo;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.util.List;
 import java.util.regex.Pattern;
 
@@ -55,13 +57,10 @@ public class ProductRepository {
         return products().find("{ name : # }", Pattern.compile(name, Pattern.CASE_INSENSITIVE)).limit(FETCHEDNUMBER).as(Product.class);
     }
 
-//    public static String findImage(String name){
-//        GridFS gfs = PlayJongo.gridfs();
-//        List<GridFSDBFile> gfsDBFile = gfs.find(name);
-//        String imageBytes = "";
-//        for(int i=0; i<gfsDBFile.size();i++){
-//            imageBytes += gfsDBFile.get(0).getInputStream().read();
-//        }
-//    }
+    public static InputStream findImage(String name){
+        GridFS gfs = PlayJongo.gridfs();
+        GridFSDBFile gfsDBFile = gfs.findOne(name);
+        return gfsDBFile.getInputStream();
+    }
 
 }

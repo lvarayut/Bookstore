@@ -51,8 +51,6 @@ public class User {
     private List<Address> addresses;
     @JsonProperty("roles")
     private List<Role> roles;
-    @JsonProperty("contact")
-    private Address contact;
 
 
     public User(){
@@ -178,13 +176,6 @@ public class User {
         this.roles = roles;
     }
 
-    public Address getContact() {
-        return contact;
-    }
-
-    public void setContact(Address contact) {
-        this.contact = contact;
-    }
 
 //
 //    public Account getAccount() {
@@ -304,7 +295,6 @@ public class User {
                 ", age=" + age +
                 ", accounts=" + accounts +
                 ", roles=" + roles +
-                ", contact=" + contact +
                 '}';
     }
 

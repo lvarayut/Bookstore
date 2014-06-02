@@ -17,8 +17,7 @@ public class BookStore extends Controller{
     public static Result index(){
        //Identity user = (Identity) ctx().args.get(SecureSocial.USER_KEY);
        //return ok(index.render(user));
-    	List<Product> products = Util.iterableToList(ProductRepository.findAll());
-        return ok(index.render(products));
+        return ok(index.render());
    }
 
     /**
@@ -27,7 +26,7 @@ public class BookStore extends Controller{
      * @return JSON
      */
    public static Result loadProducts(int count){
-        List<Product> products = Util.iterableToList(ProductRepository.findBySkip(count));
+       List<Product> products = Util.iterableToList(ProductRepository.findBySkip(count));
        return ok(Json.toJson(products));
    }
 
@@ -35,4 +34,10 @@ public class BookStore extends Controller{
         List<Product> products = Util.iterableToList(ProductRepository.findByName(name));
         return ok(Json.toJson(products));
     }
+
+    public static Result getImage(String name){
+        return ok(ProductRepository.findImage(name));
+    }
+
+
 }
