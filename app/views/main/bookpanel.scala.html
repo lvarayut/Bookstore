@@ -114,7 +114,7 @@
     <div class="col-sm-6 col-md-3" ng-repeat="product in products">
         <a href="#">
             <div class="thumbnail">
-                <img class="img-responsive" ng-src="">
+                <img class="img-responsive" ng-src="getImage/{{product.imageName}}">
                 <div class="caption">
                     <h5 class="title">{{ product.name }}</h5>
                     <small>{{ product.company }}</small>

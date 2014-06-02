@@ -22,6 +22,8 @@ public class Product {
     protected float price;
     @JsonProperty("imagePath")
     protected String imagePath;
+    @JsonProperty("imageName")
+    protected String imageName;
     @JsonProperty("rating")
     protected float rating;
 
@@ -82,6 +84,14 @@ public class Product {
 
     public void setImagePath(String imagePath) {
         this.imagePath = imagePath;
+    }
+
+    public String getImageName(){
+        return imageName;
+    }
+
+    public void setImageName(String imageName){
+        this.imageName = imageName;
     }
 
     public float getRating() {

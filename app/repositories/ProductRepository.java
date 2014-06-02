@@ -24,13 +24,19 @@ public class ProductRepository {
     }
 
     public static void insert(Product product){
+        String puncPattern = "[^a-zA-Z]";
+        String duplicateDashPattern = "-+";
+        String trimPunc = "(^-|-$)";
+        String imageName = product.getName().replaceAll(puncPattern,"-").replaceAll(duplicateDashPattern,"-").replaceAll(trimPunc,"").toLowerCase();
+        product.setImageName(imageName);
         GridFS gfs = PlayJongo.gridfs();
         File imagePath = new File(product.getImagePath());
         try {
             GridFSInputFile gfsFile = gfs.createFile(imagePath);
-            gfsFile.setFilename(product.getName());
+            gfsFile.setFilename(imageName);
             gfsFile.save();
         } catch (IOException e) {
+            System.out.println(e.toString());
             e.printStackTrace();
         }
         products().save(product);

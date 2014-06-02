@@ -8,7 +8,7 @@ books:
         description:      "Play for Java shows you how to build Java-based web applications using the Play 2 framework. The book starts by introducing Play through a comprehensive overview example. Then, you'll look at each facet of a typical Play application, both by exploring simple code snippets and by adding to a larger running example. Along the way, you'll contrast Play and JEE patterns and learn how a stateless web application can fit seamlessly in an enterprise environment."
         company:          "Manning Publications"
         price:            30
-        imagePath:        "/home/varayut/Documents/Internship/Projects/BookStore/public/images/play-for-java.png"
+        imagePath:        "public/images/play-for-java.png"
         rating:           4.5
         category:         "Computer"
         author:           "Nicolas Leroux"
@@ -22,7 +22,7 @@ books:
         description:      "Manage the huMONGOus amount of data collected through your web application with MongoDB. This authoritative introduction—written by a core contributor to the project—shows you the many advantages of using document-oriented databases, and demonstrates how this reliable, high-performance system allows for almost infinite horizontal scalability."
         company:          "O'Reilly Media"
         price:            24
-        imagePath:        "/home/varayut/Documents/Internship/Projects/BookStore/public/images/mongodb.png"
+        imagePath:        "public/images/mongodb.png"
         rating:           4.5
         category:         "Computer"
         author:           "Kristina Chodorow"
@@ -35,7 +35,7 @@ books:
         description:      "JavaScript lets you supercharge your HTML with animation, interactivity, and visual effects—but many web designers find the language hard to learn. This jargon-free guide covers JavaScript basics and shows you how to save time and effort with the jQuery library of prewritten JavaScript code. You’ll soon be building web pages that feel and act like desktop programs, without having to do much programming."
         company:          "O'Reilly Media"
         price:            16.91
-        imagePath:        "/home/varayut/Documents/Internship/Projects/BookStore/public/images/javascript-jQuery-the-missing-manual.png"
+        imagePath:        "public/images/javascript-jQuery-the-missing-manual.png"
         rating:           4.5
         category:         "Computer"
         author:           "David Sawyer McFarland"
@@ -48,7 +48,7 @@ books:
         description:      "Secrets of the Javascript Ninja takes you on a journey towards mastering modern JavaScript development in three phases: design, construction, and maintenance. Written for JavaScript developers with intermediate-level skills, this book will give you the knowledge you need to create a cross-browser JavaScript library from the ground up."
         company:          "Manning Publications"
         price:            17.49
-        imagePath:        "/home/varayut/Documents/Internship/Projects/BookStore/public/images/secrets-of-the-javascript-ninja.png"
+        imagePath:        "public/images/secrets-of-the-javascript-ninja.png"
         rating:             4.5
         category:         "Computer"
         author:           "David Sawyer McFarland"
@@ -61,7 +61,7 @@ books:
         company:          "Simon & Schuste"
         description:      "One of the most inspiring and impactful books ever written, The 7 Habits of Highly Effective People has captivated readers for 25 years. It has transformed the lives of Presidents and CEOs, educators and parents— in short, millions of people of all ages and occupations."
         price:            16.21
-        imagePath:        "/home/varayut/Documents/Internship/Projects/BookStore/public/images/the-7-habits.png"
+        imagePath:        "public/images/the-7-habits.png"
         rating:           4.5
         category:         "Self improvement"
         author:           "Stephen R. Covey"
@@ -74,7 +74,7 @@ books:
         company:          "Mason Press"
         description:      "Stunning Digital Photography is much more than a book; it's a hands-on, self-paced photography class with over 9 hours of online training videos and free help from the author and other readers. That's why award-winning author and photographer Tony Northrup's book is the the first photography e-book with over 100,000 readers."
         price:            12.98
-        imagePath:        "/home/varayut/Documents/Internship/Projects/BookStore/public/images/tony-northrup-dslr-book-how-to-create-stunning-digital-photography.png"
+        imagePath:        "public/images/tony-northrup-dslr-book-how-to-create-stunning-digital-photography.png"
         rating:           4.5
         category:         "Photography"
         author:           "Tony Northrup"
@@ -87,7 +87,7 @@ books:
         description:      "Play for Java shows you how to build Java-based web applications using the Play 2 framework. The book starts by introducing Play through a comprehensive overview example. Then, you'll look at each facet of a typical Play application, both by exploring simple code snippets and by adding to a larger running example. Along the way, you'll contrast Play and JEE patterns and learn how a stateless web application can fit seamlessly in an enterprise environment."
         company:          "Manning Publications"
         price:            30
-        imagePath:        "/home/varayut/Documents/Internship/Projects/BookStore/public/images/play-for-java.png"
+        imagePath:        "public/images/play-for-java.png"
         rating:           4.5
         category:         "Computer"
         author:           "Nicolas Leroux"
@@ -101,7 +101,7 @@ books:
         description:      "Manage the huMONGOus amount of data collected through your web application with MongoDB. This authoritative introduction—written by a core contributor to the project—shows you the many advantages of using document-oriented databases, and demonstrates how this reliable, high-performance system allows for almost infinite horizontal scalability."
         company:          "O'Reilly Media"
         price:            24
-        imagePath:        "/home/varayut/Documents/Internship/Projects/BookStore/public/images/mongodb.png"
+        imagePath:        "public/images/mongodb.png"
         rating:           4.5
         category:         "Computer"
         author:           "Kristina Chodorow"
