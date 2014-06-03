@@ -9,6 +9,7 @@ GET         /introduction                  controllers.Introduction.introduction
 #POST        /sign-up                              controllers.Introduction.signUp()
 #GET     /lists                      controllers.Application.bookList()
 #GET     /order                      controllers.Application.buy(bookName,bookPrice: Float)
+GET     /addbook                           controllers.BookStore.addBook()
 
 # Login page
 GET         /login                         securesocial.controllers.LoginPage.login

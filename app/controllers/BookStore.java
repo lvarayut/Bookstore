@@ -1,11 +1,13 @@
 package controllers;
 
+import play.data.Form;
 import play.libs.Json;
 import play.mvc.*;
 import models.*;
 import repositories.*;
 import views.html.*;
 import views.html.main.*;
+import views.html.book.*;
 import interceptors.WithProvider;
 import securesocial.core.Identity;
 import securesocial.core.java.SecureSocial;
@@ -44,6 +46,10 @@ public class BookStore extends Controller{
 
     public static Result getImage(String name){
         return ok(ProductRepository.findImage(name));
+    }
+
+    public static Result addBook(){
+        return ok(bookList.render(Form.form(Book.class)));
     }
 
 
