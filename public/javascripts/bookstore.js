@@ -59,20 +59,9 @@ app.controller("BookStoreController",function($scope, $http){
         	return new Array(parseInt(rating));
         }
 
-        // Get image stream
-        $scope.getImageFromName = function(name){
-            var responsePromise = $http.get("/getImage/"+name);
-            responsePromise.success(function(data, status, header, config){
-
-            });
-            responsePromise.error(function(data, status, header, config){
-                console.log("Error: The image is not found");
-            });
-        }
-
         // Search
         $scope.searchProducts = function(name){
-            var responsePromise = $http.get("/searchProducts/"+name);
+            var responsePromise = $http.get("/searchProducts?name="+name);
             responsePromise.success(function(data, status, header, config){
                 $scope.products = data;
             });

@@ -82,28 +82,28 @@ books:
         numPage:          432
 
     - !!models.Book
-        name:             "Play for Java: Covers Play 2"
+        name:             "Eat That Frog!: 21 Great Ways to Stop Procrastinating and Get More Done in Less Time"
         type:             "Book"
-        description:      "Play for Java shows you how to build Java-based web applications using the Play 2 framework. The book starts by introducing Play through a comprehensive overview example. Then, you'll look at each facet of a typical Play application, both by exploring simple code snippets and by adding to a larger running example. Along the way, you'll contrast Play and JEE patterns and learn how a stateless web application can fit seamlessly in an enterprise environment."
-        company:          "Manning Publications"
-        price:            30
-        imagePath:        "public/images/play-for-java.png"
+        description:      "The legendary Eat That Frog! (more than 450,000 copies sold and translated into 23 languages) provides the 21 most effective methods for conquering procrastination and accomplishing more. This new edition is revised and updated throughout, and includes brand new information."
+        company:          "Berrett-Koehler Publishers"
+        price:            8.09
+        imagePath:        "public/images/eat-that-frog.png"
         rating:           4.5
-        category:         "Computer"
-        author:           "Nicolas Leroux"
-        publicationDate:  "2014-03-31"
-        numPage:          320
+        category:         "Self improvement"
+        author:           "Brian Tracy"
+        publicationDate:  "2007-01-01"
+        numPage:          128
 
 
     - !!models.Book
-        name:             "MongoDB: The Definitive Guide"
+        name:             "Steve Jobs"
         type:             "Book"
-        description:      "Manage the huMONGOus amount of data collected through your web application with MongoDB. This authoritative introduction—written by a core contributor to the project—shows you the many advantages of using document-oriented databases, and demonstrates how this reliable, high-performance system allows for almost infinite horizontal scalability."
-        company:          "O'Reilly Media"
-        price:            24
-        imagePath:        "public/images/mongodb.png"
+        description:      "Based on more than forty interviews with Jobs conducted over two years—as well as interviews with more than a hundred family members, friends, adversaries, competitors, and colleagues—Walter Isaacson has written a riveting story of the roller-coaster life and searingly intense personality of a creative entrepreneur whose passion for perfection and ferocious drive revolutionized six industries: personal computers, animated movies, music, phones, tablet computing, and digital publishing."
+        company:          "Simon & Schuster"
+        price:            14.44
+        imagePath:        "public/images/steve-jobs.png"
         rating:           4.5
-        category:         "Computer"
-        author:           "Kristina Chodorow"
-        publicationDate:  "2013-06-21"
-        numPage:          432
+        category:         "Biography"
+        author:           "Walter Isaacson"
+        publicationDate:  "2011-10-24"
+        numPage:          656

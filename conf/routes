@@ -33,7 +33,7 @@ GET         /not-authorized                securesocial.controllers.ProviderCont
 
 # AngularJS 
 GET			/loadProducts/:count		   controllers.BookStore.loadProducts(count: Int)
-GET         /searchProducts/:name          controllers.BookStore.searchProducts(name: String)
+GET         /searchProducts                controllers.BookStore.searchProducts(name: String ?= "")
 GET         /getImage/:name                controllers.BookStore.getImage(name: String)
 
 # Map static resources from the /public folder to the /assets URL path

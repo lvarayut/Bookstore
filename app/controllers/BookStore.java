@@ -31,7 +31,14 @@ public class BookStore extends Controller{
    }
 
     public static Result searchProducts(String name){
-        List<Product> products = Util.iterableToList(ProductRepository.findByName(name));
+        List<Product> products;
+        //  User inputs empty value
+        if(name.equals("")){
+            products = Util.iterableToList(ProductRepository.findBySkip(0));
+        }
+        else{
+            products = Util.iterableToList(ProductRepository.findByName(name));
+        }
         return ok(Json.toJson(products));
     }
 
