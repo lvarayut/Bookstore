@@ -20,6 +20,10 @@ public class UserRepository {
         users().remove(user.getId());
     }
 
+    public static void update(User user){
+        users().update("{email: #}",user.getEmail()).with(user);
+    }
+
     public static Iterable<User> findAll(){
         return users().find().as(User.class);
     }

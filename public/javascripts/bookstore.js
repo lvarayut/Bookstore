@@ -70,4 +70,10 @@ app.controller("BookStoreController",function($scope, $http){
                 console.log("Error: No data found")
             });
         }
+
+        // Edit Book
+        $scope.editBook = function(){
+            window.location.href = "/addbook";
+        }
+
 });

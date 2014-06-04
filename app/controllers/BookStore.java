@@ -12,6 +12,7 @@ import interceptors.WithProvider;
 import securesocial.core.Identity;
 import securesocial.core.java.SecureSocial;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import utils.Util;
@@ -63,6 +64,15 @@ public class BookStore extends Controller{
 
     public static Result addBook(){
         return ok(addBook.render(Form.form(Book.class)));
+    }
+
+    public static Result listBook(){
+        List<Product> products = Util.iterableToList(ProductRepository.findAll());
+        List<Book> books = new ArrayList<Book>();
+        for(Product product : products){
+            books.add((Book)product);
+        }
+        return ok(listBook.render(books));
     }
 
 

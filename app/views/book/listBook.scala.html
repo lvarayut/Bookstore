@@ -1,0 +1,36 @@
+@*@(identity:securesocial.core.Identity)*@
+@(books : List[Book])
+@layout{
+    <h2>All Products</h2>
+    <hr>
+    <div class="table-responsive">
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Type</th>
+                    <th>Description</th>
+                    <th>Company</th>
+                    <th>Author</th>
+                    <th>Category</th>
+                    <th>Price</th>
+                    <th>Rating</th>
+                </tr>
+            </thead>
+            <tbody>
+            @for(book <- books){
+                <tr ng-click="editBook()">
+                    <td>@book.getName()</td>
+                    <td>@book.getType()</td>
+                    <td>@book.getDescription()</td>
+                    <td>@book.getCompany()</td>
+                    <td>@book.getAuthor()</td>
+                    <td>@book.getCategory()</td>
+                    <td>@book.getPrice()</td>
+                    <td>@book.getRating()</td>
+                </tr>
+            }
+            </tbody>
+        </table>
+    </div>
+}
