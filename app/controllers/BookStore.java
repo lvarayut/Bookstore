@@ -50,12 +50,14 @@ public class BookStore extends Controller{
     public static Result getImage(String name){
         return ok(ProductRepository.findImage(name));
     }
-    
+    @SecureSocial.SecuredAction
     public static Result setting(){
     	Form<User> userForm = Form.form(User.class);
-    	Identity userIdentity = (Identity) ctx().args.get(SecureSocial.USER_KEY);
-    	User user = Util.transformIdentityToUser(userIdentity);
-    	userForm.fill(user);
+    	Identity userIdentity =(Identity) ctx().args.get(SecureSocial.USER_KEY);
+        if(userIdentity != null){
+            User user = Util.transformIdentityToUser(userIdentity);
+            userForm = userForm.fill(user);
+        }
     	return ok(setting.render(userForm));
     }
 

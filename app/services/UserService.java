@@ -10,6 +10,7 @@ import securesocial.core.*;
 import securesocial.core.java.BaseUserService;
 import securesocial.core.java.Token;
 import java.util.*;
+import utils.*;
 
 /**
  * UserService is a services that acts as a controller
@@ -44,25 +45,7 @@ public class UserService extends BaseUserService {
         // Create a new user
         if (found == null) {
             // Create a new user
-            User user = new User();
-            Password password = new Password();
-            user.setUserid(identity.identityId().userId());
-            user.setProvider(identity.identityId().providerId());
-            user.setFirstname(identity.firstName());
-            user.setLastname(identity.lastName());
-            user.setEmail(identity.email().get());
-            user.setAuthmethod(identity.authMethod().method());
-            // In case of using third party provider, they don't have a password.
-            if (identity.passwordInfo().nonEmpty()) {
-                password.setPasswordHasher(identity.passwordInfo().get().hasher());
-                password.setPassword(identity.passwordInfo().get().password());
-                if(identity.passwordInfo().get().salt().isDefined()){
-                    password.setSalt(identity.passwordInfo().get().salt().get());
-                }
-            }
-            user.setPwd(password);
-            user.setUsername(identity.firstName());
-
+            User user = Util.transformIdentityToUser(identity);
             // Persist the user to DB
             UserRepository.insert(user);
         }
