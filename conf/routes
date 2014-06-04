@@ -6,6 +6,7 @@
 
 GET         /                              controllers.BookStore.index()
 GET         /introduction                  controllers.Introduction.introduction()
+GET			/setting					   controllers.BookStore.setting()
 #POST        /sign-up                              controllers.Introduction.signUp()
 #GET     /lists                      controllers.Application.bookList()
 #GET     /order                      controllers.Application.buy(bookName,bookPrice: Float)

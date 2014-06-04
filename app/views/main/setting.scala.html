@@ -1,0 +1,52 @@
+@(form: Form[models.User])
+@*@(identity:securesocial.core.Identity)*@
+@base("Setting") {
+    @*Navbar*@
+    @*@navbar(identity)*@
+    @navbar()
+} {
+    @*Search bar*@
+    <div class="container">
+        <div class="row col-xs-12 col-sm-8 col-md-8 col-sm-offset-2 col-md-offset-2 bs-searchbar-container" >
+            @*@searchbar()*@
+        </div>
+        <div class="clearfix"></div>
+        @*Content*@
+        <div class="row" style="margin-top: 20px; text-align: center;">
+            
+        <form class="form-inline" role="form">      
+    	<p>
+        	<input type="text" name="provider" placeholder="Provider" value="@form("provider").value">
+    	</p>
+    	<p>
+        	<input type="text" name="firstname" placeholder="Firstname" value="@form("firstname").value">
+    	</p>
+    	<p>
+        	<input type="text" name="lastname" placeholder="Lastname" value="@form("lastname").value">
+    	</p>	
+    	<p>
+        	<input type="text" name="email" placeholder="Email" value="@form("email").value">
+    	</p>
+    	<p>
+        	<input type="password" name="password" placeholder="Password">
+    	</p>
+    	<p>
+        	<input type="text" name="username" placeholder="Username" value="@form("username").value">
+    	</p>
+    	<p>
+        	<input type="tel" name="phoneno" placeholder="PhoneNo" value="@form("phoneno").value">
+    	</p>
+    	<p>
+        	<input type="text" name="addresses" placeholder="Adresses" value="adesses">
+    	</p> <!--list-->
+    	<p>
+        	<button type="submit">Save</button>
+    	</p>
+        </form>    
+            
+        </div>
+    </div>
+} {
+    @*Footer*@
+    @footer()
+}()

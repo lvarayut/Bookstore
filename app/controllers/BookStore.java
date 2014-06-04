@@ -1,5 +1,6 @@
 package controllers;
 
+import play.data.Form;
 import play.libs.Json;
 import play.mvc.*;
 import models.*;
@@ -9,8 +10,11 @@ import views.html.main.*;
 import interceptors.WithProvider;
 import securesocial.core.Identity;
 import securesocial.core.java.SecureSocial;
+
 import java.util.List;
+
 import utils.Util;
+
 
 public class BookStore extends Controller{
     //@SecureSocial.SecuredAction(authorization = WithProvider.class, params = {})
@@ -37,6 +41,14 @@ public class BookStore extends Controller{
 
     public static Result getImage(String name){
         return ok(ProductRepository.findImage(name));
+    }
+    
+    public static Result setting(){
+    	Form<User> userForm = Form.form(User.class);
+    	Identity userIdentity = (Identity) ctx().args.get(SecureSocial.USER_KEY);
+    	User user = Util.transformIdentityToUser(userIdentity);
+    	userForm.fill(user);
+    	return ok(setting.render(userForm));
     }
 
 
