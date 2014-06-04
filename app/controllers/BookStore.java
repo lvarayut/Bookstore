@@ -49,7 +49,7 @@ public class BookStore extends Controller{
     }
 
     public static Result addBook(){
-        return ok(bookList.render(Form.form(Book.class)));
+        return ok(addBook.render(Form.form(Book.class)));
     }
 
 
