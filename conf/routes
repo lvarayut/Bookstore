@@ -12,6 +12,8 @@ GET			/setting					   controllers.BookStore.setting()
 #GET     /order                      controllers.Application.buy(bookName,bookPrice: Float)
 GET     /addbook                           controllers.BookStore.addBook()
 GET     /listbook                          controllers.BookStore.listBook()
+GET     /updatebook/:name                  controllers.BookStore.updateBook(name: String)
+POST    /updatebook                        controllers.BookStore.handleUpdateBook()
 
 # Login page
 GET         /login                         securesocial.controllers.LoginPage.login

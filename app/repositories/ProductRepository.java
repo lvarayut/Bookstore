@@ -42,12 +42,16 @@ public class ProductRepository {
         products().save(product);
     }
 
-    public static void updateName(Product product, String name){
-        products().update("{name: #}",product.getName()).with("{name:#}",name);
+    public static void updateName(Product product, String newName){
+        products().update("{name: #}",product.getName()).with("{name:#}",newName);
+    }
+
+    public static void update(Product product){
+        products().update("{name: #}",product.getName()).with(product);
     }
 
     public static void remove(Product product){
-        products().remove(product.getId());
+       // products().remove(product.getId());
     }
 
     public static Iterable<Product> findAll(){
@@ -61,6 +65,10 @@ public class ProductRepository {
 
     public static Iterable<Product> findByName(String name){
         return products().find("{ name : # }", Pattern.compile(name, Pattern.CASE_INSENSITIVE)).limit(FETCHEDNUMBER).as(Product.class);
+    }
+
+    public static Product findOneByName(String name){
+        return products().findOne("{name:#}", name).as(Product.class);
     }
 
     public static InputStream findImage(String name){

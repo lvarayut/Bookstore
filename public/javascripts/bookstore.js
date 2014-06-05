@@ -72,8 +72,9 @@ app.controller("BookStoreController",function($scope, $http){
         }
 
         // Edit Book
-        $scope.editBook = function(){
-            window.location.href = "/addbook";
+        $scope.editBook = function($event){
+            var bookHref = $event.currentTarget.attributes[1].nodeValue;
+            window.location.href = bookHref;
         }
 
 });

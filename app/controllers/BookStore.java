@@ -6,6 +6,7 @@ import play.mvc.*;
 import models.*;
 import repositories.*;
 import views.html.*;
+import views.html.defaultpages.badRequest;
 import views.html.main.*;
 import views.html.book.*;
 import interceptors.WithProvider;
@@ -63,7 +64,7 @@ public class BookStore extends Controller{
     }
 
     public static Result addBook(){
-        return ok(addBook.render(Form.form(Book.class)));
+        return ok(upsertBook.render(Form.form(Book.class)));
     }
 
     public static Result listBook(){
@@ -73,6 +74,26 @@ public class BookStore extends Controller{
             books.add((Book)product);
         }
         return ok(listBook.render(books));
+    }
+
+    public static Result updateBook(String name){
+        Book book = (Book) ProductRepository.findOneByName(name);
+        Form bookForm = Form.form(Book.class);
+        bookForm = bookForm.fill(book);
+        return ok(upsertBook.render(bookForm));
+    }
+
+    public static Result handleUpdateBook(){
+        Form bookForm = Form.form(Book.class).bindFromRequest();
+        if(bookForm.hasErrors()){
+            return badRequest(upsertBook.render(bookForm));
+        }
+        else {
+            Product product = (Product) bookForm.get();
+            System.out.println(product.getRating());
+            ProductRepository.update(product);
+        }
+        return redirect("/listbook");
     }
 
 

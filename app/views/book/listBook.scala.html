@@ -19,7 +19,7 @@
             </thead>
             <tbody>
             @for(book <- books){
-                <tr ng-click="editBook()">
+                <tr ng-click="editBook($event)" href="@routes.BookStore.updateBook(book.getName())">
                     <td>@book.getName()</td>
                     <td>@book.getType()</td>
                     <td>@book.getDescription()</td>
