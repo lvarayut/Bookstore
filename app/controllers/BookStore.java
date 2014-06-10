@@ -63,6 +63,28 @@ public class BookStore extends Controller{
     	return ok(setting.render(userForm));
     }
 
+    public static Result settingRegister(){
+        Form<User> userForm = Form.form(User.class).bindFromRequest();
+        if(userForm.hasErrors()){
+            return badRequest(setting.render(userForm));
+        }
+        else{
+            //System.out.println("firstname 1 :" + userForm.get().getFirstname());
+            //System.out.println("username 1 :" + userForm.get().getUsername());
+            UserRepository.update(userForm.get());
+            //System.out.println("firstname 2 :" + userForm.get().getFirstname());
+            //System.out.println(userForm.get().getLastname());
+            //System.out.println("username 2 :" + userForm.get().getUsername());
+            //System.out.println(userForm.get().getId());
+            return ok(setting.render(userForm));
+            //controllers.BookStore.index
+        }
+    }
+
+    public static Result bookpanel(){
+        return ok(bookpanel.render());
+    }
+
     public static Result addBook(){
         return ok(upsertBook.render(Form.form(Book.class)));
     }

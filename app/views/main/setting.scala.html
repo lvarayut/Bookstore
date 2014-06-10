@@ -1,52 +1,95 @@
 @(form: Form[models.User])
 @*@(identity:securesocial.core.Identity)*@
 @base("Setting") {
-    @*Navbar*@
-    @*@navbar(identity)*@
-    @navbar()
+@*Navbar*@
+@*@navbar(identity)*@
+@navbar()
 } {
-    @*Search bar*@
-    <div class="container">
-        <div class="row col-xs-12 col-sm-8 col-md-8 col-sm-offset-2 col-md-offset-2 bs-searchbar-container" >
-            @*@searchbar()*@
-        </div>
-        <div class="clearfix"></div>
-        @*Content*@
-        <div class="row" style="margin-top: 20px; text-align: center;">
-            
-        <form class="form-inline" role="form">      
-    	<p>
-        	<input type="text" name="provider" placeholder="Provider" value="@form("provider").value">
-    	</p>
-    	<p>
-        	<input type="text" name="firstname" placeholder="Firstname" value="@form("firstname").value">
-    	</p>
-    	<p>
-        	<input type="text" name="lastname" placeholder="Lastname" value="@form("lastname").value">
-    	</p>	
-    	<p>
-        	<input type="text" name="email" placeholder="Email" value="@form("email").value">
-    	</p>
-    	<p>
-        	<input type="password" name="password" placeholder="Password">
-    	</p>
-    	<p>
-        	<input type="text" name="username" placeholder="Username" value="@form("username").value">
-    	</p>
-    	<p>
-        	<input type="tel" name="phoneno" placeholder="PhoneNo" value="@form("phoneno").value">
-    	</p>
-    	<p>
-        	<input type="text" name="addresses" placeholder="Adresses" value="adesses">
-    	</p> <!--list-->
-    	<p>
-        	<button type="submit">Save</button>
-    	</p>
-        </form>    
-            
+
+<div class="row col-xs-12 col-sm-8 col-md-8 col-sm-offset-2 col-md-offset-2 bs-searchbar-container" >
+    @*@searchbar()*@
+</div>
+<div class="clearfix"></div>
+
+@*Content*@
+<div class="form-horizontal">
+<div class="container">
+<h2>Setting</h2>
+<hr> </hr>
+
+<div class="bs-docs-example">
+   <ul id="myTab" class="nav nav-tabs">
+       <li class="active"><a href="#home" data-toggle="tab">Home</a></li>
+       <li><a href="#adresses" data-toggle="tab">Adresses</a></li>
+   </ul>
+   <div id="myTabContent" class="tab-content">
+   <br>
+   <div class="tab-pane fade in active" id="home">
+
+    @helper.form(routes.BookStore.settingRegister) {
+    @if(form.hasGlobalErrors){
+        <p class="error">
+            @form.globalError.message
+        </p>
+    }
+    @if(flash.contains("success")){
+        <p class="success">
+            @flash.get("success")
+        </p>
+    }
+
+    <div class="form-group">
+        <label class="col-sm-2 control-label">Firstname</label>
+        <div class="col-sm-10">
+            <input type="text" name="firstname" class="form-control" placeholder="Firstname" value="@form("firstname").value">
         </div>
     </div>
+    <div class="form-group">
+        <label class="col-sm-2 control-label">Lastname</label>
+        <div class="col-sm-10">
+            <input type="text" name="lastname" class="form-control" placeholder="Lastname" value="@form("lastname").value">
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-2 control-label">Email</label>
+        <div class="col-sm-10">
+            <input type="text" name="email" class="form-control" placeholder="Email" value="@form("email").value">
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-2 control-label">Password</label>
+        <div class="col-sm-10">
+            <input type="text" name="text" class="form-control" placeholder="Password" value="@form("pwd").value">
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-2 control-label">Username</label>
+        <div class="col-sm-10">
+            <input type="text" name="username" class="form-control" placeholder="Username" value="@form("username").value">
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-2 control-label">Phone number</label>
+        <div class="col-sm-10">
+            <input type="text" name="phoneno" class="form-control" placeholder="Phone number" value="@form("phoneno").value">
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+            <button type="submit" class="btn btn-primary">  Save  </button>
+        </div>
+    </div>
+}
+        </div>
+    <div class="tab-pane fade" id="adresses">
+    <p>2</p>
+    </div>
+</div>
+</div>
+</div>
+</div>
+<!--</div>-->
 } {
-    @*Footer*@
-    @footer()
+@*Footer*@
+@footer()
 }()
