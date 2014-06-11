@@ -54,6 +54,10 @@ public class ProductRepository {
        // products().remove(product.getId());
     }
 
+    public static void removeByName(String name){
+        products().remove("{name: #}",name);
+    }
+
     public static Iterable<Product> findAll(){
         return products().find().as(Product.class);
     }

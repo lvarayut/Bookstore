@@ -13,9 +13,11 @@ GET         /bookpanel                     controllers.BookStore.bookpanel()
 #GET     /lists                      controllers.Application.bookList()
 #GET     /order                      controllers.Application.buy(bookName,bookPrice: Float)
 GET     /addbook                           controllers.BookStore.addBook()
+POST    /addbook                           controllers.BookStore.handleAddBook()
 GET     /listbook                          controllers.BookStore.listBook()
 GET     /updatebook/:name                  controllers.BookStore.updateBook(name: String)
 POST    /updatebook                        controllers.BookStore.handleUpdateBook()
+GET     /deleteBook                        controllers.BookStore.deleteBook(name: String)
 
 # Login page
 GET         /login                         securesocial.controllers.LoginPage.login

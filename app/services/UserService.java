@@ -49,7 +49,6 @@ public class UserService extends BaseUserService {
             // Persist the user to DB
             UserRepository.insert(user);
         }
-
         return identity;
     }
 
