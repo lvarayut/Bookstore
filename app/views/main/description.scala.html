@@ -1,0 +1,55 @@
+@base("order") {
+@*Navbar*@
+@*@navbar(identity)*@
+@navbar()
+} {
+
+<!-- Start main container-->
+<main class="container">
+    <!-- Search bar -->
+    <div class="row col-xs-12 col-sm-8 col-md-8 col-sm-offset-2 col-md-offset-2 bs-searchbar-container">
+        @*searchbar*@
+        @searchbar()
+    </div>
+    <!-- After Search bar -->
+    <div class="row bs-detail-container" style="margin-top: 20px;">
+        <div class="col-xs-12 col-sm-4 col-md-4">
+            <img src="images/play-for-java.png">
+        </div>
+        <div class="col-xs-12 col-sm-8 col-md-8">
+            <h3>Play for Java: Covers Play 2</h3>
+            <small>by Nicolas Leroux</small>
+            <div><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i></div>
+            <detail>
+                Play for Java shows you how to build Java-based web applications using the Play 2 framework. The book starts by introducing Play through a comprehensive overview example. Then, you'll look at each facet of a typical Play application, both by exploring simple code snippets and by adding to a larger running example. Along the way, you'll contrast Play and JEE patterns and learn how a stateless web application can fit seamlessly in an enterprise environment.
+            </detail>
+            <hr>
+            <div class="col-xs-12 col-sm-6 col-md-6 bs-detail-char">
+                <h4>Paper back</h4>
+                <h4>Normal price: <del><i class="glyphicon glyphicon-euro"></i> 50</del></h4>
+                <h4 style="color: red">Special price: <i class="glyphicon glyphicon-euro"></i> 30 (save 60%)</h4>
+                <button class="btn btn-success">Add to cart</button>
+            </div>
+            <div class="col-xs-12 col-sm-6 col-md-6">
+                <p>Free shipping for exclusive membership <a href="#">details</a></p>
+                <p>Free gift wrapping <a href="#">details</a></p>
+            </div>
+        </div>
+    </div>
+    <hr>
+    <div class="row bs-recommendation-container visible-md visible-lg">
+        <h4>Book recommendations, frequently brought together</h4>
+        <div class="">
+        </div>
+    </div>
+</main>
+<!-- Javascripts -->
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+<script src="javascripts/jquery-1.11.0.min.js"></script>
+<script src="javascripts/bootstrap.min.js"></script>
+<script src="javascripts/bookstore.js"></script>
+} {
+@*Footer*@
+@footer()
+}()

@@ -2,6 +2,9 @@
     <div class="col-sm-6 col-md-3" ng-repeat="product in products">
         <a href="#">
             <div class="thumbnail">
+
+                <a href="description">
+
                 <img class="img-responsive" ng-src="getImage/{{product.imageName}}">
                 <div class="caption">
                     <h5 class="title">{{ product.name }}</h5>
@@ -10,6 +13,9 @@
                     <small>Paper back</small>
                     <small class="bs-price"><i class="glyphicon glyphicon-euro"></i>{{ product.price | number : 2 }}</small>
                 </div>
+
+                </a>
+
             </div>
         </a>
    </div>
