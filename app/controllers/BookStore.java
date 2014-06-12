@@ -57,8 +57,9 @@ public class BookStore extends Controller{
     	Form<User> userForm = Form.form(User.class);
     	Identity userIdentity =(Identity) ctx().args.get(SecureSocial.USER_KEY);
         if(userIdentity != null){
-            User user = Util.transformIdentityToUser(userIdentity);
-            userForm = userForm.fill(user);
+            User currentUser = Util.transformIdentityToUser(userIdentity);
+            User dbUser = UserRepository.findByEmail(currentUser.getEmail());
+            userForm = userForm.fill(dbUser);
         }
     	return ok(setting.render(userForm));
     }
@@ -83,6 +84,18 @@ public class BookStore extends Controller{
         return ok(upsertBook.render(Form.form(Book.class)));
     }
 
+    public static Result handleAddBook(){
+        Form<Book> bookForm = Form.form(Book.class).bindFromRequest();
+        if(bookForm.hasErrors()){
+            return badRequest(upsertBook.render(bookForm));
+        }
+        else{
+            Book book = bookForm.get();
+            ProductRepository.insert(book);
+        }
+        return redirect("/listbook");
+    }
+
     public static Result listBook(){
         List<Product> products = Util.iterableToList(ProductRepository.findAll());
         List<Book> books = new ArrayList<Book>();
@@ -100,15 +113,19 @@ public class BookStore extends Controller{
     }
 
     public static Result handleUpdateBook(){
-        Form bookForm = Form.form(Book.class).bindFromRequest();
+        Form<Book> bookForm = Form.form(Book.class).bindFromRequest();
         if(bookForm.hasErrors()){
             return badRequest(upsertBook.render(bookForm));
         }
         else {
-            Product product = (Product) bookForm.get();
-            System.out.println(product.getRating());
-            ProductRepository.update(product);
+            Book book = (Book) bookForm.get();
+            ProductRepository.update(book);
         }
+        return redirect("/listbook");
+    }
+
+    public static Result deleteBook(String name){
+        ProductRepository.removeByName(name);
         return redirect("/listbook");
     }
 

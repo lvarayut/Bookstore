@@ -27,4 +27,8 @@ public class UserRepository {
     public static Iterable<User> findAll(){
         return users().find().as(User.class);
     }
+
+    public static User findByEmail(String email){
+        return users().findOne("{email: #}", email).as(User.class);
+    }
 }
