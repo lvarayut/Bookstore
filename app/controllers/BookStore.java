@@ -76,8 +76,9 @@ public class BookStore extends Controller{
         }
     }
 
-    public static Result description(){
-        return ok(description.render());
+    public static Result description(String name){
+        Book product = (Book)ProductRepository.findOneByName(name);
+        return ok(description.render(product));
     }
 
     public static Result addBook(){
