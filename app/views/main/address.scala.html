@@ -1,15 +1,32 @@
 @(userForm : Form[models.User])
 <div class="tab-pane fade" id="adresses">
     <form class="form-horizontal" action="" method="POST">
-        @helper.repeat(userForm("addresses"), min = 1) {
-            addressField => @helper.inputText(city)
+        @helper.repeat(userForm("addresses"), min = 1) { addressField => 
+            <div class="form-group" >
+                <label class="col-sm-2 control-label">Street</label>
+                <div class="col-sm-7">
+                    <input name="street" class="form-control" type="text"  placeholder="Street" value='@userForm("addresses")'>
+                </div>
+            </div>         
+            <div class="form-group" >
+                <label class="col-sm-2 control-label">City</label>
+                <div class="col-sm-7">
+                    <input name="city" class="form-control" type="text"  placeholder="City" value='@userForm("city").value'>
+                </div>
+            </div>            
+            <div class="form-group" >
+                <label class="col-sm-2 control-label">Country</label>
+                <div class="col-sm-7">
+                    <input name="country" class="form-control" type="text"  placeholder="Country" value='@userForm("country").value'>
+                </div>
+            </div>            
+            <div class="form-group" >
+                <label class="col-sm-2 control-label">Zipcode</label>
+                <div class="col-sm-7">
+                    <input name="zipcode" class="form-control" type="number" min=10000 max=99999  placeholder="Zip code, 6 digits" value='@userForm("zipcode")'>
+                </div>
+            </div>                                                   
         }
-        <div class="form-group" >
-            <label class="col-sm-2 control-label">Address</label>
-            <div class="col-sm-7">
-                <input name="" class="form-control" type="text"  placeholder="Full address">
-            </div>
-        </div>
         <div class="form-group">
             <div class="col-sm-offset-2" style="display:inline-block; padding-left:15px;">
                 <a class="btn btn-success" href="#" ng-click="">Add</a>
