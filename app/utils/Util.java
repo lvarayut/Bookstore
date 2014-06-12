@@ -7,6 +7,12 @@ import securesocial.core.*;
 
 public class Util{
 
+    /**
+     * Convert Iterable type to List type
+     * @param iter
+     * @param <E>
+     * @return
+     */
 	public static <E> List<E> iterableToList(Iterable<E> iter){
 		List<E> list = new ArrayList<E>();
 		for(E item : iter){
@@ -14,7 +20,12 @@ public class Util{
 		}
 		return list;
 	}
-	
+
+    /**
+     * Transform Identity type to User type
+     * @param identity
+     * @return
+     */
 	public static User transformIdentityToUser(Identity identity){
 		User user = new User();
 		Password password = new Password();
@@ -32,7 +43,6 @@ public class Util{
 			}
 		}
 		user.setPwd(password);
-		user.setUsername(user.getFirstname());
 		return user;
 	}
 }

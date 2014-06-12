@@ -57,8 +57,9 @@ public class BookStore extends Controller{
     	Form<User> userForm = Form.form(User.class);
     	Identity userIdentity =(Identity) ctx().args.get(SecureSocial.USER_KEY);
         if(userIdentity != null){
-            User user = Util.transformIdentityToUser(userIdentity);
-            userForm = userForm.fill(user);
+            User currentUser = Util.transformIdentityToUser(userIdentity);
+            User dbUser = UserRepository.findByEmail(currentUser.getEmail());
+            userForm = userForm.fill(dbUser);
         }
     	return ok(setting.render(userForm));
     }

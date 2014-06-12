@@ -70,7 +70,10 @@ public class UserService extends BaseUserService {
 //    }
 
     /**
-     * Find a requested user for the login system
+     * Find a requested user for the login system.
+     * It also gets called when calling the
+     * `(Identity) ctx().args.get(SecureSocial.USER_KEY)`
+     * in a controller
      * @param userId
      * @return
      */
