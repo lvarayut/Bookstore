@@ -1,10 +1,16 @@
 package models;
 
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public class Address {
+    @JsonProperty("street")
     private String street;
+    @JsonProperty("city")
     private String city;
+    @JsonProperty("country")
     private String country;
+    @JsonProperty("zipcode")
     private String zipcode;
 
     public Address() {

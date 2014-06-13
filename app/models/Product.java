@@ -2,13 +2,13 @@ package models;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
-import org.jongo.marshall.jackson.oid.ObjectId;
+import org.jongo.marshall.jackson.oid.*;
 
 import java.util.Arrays;
 
 @JsonTypeInfo(use= JsonTypeInfo.Id.CLASS,property="_class")
 public class Product {
-    @JsonProperty("_id")
+    @ObjectId
     protected String id;
     @JsonProperty("name")
     protected String name;
