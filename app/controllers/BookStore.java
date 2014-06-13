@@ -72,20 +72,15 @@ public class BookStore extends Controller{
             return badRequest(setting.render(userForm));
         }
         else{
-            //System.out.println("firstname 1 :" + userForm.get().getFirstname());
-            //System.out.println("username 1 :" + userForm.get().getUsername());
             UserRepository.update(userForm.get());
-            //System.out.println("firstname 2 :" + userForm.get().getFirstname());
-            //System.out.println(userForm.get().getLastname());
-            //System.out.println("username 2 :" + userForm.get().getUsername());
-            //System.out.println(userForm.get().getId());
             return ok(setting.render(userForm));
             //controllers.BookStore.index
         }
     }
 
-    public static Result bookpanel(){
-        return ok(bookpanel.render());
+    public static Result description(String name){
+        Book product = (Book)ProductRepository.findOneByName(name);
+        return ok(description.render(product));
     }
 
     public static Result addBook(){
