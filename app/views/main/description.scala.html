@@ -11,18 +11,36 @@
         @*searchbar*@
         @searchbar()
     </div>
+    <div class="clearfix"></div>
+    @*Content*@
     <!-- After Search bar -->
     <!-- After Search bar -->
     <div class="row bs-detail-container" style="margin-top: 20px;">
         <div class="col-xs-12 col-sm-4 col-md-4">
-            <img src="@product.getImagePath()">
+            <!-- Small picture -->
+            <a data-toggle="modal" data-target="#myModal"><img alt="Click to view the lightbox"  class="img-responsive" src="@routes.BookStore.getImage(product.getImageName())"></a>
+            </button>
+
+            <!-- Big picture Modal -->
+            <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        </div>
+                        <div class="modal-body" style="text-align:center;">
+
+                            <img src="@routes.BookStore.getImage(product.getImageName())" style="height:500px;">
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
         <div class="col-xs-12 col-sm-8 col-md-8">
             <h3>@product.getName()</h3>
             <small>@product.getAuthor()</small>
             <div><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i></div>
             <detail>
-                @product.getImagePath()
                 @product.getDescription()
             </detail>
             <hr>
