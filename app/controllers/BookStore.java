@@ -81,8 +81,8 @@ public class BookStore extends Controller{
         }
     }
 
-    public static Result description(String name){
-        Book product = (Book)ProductRepository.findOneByName(name);
+    public static Result description(String id){
+        Book product = (Book)ProductRepository.findOneById(id);
         return ok(description.render(product));
     }
 
@@ -111,8 +111,8 @@ public class BookStore extends Controller{
         return ok(listBook.render(books));
     }
 
-    public static Result updateBook(String name){
-        Book book = (Book) ProductRepository.findOneByName(name);
+    public static Result updateBook(String id){
+        Book book = (Book) ProductRepository.findOneById(id);
         Form bookForm = Form.form(Book.class);
         bookForm = bookForm.fill(book);
         return ok(upsertBook.render(bookForm));
@@ -125,13 +125,14 @@ public class BookStore extends Controller{
         }
         else {
             Book book = (Book) bookForm.get();
+            System.out.println(book);
             ProductRepository.update(book);
         }
         return redirect("/listbook");
     }
 
-    public static Result deleteBook(String name){
-        ProductRepository.removeByName(name);
+    public static Result deleteBook(String id){
+        ProductRepository.removeById(id);
         return redirect("/listbook");
     }
     /**

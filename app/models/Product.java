@@ -9,7 +9,7 @@ import jackson.*;
 import java.util.Arrays;
 @JsonTypeInfo(use= JsonTypeInfo.Id.CLASS,property="_class")
 public class Product {
-    @ObjectId
+    @JsonProperty("_id")
     protected String id;
     @JsonProperty("name")
     protected String name;

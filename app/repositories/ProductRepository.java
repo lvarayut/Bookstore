@@ -47,15 +47,15 @@ public class ProductRepository {
     }
 
     public static void update(Product product){
-        products().update("{name: #}",product.getName()).with(product);
+        products().update("{_id: #}",product.getId()).with(product);
     }
 
     public static void remove(Product product){
        // products().remove(product.getId());
     }
 
-    public static void removeByName(String name){
-        products().remove("{name: #}",name);
+    public static void removeById(String id){
+        products().remove("{_id: #}",id);
     }
 
     public static Iterable<Product> findAll(){
@@ -71,9 +71,9 @@ public class ProductRepository {
         return products().find("{ name : # }", Pattern.compile(name, Pattern.CASE_INSENSITIVE)).limit(FETCHEDNUMBER).as(Product.class);
     }
 
-    public static Product findOneByName(String name){
-        return products().findOne("{name:#}", name).as(Product.class);
-    }
+    public static Product findOneById(String id){
+        return products().findOne("{_id:#}", id).as(Product.class);
+    }    
 
     public static InputStream findImage(String name){
         GridFS gfs = PlayJongo.gridfs();

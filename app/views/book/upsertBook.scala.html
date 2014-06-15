@@ -64,12 +64,13 @@
                 <input type="number" name="numPage" class="form-control" placeholder="Page number" value='@bookForm("numPage").value'>
             </div>
         </div>
+        <input type="hidden" name="id" value='@bookForm("id").value'>
         <div class="form-group">
             <div class="col-sm-offset-2" style="display:inline-block; padding-left: 15px;">
                 <button type="submit" class="btn btn-primary">Submit</button>
             </div>
             @if(bookForm("name").value != null){
-                <a class="btn btn-danger" href='@routes.BookStore.deleteBook(bookForm("name").value)'>Delete</a>
+                <a class="btn btn-danger" href='@routes.BookStore.deleteBook(bookForm("id").value)'>Delete</a>
             }
         </div>
 

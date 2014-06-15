@@ -9,10 +9,10 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonSerializer;
 import com.fasterxml.jackson.databind.SerializerProvider;
  
-public class ObjectIdSerializer extends JsonSerializer<ObjectId> {
+public class ObjectIdSerializer extends JsonSerializer<Object> {
 	@Override
-	public void serialize(ObjectId value, JsonGenerator jsonGen,SerializerProvider provider) throws IOException,
-			JsonProcessingException {
-		jsonGen.writeString(value.toString());
-	}
+    public void serialize(Object value, JsonGenerator jsonGen,SerializerProvider provider) throws IOException {
+        jsonGen.writeString(value.toString());
+    }
+
 }

@@ -23,7 +23,7 @@ import java.util.List;
 
 public class User {
 
-    @Id @ObjectId
+    @JsonProperty("_id")
     private String id;
     @JsonProperty("userid")
     private String userid;
