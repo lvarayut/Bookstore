@@ -11,6 +11,7 @@ import models.SecureSocial.Password;
 import org.jongo.MongoCollection;
 import securesocial.core.Identity;
 import uk.co.panaxiom.playjongo.PlayJongo;
+import org.jongo.marshall.jackson.oid.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,7 +23,7 @@ import java.util.List;
 
 public class User {
 
-    @JsonProperty("_id")
+    @Id @ObjectId
     private String id;
     @JsonProperty("userid")
     private String userid;

@@ -1,4 +1,4 @@
-@(form: Form[models.User])
+@(form: Form[models.User], user: models.User)
 @*@(identity:securesocial.core.Identity)*@
 @base("Setting") {
 @*Navbar*@
@@ -105,7 +105,7 @@
     </div>
 }
         </div>
-    @address(form)
+    @address(user)
 </div>
 </div>
 </div>

@@ -18,6 +18,8 @@ GET     /listbook                          controllers.BookStore.listBook()
 GET     /updatebook/:name                  controllers.BookStore.updateBook(name: String)
 POST    /updatebook                        controllers.BookStore.handleUpdateBook()
 GET     /deleteBook                        controllers.BookStore.deleteBook(name: String)
+GET     /loadAddresses					   controllers.BookStore.loadAddresses()
+#GET 	/addAddress						   controllers.BookStore.addAddress(address Object)
 
 # Login page
 GET         /login                         securesocial.controllers.LoginPage.login

@@ -1,42 +1,88 @@
-@(userForm : Form[models.User])
+@(user: models.User)
 <div class="tab-pane fade" id="addresses">
-    @*@for(address <- user.getAddresses()){
-        <h5>@address.getCity()</h5>
-    }*@
-    <form class="form-horizontal" action="" method="POST">
-        @helper.repeat(userForm("addresses"), min = 1) { addressField =>
-            <div class="form-group" >
-                <label class="col-sm-2 control-label">Street</label>
-                <div class="col-sm-7">
-                    <input name="street" class="form-control" type="text"  placeholder="Street" name='@userForm(addressField.name.toString + ".street")' value=''>
-                </div>
-            </div>         
-            <div class="form-group" >
-                <label class="col-sm-2 control-label">City</label>
-                <div class="col-sm-7">
-                    <input name="city" class="form-control" type="text"  placeholder="City" value='@userForm("city").value'>
+        @if(user.getAddresses().size == 0){
+            <div class="alert alert-warning">
+                <strong>Warning!</strong> You didn't add any address information, it is important for delivering your ordered books.
+            </div>
+            <div class="form-group">
+                <div class="col-sm-2">
+                    <a class="btn btn-success" ng-click="addAddressField()">Add your first address</a>
                 </div>
             </div>            
-            <div class="form-group" >
-                <label class="col-sm-2 control-label">Country</label>
-                <div class="col-sm-7">
-                    <input name="country" class="form-control" type="text"  placeholder="Country" value='@userForm("country").value'>
-                </div>
-            </div>            
-            <div class="form-group" >
-                <label class="col-sm-2 control-label">Zipcode</label>
-                <div class="col-sm-7">
-                    <input name="zipcode" class="form-control" type="number" min=10000 max=99999  placeholder="Zip code, 6 digits" value='@userForm("zipcode")'>
-                </div>
-            </div>                                                   
         }
+        <div class="table-responsive">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>Number</th>
+                        <th>Street</th>
+                        <th>City</th>
+                        <th>Country</th>
+                        <th>Zipcode</th>
+                        <th>Edit/Delete</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-click="" ng-repeat="address in addresses track by $index">
+                        <td>{{ $index+1 }}</td>
+                        <td>{{ address.street }}</td>
+                        <td>{{ address.city }}</td>
+                        <td>{{ address.country }}</td>
+                        <td>{{ address.zipcode}}</td>
+                        <td>
+                            <a href="#" class="btn btn-sm btn-primary" ng-click="">Edit <i class="fa fa-edit"></i></a>
+                            <a href="#" class="btn btn-danger" style="margin-left: 5px;" ng-click="removeAddress($index)">Delete <i class="fa fa-trash-o"></i></a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>            
+
+        <!-- Modal -->
         <div class="form-group">
-            <div class="col-sm-offset-2" style="display:inline-block; padding-left:15px;">
-                <a class="btn btn-success" href="#" ng-click="">Add</a>
-            </div>
-            <div style="display:inline-block;">
-                <button type="submit" class="btn btn-primary">Save</button>
-            </div>
-        </div>
-    </form>
+            <button class="btn btn-success" data-toggle="modal" data-target="#myModal">Add a new address</button>
+            <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title" id="myModalLabel">Add a new address</h4>
+                  </div>
+                  <div class="modal-body">
+                      <form class="form-horizontal" action="" method="POST" ng-init="loadAddresses()">
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Street</label>
+                            <div class="col-sm-7">
+                                <input name='street' class="form-control" type="text"  placeholder="Street" ng-model="address.street" value=''>
+                            </div>
+                        </div>         
+                        <div class="form-group" >
+                            <label class="col-sm-2 control-label">City</label>
+                            <div class="col-sm-7">
+                                <input name="city" class="form-control" type="text"  placeholder="City" ng-model="address.city" value=''>
+                            </div>
+                        </div>            
+                        <div class="form-group" >
+                            <label class="col-sm-2 control-label">Country</label>
+                            <div class="col-sm-7">
+                                <input name="country" class="form-control" type="text"  placeholder="Country" ng-model="address.country" value=''>
+                            </div>
+                        </div>            
+                        <div class="form-group" >
+                            <label class="col-sm-2 control-label">Zipcode</label>
+                            <div class="col-sm-7">
+                                <input name="zipcode" class="form-control" type="number" min=10000 max=99999  placeholder="Zip code, 6 digits" ng-model="address.zipcode" value=''>
+                            </div>
+                        </div>   
+                    </form>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" ng-click="addAddress(address)" data-dismiss="modal">Save</button>
+                  </div>
+                </div>
+              </div>
+            </div>            
+        </div>                                                    
+             
 </div>

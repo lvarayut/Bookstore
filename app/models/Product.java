@@ -1,11 +1,12 @@
 package models;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonTypeInfo;
+import com.fasterxml.jackson.annotation.*;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import jackson.ObjectIdSerializer;
 import org.jongo.marshall.jackson.oid.*;
+import jackson.*;
 
 import java.util.Arrays;
-
 @JsonTypeInfo(use= JsonTypeInfo.Id.CLASS,property="_class")
 public class Product {
     @ObjectId

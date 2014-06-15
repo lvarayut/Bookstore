@@ -39,6 +39,8 @@ app.controller("BookStoreController",function($scope, $http){
             $("#ajaxloader").show();
             var responsePromise = $http.get("/loadProducts/"+count);
             responsePromise.success(function(data, status, header, config){
+                                console.log("My data is " + data);
+
             	if(typeof $scope.products == 'undefined'){
             		$scope.products = data;
             	}
@@ -75,6 +77,30 @@ app.controller("BookStoreController",function($scope, $http){
         $scope.editBook = function($event){
             var bookHref = $event.currentTarget.attributes[1].nodeValue;
             window.location.href = bookHref;
+        }
+
+        // Load address of a current user
+        $scope.loadAddresses = function(){
+            var responsePromise = $http.get("/loadAddresses");
+            responsePromise.success(function(data, status, header, config){
+                console.dir(data);
+                $scope.addresses = data;
+            });
+            responsePromise.error(function(data, status, header, config){
+                $scope.addresses = [];                
+                console.log("Error: No address found");
+            });
+        }
+
+        // Add a new address
+        $scope.addAddress = function(address){
+            $scope.addresses.push(address);
+            //var responsePromise = $http.get("/address");
+        }
+
+        // Remove a book
+        $scope.removeAddress = function(index){
+            $scope.addresses.splice(index,1);
         }
 
 });

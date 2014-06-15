@@ -8,7 +8,9 @@ resolvers ++= Seq(
   // Cassandra
   //"Sonatype Snapshots" at "http://oss.sonatype.org/content/repositories/snapshots/",
   // SecureSocial
-  Resolver.sonatypeRepo("releases")
+  Resolver.sonatypeRepo("releases"),
+  // Jongo
+  "Jongo Snapshots" at "http://repository-jongo.forge.cloudbees.com/release"
   // Play-authenticate plugin
 //  Resolver.url("play-easymail (release)", url("http://joscha.github.com/play-easymail/repo/releases/"))(Resolver.ivyStylePatterns),
 //  Resolver.url("play-easymail (snapshot)", url("http://joscha.github.com/play-easymail/repo/snapshots/"))(Resolver.ivyStylePatterns),
@@ -32,12 +34,12 @@ libraryDependencies ++= Seq(
   //Cassandra Plugin
   //"com.github.filosganga" %% "play-cassandra" % "1.0-SNAPSHOT",
   // Jongo, MongoDb Java driver wrapper
-  "de.undercouch" % "bson4jackson" % "2.1.0" force(),
+  "de.undercouch" % "bson4jackson" % "2.3.1" force(),
   "com.fasterxml.jackson.core" % "jackson-databind" % "2.1.0" force(),
   "com.fasterxml.jackson.core" % "jackson-annotations" % "2.1.0" force(),
   "com.fasterxml.jackson.core" % "jackson-core" % "2.1.0" force(),
   "org.mongodb" % "mongo-java-driver" % "2.11.3",
-  "org.jongo" % "jongo" % "1.0",
+  "org.jongo" % "jongo" % "1.1-early-20140527-0800",
   "uk.co.panaxiom" %% "play-jongo" % "0.6.0-jongo1.0",
   // SecureSocial
   "ws.securesocial" %% "securesocial" % "2.1.3",

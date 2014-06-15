@@ -56,24 +56,27 @@ public class BookStore extends Controller{
     public static Result setting(){
     	Form<User> userForm = Form.form(User.class);
     	Identity userIdentity =(Identity) ctx().args.get(SecureSocial.USER_KEY);
-        User currentUser;
-        User dbUser;
+        User currentUser = null;
+        User dbUser = null;
         if(userIdentity != null){
             currentUser = Util.transformIdentityToUser(userIdentity);
             dbUser = UserRepository.findByEmail(currentUser.getEmail());
             userForm = userForm.fill(dbUser);
         }
-    	return ok(setting.render(userForm));
+    	return ok(setting.render(userForm,dbUser));
     }
 
     public static Result settingRegister(){
+        Identity userIdentity =(Identity) ctx().args.get(SecureSocial.USER_KEY);
+        User currentUser = Util.transformIdentityToUser(userIdentity);
+        User dbUser = UserRepository.findByEmail(currentUser.getEmail());
         Form<User> userForm = Form.form(User.class).bindFromRequest();
         if(userForm.hasErrors()){
-            return badRequest(setting.render(userForm));
+            return badRequest(setting.render(userForm,dbUser));
         }
         else{
             UserRepository.update(userForm.get());
-            return ok(setting.render(userForm));
+            return ok(setting.render(userForm,dbUser));
             //controllers.BookStore.index
         }
     }
@@ -130,6 +133,21 @@ public class BookStore extends Controller{
     public static Result deleteBook(String name){
         ProductRepository.removeByName(name);
         return redirect("/listbook");
+    }
+    /**
+     * Load addresses of a current user
+     * @return JSON
+     */
+    @SecureSocial.SecuredAction
+    public static Result loadAddresses(){
+        Identity userIdentity =(Identity) ctx().args.get(SecureSocial.USER_KEY);
+        User currentUser = Util.transformIdentityToUser(userIdentity);
+        User dbUser = UserRepository.findByEmail(currentUser.getEmail()); 
+        return ok(Json.toJson(dbUser.getAddresses()));
+    }
+
+    public static Result addAddress(){
+        return TODO;
     }
 
 
