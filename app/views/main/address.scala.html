@@ -1,16 +1,8 @@
-@(user: models.User)
 <div class="tab-pane fade" id="addresses">
-        @if(user.getAddresses().size == 0){
-            <div class="alert alert-warning">
-                <strong>Warning!</strong> You didn't add any address information, it is important for delivering your ordered books.
-            </div>
-            <div class="form-group">
-                <div class="col-sm-2">
-                    <a class="btn btn-success" ng-click="addAddressField()">Add your first address</a>
-                </div>
-            </div>            
-        }
-        <div class="table-responsive">
+       <div class="alert alert-warning" ng-if="addresses.length == 0">
+            <strong>Warning!</strong> You didn't add any address information, it is important for delivering your ordered books.
+       </div>
+        <div class="table-responsive" ng-if="addresses.length != 0">
             <table class="table table-hover">
                 <thead>
                     <tr>
@@ -30,7 +22,7 @@
                         <td>{{ address.country }}</td>
                         <td>{{ address.zipcode}}</td>
                         <td>
-                            <a href="#" class="btn btn-sm btn-primary" ng-click="">Edit <i class="fa fa-edit"></i></a>
+                            <a data-toggle="modal" data-target="#myModal" class="btn btn-sm btn-primary" ng-click="editAddressForm($index)">Edit <i class="fa fa-edit"></i></a>
                             <a href="#" class="btn btn-danger" style="margin-left: 5px;" ng-click="removeAddress($index)">Delete <i class="fa fa-trash-o"></i></a>
                         </td>
                     </tr>
@@ -53,32 +45,32 @@
                         <div class="form-group">
                             <label class="col-sm-2 control-label">Street</label>
                             <div class="col-sm-7">
-                                <input name='street' class="form-control" type="text"  placeholder="Street" ng-model="address.street" value=''>
+                                <input name='street' class="form-control" type="text"  placeholder="Street" ng-model="editAddress.street" value=''>
                             </div>
                         </div>         
                         <div class="form-group" >
                             <label class="col-sm-2 control-label">City</label>
                             <div class="col-sm-7">
-                                <input name="city" class="form-control" type="text"  placeholder="City" ng-model="address.city" value=''>
+                                <input name="city" class="form-control" type="text"  placeholder="City" ng-model="editAddress.city" value=''>
                             </div>
                         </div>            
                         <div class="form-group" >
                             <label class="col-sm-2 control-label">Country</label>
                             <div class="col-sm-7">
-                                <input name="country" class="form-control" type="text"  placeholder="Country" ng-model="address.country" value=''>
+                                <input name="country" class="form-control" type="text"  placeholder="Country" ng-model="editAddress.country" value=''>
                             </div>
                         </div>            
                         <div class="form-group" >
                             <label class="col-sm-2 control-label">Zipcode</label>
                             <div class="col-sm-7">
-                                <input name="zipcode" class="form-control" type="number" min=10000 max=99999  placeholder="Zip code, 6 digits" ng-model="address.zipcode" value=''>
+                                <input name="zipcode" class="form-control" type="text"  placeholder="Zip code, 6 digits" ng-model="editAddress.zipcode" value=''>
                             </div>
                         </div>   
                     </form>
                   </div>
                   <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary" ng-click="addAddress(address)" data-dismiss="modal">Save</button>
+                    <button type="button" class="btn btn-primary" ng-click="upsertAddress()" data-dismiss="modal">Save</button>
                   </div>
                 </div>
               </div>

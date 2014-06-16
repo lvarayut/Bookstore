@@ -1,5 +1,6 @@
 package controllers;
 
+import com.fasterxml.jackson.databind.JsonNode;
 import play.data.Form;
 import play.libs.Json;
 import play.mvc.*;
@@ -63,20 +64,16 @@ public class BookStore extends Controller{
             dbUser = UserRepository.findByEmail(currentUser.getEmail());
             userForm = userForm.fill(dbUser);
         }
-    	return ok(setting.render(userForm,dbUser));
+    	return ok(setting.render(userForm));
     }
-
     public static Result settingRegister(){
-        Identity userIdentity =(Identity) ctx().args.get(SecureSocial.USER_KEY);
-        User currentUser = Util.transformIdentityToUser(userIdentity);
-        User dbUser = UserRepository.findByEmail(currentUser.getEmail());
         Form<User> userForm = Form.form(User.class).bindFromRequest();
         if(userForm.hasErrors()){
-            return badRequest(setting.render(userForm,dbUser));
+            return badRequest(setting.render(userForm));
         }
         else{
             UserRepository.update(userForm.get());
-            return ok(setting.render(userForm,dbUser));
+            return ok(setting.render(userForm));
             //controllers.BookStore.index
         }
     }
@@ -147,9 +144,79 @@ public class BookStore extends Controller{
         return ok(Json.toJson(dbUser.getAddresses()));
     }
 
+    /**
+     * Add a new address
+     * @return new Address object
+     */
+    @SecureSocial.SecuredAction
     public static Result addAddress(){
-        return TODO;
+        // Get a current user
+        Identity userIdentity =(Identity) ctx().args.get(SecureSocial.USER_KEY);
+        User currentUser = Util.transformIdentityToUser(userIdentity);
+        User dbUser = UserRepository.findByEmail(currentUser.getEmail());
+
+        // Get a new address, JSON
+        Http.RequestBody body = request().body();
+        JsonNode data = request().body().asJson();
+        String street = data.path("street").textValue();
+        String city = data.path("city").textValue();
+        String country = data.path("country").textValue();
+        String zipcode = data.path("zipcode").textValue();
+
+        // Create a new address
+        Address newAddress = new Address();
+        newAddress.setStreet(street);
+        newAddress.setCity(city);
+        newAddress.setCountry(country);
+        newAddress.setZipcode(zipcode);
+        dbUser.getAddresses().add(newAddress);
+        // Update to MongoDB
+        UserRepository.update(dbUser);
+        return ok(Json.toJson(dbUser));
     }
+
+    /**
+     *
+     * @return
+     */
+    @SecureSocial.SecuredAction
+    public static Result removeAddress(){
+        // Get a current user
+        Identity userIdentity =(Identity) ctx().args.get(SecureSocial.USER_KEY);
+        User currentUser = Util.transformIdentityToUser(userIdentity);
+        User dbUser = UserRepository.findByEmail(currentUser.getEmail());
+
+        // Get a new address, JSON
+        Http.RequestBody body = request().body();
+        JsonNode data = request().body().asJson();
+        String street = data.path("street").textValue();
+        String city = data.path("city").textValue();
+        String country = data.path("country").textValue();
+        String zipcode = data.path("zipcode").textValue();
+
+        // Create a new address
+        Address newAddress = new Address();
+        newAddress.setStreet(street);
+        newAddress.setCity(city);
+        newAddress.setCountry(country);
+        newAddress.setZipcode(zipcode);
+
+        // Remove the requested address.
+        for(Address address : dbUser.getAddresses()){
+            if(address.getStreet().equals(newAddress.getStreet()) &&
+               address.getCity().equals(newAddress.getCity()) &&
+               address.getCountry().equals(newAddress.getCountry()) &&
+               address.getZipcode().equals(newAddress.getZipcode())){
+                dbUser.getAddresses().remove(address);
+            }
+        }
+
+        // Update to MongoDB
+        UserRepository.update(dbUser);
+
+        return ok();
+    }
+
 
 
 }

@@ -39,9 +39,7 @@ app.controller("BookStoreController",function($scope, $http){
             $("#ajaxloader").show();
             var responsePromise = $http.get("/loadProducts/"+count);
             responsePromise.success(function(data, status, header, config){
-                                console.log("My data is " + data);
-
-            	if(typeof $scope.products == 'undefined'){
+            if(typeof $scope.products == 'undefined'){
             		$scope.products = data;
             	}
             	else{
@@ -93,14 +91,33 @@ app.controller("BookStoreController",function($scope, $http){
         }
 
         // Add a new address
-        $scope.addAddress = function(address){
-            $scope.addresses.push(address);
-            //var responsePromise = $http.get("/address");
+        $scope.upsertAddress = function(){
+            console.log($scope.addressIndex);
+            // Add
+            if($scope.addressIndex == null){
+                $scope.addresses.push($scope.editAddress);
+                // Add to MongoDB
+                var responsePromise = $http.post("/addAddress", angular.toJson($scope.editAddress));
+            }
+            // Edit
+            else{
+               $scope.addresses[$scope.addressIndex] = $scope.editAddress;
+               $scope.addressIndex = null;
+            }
+            // Clear the address field
+            $scope.editAddress = null;
         }
 
-        // Remove a book
+        // Fill the form when click on the edit button
+        $scope.editAddressForm = function(index){
+            $scope.editAddress = angular.copy($scope.addresses[index]);
+            $scope.addressIndex = index;
+        }
+
+        // Remove an address
         $scope.removeAddress = function(index){
+            // Remove in MongoDB
+            var responsePromise = $http.post("/removeAddress", angular.toJson($scope.addresses[index]))
             $scope.addresses.splice(index,1);
         }
-
 });
