@@ -81,9 +81,22 @@ public class BookStore extends Controller{
         }
     }
 
+
+
     public static Result description(String id){
         Book product = (Book)ProductRepository.findOneById(id);
-        return ok(description.render(product));
+        String[] words = product.getName().split(" ");
+        List<Book> similarProducts = new ArrayList<Book>();
+        System.out.println("Before Add to list ");
+        for (int i = 0; i < words.length; i++) {
+            List <Product> products = Util.iterableToList(ProductRepository.findByName(words[i]));
+            System.out.println("Add to list "+words[i]+products.size());
+            for (int j=0; j<products.size();j++){
+                System.out.println("Add to list "+products.get(j));
+                similarProducts.add((Book)products.get(j));
+            }
+        }
+        return ok(description.render(product,similarProducts));
     }
 
     public static Result addBook(){
@@ -150,6 +163,4 @@ public class BookStore extends Controller{
     public static Result addAddress(){
         return TODO;
     }
-
-
 }
