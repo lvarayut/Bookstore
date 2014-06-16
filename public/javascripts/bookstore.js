@@ -101,8 +101,11 @@ app.controller("BookStoreController",function($scope, $http){
             }
             // Edit
             else{
-               $scope.addresses[$scope.addressIndex] = $scope.editAddress;
-               $scope.addressIndex = null;
+                var oldAddress = angular.copy($scope.addresses[$scope.addressIndex]);
+                //var makeJSON = 
+                //var responsePromise = $http.post("/editAddress",);
+                $scope.addresses[$scope.addressIndex] = $scope.editAddress;
+                $scope.addressIndex = null;
             }
             // Clear the address field
             $scope.editAddress = null;

@@ -20,6 +20,7 @@ POST    /updatebook                        controllers.BookStore.handleUpdateBoo
 GET     /deleteBook                        controllers.BookStore.deleteBook(id: String)
 GET     /loadAddresses					   controllers.BookStore.loadAddresses()
 POST 	/addAddress			                controllers.BookStore.addAddress()
+POST 	/editAddress						controllers.BookStore.editAddress()
 POST    /removeAddress                      controllers.BookStore.removeAddress()
 
 # Login page
