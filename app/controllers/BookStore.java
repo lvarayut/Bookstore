@@ -172,7 +172,7 @@ public class BookStore extends Controller{
         dbUser.getAddresses().add(newAddress);
         // Update to MongoDB
         UserRepository.update(dbUser);
-        return ok());
+        return ok();
     }
 
      /**
@@ -189,18 +189,33 @@ public class BookStore extends Controller{
         // Get a new address, JSON
         Http.RequestBody body = request().body();
         JsonNode data = request().body().asJson();
-        String street = data.path("street").textValue();
-        String city = data.path("city").textValue();
-        String country = data.path("country").textValue();
-        String zipcode = data.path("zipcode").textValue();
 
-        // Create a new address
+        // Create an address
+        Address oldAddress = new Address();
+        oldAddress.setStreet(data.path("street").textValue());
+        oldAddress.setCity(data.path("city").textValue());
+        oldAddress.setCountry(data.path("country").textValue());
+        oldAddress.setZipcode(data.path("zipcode").textValue());
+
+        // Create an address
         Address newAddress = new Address();
-        newAddress.setStreet(street);
-        newAddress.setCity(city);
-        newAddress.setCountry(country);
-        newAddress.setZipcode(zipcode);
-        dbUser.getAddresses().add(newAddress);
+        newAddress.setStreet(data.path("newstreet").textValue());
+        newAddress.setCity(data.path("newcity").textValue());
+        newAddress.setCountry(data.path("newcountry").textValue());
+        newAddress.setZipcode(data.path("newzipcode").textValue());
+
+        List<Address> addresses = new ArrayList<Address>(dbUser.getAddresses());
+        for(int i = 0; i<addresses.size(); i++){
+            if(addresses.get(i).getStreet().equals(oldAddress.getStreet()) &&
+                    addresses.get(i).getCity().equals(oldAddress.getCity()) &&
+                    addresses.get(i).getCountry().equals(oldAddress.getCountry()) &&
+                    addresses.get(i).getZipcode().equals(oldAddress.getZipcode())){
+                dbUser.getAddresses().remove(i);
+                dbUser.getAddresses().add(i, newAddress);
+                break;
+            }
+        }
+
         // Update to MongoDB
         UserRepository.update(dbUser);
         return ok();
@@ -239,6 +254,7 @@ public class BookStore extends Controller{
                address.getCountry().equals(newAddress.getCountry()) &&
                address.getZipcode().equals(newAddress.getZipcode())){
                 dbUser.getAddresses().remove(address);
+                break;
             }
         }
 

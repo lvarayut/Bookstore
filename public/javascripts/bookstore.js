@@ -92,7 +92,13 @@ app.controller("BookStoreController",function($scope, $http){
 
         // Add a new address
         $scope.upsertAddress = function(){
-            console.log($scope.addressIndex);
+            console.dir($scope.editAddress);
+            if($scope.editAddress["street"] == null ||
+                $scope.editAddress["city"] == null ||
+                $scope.editAddress["country"] == null ||
+                $scope.editAddress["zipcode"] == null){
+                return;
+            }
             // Add
             if($scope.addressIndex == null){
                 $scope.addresses.push($scope.editAddress);
@@ -101,9 +107,12 @@ app.controller("BookStoreController",function($scope, $http){
             }
             // Edit
             else{
-                var oldAddress = angular.copy($scope.addresses[$scope.addressIndex]);
-                //var makeJSON = 
-                //var responsePromise = $http.post("/editAddress",);
+                var address = angular.copy($scope.addresses[$scope.addressIndex]);
+                // Combine objects into one
+                for(var attributeName in $scope.editAddress){
+                    address["new"+attributeName] = $scope.editAddress[attributeName];
+                }
+                var responsePromise = $http.post("/editAddress", address);
                 $scope.addresses[$scope.addressIndex] = $scope.editAddress;
                 $scope.addressIndex = null;
             }

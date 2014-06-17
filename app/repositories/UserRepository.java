@@ -21,7 +21,7 @@ public class UserRepository {
     }
 
     public static void update(User user){
-        users().update("{email: #}",user.getEmail()).with(user);
+        users().update("{_id: #}",user.getId()).with(user);
     }
 
     public static Iterable<User> findAll(){
