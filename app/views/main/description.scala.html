@@ -1,4 +1,4 @@
-@(product: Book)
+@(product: Book, similarProducts: List[Book])
 @base("description") {
 @*Navbar*@
 @*@navbar(identity)*@
@@ -85,6 +85,10 @@
     <div class="row bs-recommendation-container visible-md visible-lg">
         <h4>Book recommendations, frequently brought together</h4>
         <div class="">
+            <h3>
+                @for(book <- similarProducts) {
+                <li>@book.getName()</li>
+                }</h3>
         </div>
     </div>
 </main>
