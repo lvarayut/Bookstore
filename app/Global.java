@@ -17,7 +17,7 @@ public class Global extends GlobalSettings {
             if(!ProductRepository.findAll().iterator().hasNext()) {
                 Map<String,List<Object>> all = (Map<String,List<Object>>)Yaml.load("initial-data.yml");
                 for(Object product: all.get("books")) {
-                    ProductRepository.insert((Product)product);
+                    ProductRepository.insert((Product)product,null);
                 }
             }
         }
