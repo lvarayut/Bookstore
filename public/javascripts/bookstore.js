@@ -12,6 +12,8 @@ $(".bs-navbar-wishlist-body a span").html(function(index,currentText){
 	return result.trim()+"...";
 });
 
+// initialize the bootstrap star rating
+$("#reviewStar").rating();
 
 // AngularJS
 var app = angular.module("BookStore",["infinite-scroll"]);
@@ -131,5 +133,12 @@ app.controller("BookStoreController",function($scope, $http){
             // Remove in MongoDB
             var responsePromise = $http.post("/removeAddress", angular.toJson($scope.addresses[index]))
             $scope.addresses.splice(index,1);
+        }
+
+        // Add review
+        $scope.reviews = [];
+        $scope.addReview = function(){
+            //var responsePromise = $http.post("/addReview", angularJs.toJson($scope.reviewField));
+            $scope.reviews.push($scope.reviewField);
         }
 });

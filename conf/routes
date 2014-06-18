@@ -22,6 +22,7 @@ GET     /loadAddresses					   controllers.BookStore.loadAddresses()
 POST 	/addAddress			                controllers.BookStore.addAddress()
 POST 	/editAddress						controllers.BookStore.editAddress()
 POST    /removeAddress                      controllers.BookStore.removeAddress()
+POST    /addReview                          controllers.BookStore.addReview()
 
 # Login page
 GET         /login                         securesocial.controllers.LoginPage.login

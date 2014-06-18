@@ -289,7 +289,37 @@ html{
   }
 
  @media(min-width:768px){
-    .bs-detail-char{
-        border-right: solid #c7c7c7 1px;
+    .bs-detail-char-right{
+        border-right: dashed #c7c7c7 1px;
+    }
+    .bs-detail-char-left{
+        border-left: dashed #c7c7c7 1px;
     }
  }
+
+ .bs-review-wrapper> form textarea{
+    min-height: 85px;
+ }
+ .bs-rating-wrapper .bs-rating-stars{
+    font-weight: bold;
+    display: inline-block;
+ }
+  .bs-rating-wrapper .bs-rating-bar{
+     display: inline-block;
+     width:178px;
+     background-color:#f4f4cf;
+     overflow: hidden;
+     height:11px
+     border: 1px solid #ccc;
+  }
+  .bs-rating-wrapper .bs-rating-bar > .bs-rating-bar-measure{
+    background-color:#ffcc66;
+    height:11px;
+    width:61px;
+  }
+  .bs-rating-wrapper .badge{
+    background-color: #3276b1;
+    border-color: #285e8e;
+    color: #FFFFFF;
+  }
+

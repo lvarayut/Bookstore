@@ -16,6 +16,7 @@ import securesocial.core.java.SecureSocial;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import utils.Util;
@@ -238,7 +239,6 @@ public class BookStore extends Controller{
         User dbUser = UserRepository.findByEmail(currentUser.getEmail());
 
         // Get a new address, JSON
-        Http.RequestBody body = request().body();
         JsonNode data = request().body().asJson();
 
         // Create an address
@@ -284,7 +284,6 @@ public class BookStore extends Controller{
         User dbUser = UserRepository.findByEmail(currentUser.getEmail());
 
         // Get a new address, JSON
-        Http.RequestBody body = request().body();
         JsonNode data = request().body().asJson();
         String street = data.path("street").textValue();
         String city = data.path("city").textValue();
@@ -313,5 +312,25 @@ public class BookStore extends Controller{
         UserRepository.update(dbUser);
 
         return ok();
+    }
+
+    @SecureSocial.SecuredAction
+    public static Result addReview(){
+        // Get a current user
+        Identity userIdentity =(Identity) ctx().args.get(SecureSocial.USER_KEY);
+        User currentUser = Util.transformIdentityToUser(userIdentity);
+        User dbUser = UserRepository.findByEmail(currentUser.getEmail());
+        JsonNode data = request().body().asJson();
+        Comment comment = new Comment();
+        if(dbUser.getUsername().equals("")){
+            comment.setUser(dbUser.getUsername());
+        }
+        else{
+            comment.setUser(dbUser.getFirstname());
+        }
+        comment.setPublicationDate(new Date());
+        comment.setDescription(data.path("description").textValue());
+        comment.setRating(data.path("rating").intValue());
+        return ok(Json.toJson(comment));
     }
 }
