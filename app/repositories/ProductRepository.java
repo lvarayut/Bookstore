@@ -32,7 +32,11 @@ public class ProductRepository {
         products().update("{name: #}",product.getName()).with("{name:#}",newName);
     }
 
-    public static void update(Product product, File pictureFile){
+    public static void update(Product product){
+        products().update("{_id: #}",product.getId()).with(product);
+    }
+
+    public static void updateWithPicture(Product product, File pictureFile){
         utilHandleImage(product,pictureFile);
         products().update("{_id: #}",product.getId()).with(product);
     }

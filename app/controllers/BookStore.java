@@ -175,7 +175,7 @@ public class BookStore extends Controller{
         }
         else {
             Book book = (Book) bookForm.get();
-            ProductRepository.update(book,pictureFile);
+            ProductRepository.updateWithPicture(book, pictureFile);
         }
         return redirect("/listbook");
     }
@@ -316,11 +316,14 @@ public class BookStore extends Controller{
 
     @SecureSocial.SecuredAction
     public static Result addReview(){
+        String productId;
         // Get a current user
         Identity userIdentity =(Identity) ctx().args.get(SecureSocial.USER_KEY);
         User currentUser = Util.transformIdentityToUser(userIdentity);
         User dbUser = UserRepository.findByEmail(currentUser.getEmail());
         JsonNode data = request().body().asJson();
+
+        // Create a comment object
         Comment comment = new Comment();
         if(dbUser.getUsername().equals("")){
             comment.setUser(dbUser.getUsername());
@@ -331,6 +334,21 @@ public class BookStore extends Controller{
         comment.setPublicationDate(new Date());
         comment.setDescription(data.path("description").textValue());
         comment.setRating(data.path("rating").intValue());
+
+        // Find a current product
+        productId = data.path("productId").textValue();
+        Product product = ProductRepository.findOneById(productId);
+        product.getComments().add(comment);
+        // Update product
+        ProductRepository.update(product);
+
         return ok(Json.toJson(comment));
+    }
+
+    public static Result loadComments(){
+        JsonNode data = request().body().asJson();
+        String productId = data.path("id").textValue();
+        Product product = ProductRepository.findOneById(productId);
+        return ok(Json.toJson(product.getComments()));
     }
 }

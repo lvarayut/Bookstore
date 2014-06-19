@@ -300,9 +300,13 @@ html{
  .bs-review-wrapper> form textarea{
     min-height: 85px;
  }
- .bs-rating-wrapper .bs-rating-stars{
+ .bs-rating-wrapper .bs-rating-text{
     font-weight: bold;
     display: inline-block;
+ }
+ .bs-rating-star{
+    color: #fde16d;
+    text-shadow: 0 0 1px rgba(0,0,0,.7)
  }
   .bs-rating-wrapper .bs-rating-bar{
      display: inline-block;
@@ -315,7 +319,6 @@ html{
   .bs-rating-wrapper .bs-rating-bar > .bs-rating-bar-measure{
     background-color:#ffcc66;
     height:11px;
-    width:61px;
   }
   .bs-rating-wrapper .badge{
     background-color: #3276b1;

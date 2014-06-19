@@ -1,15 +1,20 @@
+// Ellipsis function
+var ellipsis = function(max,currentText){
+   var currentTextArr = currentText.split(' ');
+   var numWords = currentTextArr.length;
+   var result = "";
+   for(var i=0;i<numWords;i++){
+      // Word length + space should less than 65 characters
+      if(result.length+i < max){
+         result += currentTextArr[i] + " ";
+      }
+   }
+   return result.trim()+"...";
+ }
+
 // Ellipsis in words
-$(".bs-navbar-wishlist-body a span").html(function(index,currentText){
-	var currentTextArr = currentText.split(' ');
-	var numWords = currentTextArr.length;
-	var result = "";
-	for(var i=0;i<numWords;i++){
-		// Word length + space should less than 65 characters
-		if(result.length+i < 75){
-			result += currentTextArr[i] + " ";
-		}
-	}
-	return result.trim()+"...";
+$(".bs-navbar-wishlist-body a span").html(function(index, currentText){
+    return ellipsis(75, currentText);
 });
 
 // initialize the bootstrap star rating
@@ -83,7 +88,6 @@ app.controller("BookStoreController",function($scope, $http){
         $scope.loadAddresses = function(){
             var responsePromise = $http.get("/loadAddresses");
             responsePromise.success(function(data, status, header, config){
-                console.dir(data);
                 $scope.addresses = data;
             });
             responsePromise.error(function(data, status, header, config){
@@ -138,7 +142,81 @@ app.controller("BookStoreController",function($scope, $http){
         // Add review
         $scope.reviews = [];
         $scope.addReview = function(){
-            //var responsePromise = $http.post("/addReview", angularJs.toJson($scope.reviewField));
-            $scope.reviews.push($scope.reviewField);
+            // If user doesn't enter either the description field or all the input fields
+            if(typeof $scope.reviewField != 'undefined' && typeof $scope.reviewField.description != 'undefined'){
+                var productId = document.getElementById('productId').getAttribute('data-productId');
+                $scope.reviewField.productId = productId;
+                var responsePromise = $http.post("/addReview", angular.toJson($scope.reviewField));
+                responsePromise.success(function(data, status, header, config){
+                    // In case that the user didn't login
+                    if(typeof data.user == 'undefined'){
+                         $scope.isLogin = false;
+                    }
+                    else{
+                        var newData = [];
+                        newData.push(data);
+                        $scope.review = data;
+                        $scope.review.title = ellipsis(30, $scope.review.description);
+                        $scope.calculateRating(newData);
+                        $scope.reviews.push($scope.review);
+                    }
+                });
+            }
+        }
+
+        // Load comments of the current book
+        $scope.loadComments = function(){
+            var product = {};
+            product.id = document.getElementById('productId').getAttribute('data-productId');
+            var responsePromise = $http.post("/loadComments", angular.toJson(product));
+            responsePromise.success(function(data, status, header, config){
+                $scope.rating = {one: 0, two: 0, three: 0, four: 0, five: 0, all: 0};
+                $scope.reviews = data;
+                $scope.calculateRating($scope.reviews);
+            });
+            responsePromise.error(function(){
+                console.log("Error: No comment found");
+            });
+
+
+        }
+
+        $scope.calculateRating = function(updatedRating){
+                for(var i=0; i<updatedRating.length;i++){
+                    //updatedRating[i].title = ellipsis(30, updatedRating[i].description);
+                    // Set up rating object
+                    switch(updatedRating[i].rating){
+                        case 1:
+                            $scope.rating.one += 1;
+                            break;
+                        case 2:
+                            $scope.rating.two += 1;
+                            break;
+                        case 3:
+                            $scope.rating.three += 1;
+                            break;
+                        case 4:
+                            $scope.rating.four += 1;
+                            break;
+                        case 5:
+                            $scope.rating.five += 1;
+                            break;
+                    }
+                    $scope.rating.all += 1;
+                }
+                // Calculate percentage for the rating bars
+                $scope.rating.onePc =  $scope.rating.one * 100 /  $scope.rating.all;
+                $scope.rating.twoPc =  $scope.rating.two * 100 /  $scope.rating.all;
+                $scope.rating.threePc =  $scope.rating.three * 100 /  $scope.rating.all;
+                $scope.rating.fourPc =  $scope.rating.four * 100 /  $scope.rating.all;
+                $scope.rating.fivePc =  $scope.rating.five * 100 /  $scope.rating.all;
+                // Calculate rating average
+                $scope.rating.average = Math.round(
+                    ($scope.rating.one +
+                     $scope.rating.two * 2 +
+                     $scope.rating.three * 3 +
+                     $scope.rating.four * 4 +
+                     $scope.rating.five * 5) / $scope.rating.all
+                );
         }
 });
