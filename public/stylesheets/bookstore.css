@@ -319,6 +319,10 @@ html{
   .bs-rating-wrapper .bs-rating-bar > .bs-rating-bar-measure{
     background-color:#ffcc66;
     height:11px;
+    transition: all .5s ease-out;
+    -o-transition: all .5s ease-out;
+    -moz-transition: all .5s ease-out;
+    -webkit-transition: all .5s ease-out;
   }
   .bs-rating-wrapper .badge{
     background-color: #3276b1;

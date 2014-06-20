@@ -63,7 +63,8 @@ app.controller("BookStoreController",function($scope, $http){
 
         // Number of rating 
         $scope.getRating = function(rating){
-        	return new Array(parseInt(rating));
+            if(typeof rating != 'undefined')
+        	    return new Array(parseInt(rating));
         }
 
         // Search
@@ -153,11 +154,13 @@ app.controller("BookStoreController",function($scope, $http){
                          $scope.isLogin = false;
                     }
                     else{
+                        // Recalculate rating
                         var newData = [];
                         newData.push(data);
+                        $scope.calculateRating(newData);
+                        // Add the new data into array
                         $scope.review = data;
                         $scope.review.title = ellipsis(30, $scope.review.description);
-                        $scope.calculateRating(newData);
                         $scope.reviews.push($scope.review);
                     }
                 });
@@ -172,6 +175,9 @@ app.controller("BookStoreController",function($scope, $http){
             responsePromise.success(function(data, status, header, config){
                 $scope.rating = {one: 0, two: 0, three: 0, four: 0, five: 0, all: 0};
                 $scope.reviews = data;
+                for(var i = 0; i< $scope.reviews.length; i++){
+                    $scope.reviews[i].title = ellipsis(30,  $scope.reviews[i].description);
+                }
                 $scope.calculateRating($scope.reviews);
             });
             responsePromise.error(function(){
@@ -183,7 +189,6 @@ app.controller("BookStoreController",function($scope, $http){
 
         $scope.calculateRating = function(updatedRating){
                 for(var i=0; i<updatedRating.length;i++){
-                    //updatedRating[i].title = ellipsis(30, updatedRating[i].description);
                     // Set up rating object
                     switch(updatedRating[i].rating){
                         case 1:

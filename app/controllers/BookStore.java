@@ -325,11 +325,11 @@ public class BookStore extends Controller{
 
         // Create a comment object
         Comment comment = new Comment();
-        if(dbUser.getUsername().equals("")){
-            comment.setUser(dbUser.getUsername());
+        if(dbUser.getUsername() == null){
+            comment.setUser(dbUser.getFirstname());
         }
         else{
-            comment.setUser(dbUser.getFirstname());
+            comment.setUser(dbUser.getUsername());
         }
         comment.setPublicationDate(new Date());
         comment.setDescription(data.path("description").textValue());
