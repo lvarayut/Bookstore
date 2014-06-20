@@ -1,0 +1,17 @@
+@*@(identity:securesocial.core.Identity)*@
+@(content: Html = Html.empty)
+@import views.html.main._
+
+@base("Administrator : BookStore") {
+@*Navbar*@
+@*@navbar(identity)*@
+@navbarAdmin()
+} {
+@*Search bar*@
+<div class="container">
+    @content
+</div>
+} {
+@*Footer*@
+@footer()
+}()

@@ -37,7 +37,9 @@ public class ProductRepository {
     }
 
     public static void updateWithPicture(Product product, File pictureFile){
-        utilHandleImage(product,pictureFile);
+        if(pictureFile != null){
+            utilHandleImage(product,pictureFile);
+        }
         products().update("{_id: #}",product.getId()).with(product);
     }
 

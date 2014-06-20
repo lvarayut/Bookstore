@@ -1,12 +1,13 @@
 @*@(identity:securesocial.core.Identity)*@
 @(bookForm : Form[models.Book])
-@layout{
+@import views.html.administrator._
+@layoutAdmin{
     <h2>Add/Edit/Delete the Book</h2>
     <hr>
     @if(bookForm("name").value == null){
-        <form class="form-horizontal" role="form" action="@routes.BookStore.handleAddBook()" method="POST" enctype="multipart/form-data">
+        <form class="form-horizontal" role="form" action="@routes.Administrator.handleAddBook()" method="POST" enctype="multipart/form-data">
     } else{
-        <form class="form-horizontal" role="form" action="@routes.BookStore.handleUpdateBook()" method="POST" enctype="multipart/form-data">
+        <form class="form-horizontal" role="form" action="@routes.Administrator.handleUpdateBook()" method="POST" enctype="multipart/form-data">
     }
         <div class="form-group">
             <label class="col-sm-2 control-label">Book name</label>
@@ -74,7 +75,7 @@
             </div>
             @if(bookForm("name").value != null){
                 <input type="hidden" name="id" value='@bookForm("id").value'>
-                <a class="btn btn-danger" href='@routes.BookStore.deleteBook(bookForm("id").value)'>Delete</a>
+                <a class="btn btn-danger" href='@routes.Administrator.deleteBook(bookForm("id").value)'>Delete</a>
             }
         </div>
 

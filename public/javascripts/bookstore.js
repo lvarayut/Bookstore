@@ -80,8 +80,8 @@ app.controller("BookStoreController",function($scope, $http){
         }
 
         // Edit Book
-        $scope.editBook = function($event){
-            var bookHref = $event.currentTarget.attributes[1].nodeValue;
+        $scope.editBook = function(event){
+            var bookHref = event.currentTarget.attributes["data-redirect"].nodeValue;
             window.location.href = bookHref;
         }
 
@@ -162,6 +162,7 @@ app.controller("BookStoreController",function($scope, $http){
                         $scope.review = data;
                         $scope.review.title = ellipsis(30, $scope.review.description);
                         $scope.reviews.push($scope.review);
+
                     }
                 });
             }

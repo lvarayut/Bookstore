@@ -330,3 +330,12 @@ html{
     color: #FFFFFF;
   }
 
+/*
+ * Administrator
+ */
+ .bs-admin-menu-wrapper > .dropdown > .dropdown-menu{
+    text-align: left;
+ }
+
+
+
