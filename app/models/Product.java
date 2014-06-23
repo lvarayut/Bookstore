@@ -32,6 +32,8 @@ public class Product {
     protected float rating;
     @JsonProperty("comments")
     protected List<Comment> comments;
+    @JsonProperty("userId")
+    protected String userId;
 
     public Product() {
         comments = new ArrayList<Comment>();
@@ -115,6 +117,14 @@ public class Product {
 
     public void setComments(List<Comment> comments) {
         this.comments = comments;
+    }
+
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
     }
 
     @Override

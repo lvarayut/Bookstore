@@ -391,10 +391,63 @@ public class BookStore extends Controller{
         return ok(Json.toJson(comment));
     }
 
+    /**
+     * Load comment of a current book
+     * @return JSON
+     */
     public static Result loadComments(){
         JsonNode data = request().body().asJson();
         String productId = data.path("id").textValue();
         Product product = ProductRepository.findOneById(productId);
         return ok(Json.toJson(product.getComments()));
+    }
+
+    @SecureSocial.SecuredAction
+    public static Result addToCart(){
+        // Get a current user
+        Identity userIdentity =(Identity) ctx().args.get(SecureSocial.USER_KEY);
+        User currentUser = Util.transformIdentityToUser(userIdentity);
+        User dbUser = UserRepository.findByEmail(currentUser.getEmail());
+
+        JsonNode data = request().body().asJson();
+        String productId = data.path("id").textValue();
+
+        Product product = ProductRepository.findOneById(productId);
+        Order order = OrderRepository.findOneByUserId(dbUser.getId());
+
+        if(order == null){
+            order = new Order();
+            order.setUserId(dbUser.getId());
+            order.getProductIds().add(product.getId());
+            order.setQuantity(1);
+            order.setTotal(product.getPrice());
+            OrderRepository.insert(order);
+        }
+        else{
+            order.getProductIds().add(product.getId());
+            order.setQuantity(order.getQuantity() + 1);
+            order.setTotal(order.getTotal() + product.getPrice());
+            OrderRepository.update(order);
+        }
+
+        return ok(Json.toJson(product));
+    }
+
+    @SecureSocial.SecuredAction
+    public static Result loadCart(){
+        // Get a current user
+        Identity userIdentity =(Identity) ctx().args.get(SecureSocial.USER_KEY);
+        User currentUser = Util.transformIdentityToUser(userIdentity);
+        User dbUser = UserRepository.findByEmail(currentUser.getEmail());
+
+        Order order = OrderRepository.findOneByUserId(dbUser.getId());
+        List<String> productIds = order.getProductIds();
+        List<Product> product = new ArrayList<Product>();
+
+        for(String id : productIds){
+            product.add(ProductRepository.findOneById(id));
+        }
+
+        return ok(Json.toJson(product));
     }
 }

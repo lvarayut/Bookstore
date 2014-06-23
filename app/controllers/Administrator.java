@@ -2,9 +2,13 @@ package controllers;
 
 import models.Book;
 import models.Product;
+import models.User;
 import play.data.Form;
 import play.mvc.*;
 import repositories.ProductRepository;
+import repositories.UserRepository;
+import securesocial.core.Identity;
+import securesocial.core.java.SecureSocial;
 import utils.Util;
 import views.html.administrator.*;
 import views.html.book.*;
@@ -31,7 +35,13 @@ public class Administrator extends Controller {
      * Handle adding a book (Post request)
      * @return redirect to the book list
      */
+    @SecureSocial.SecuredAction
     public static Result handleAddBook(){
+        // Get a current user
+        Identity userIdentity =(Identity) ctx().args.get(SecureSocial.USER_KEY);
+        User currentUser = Util.transformIdentityToUser(userIdentity);
+        User dbUser = UserRepository.findByEmail(currentUser.getEmail());
+
         Form<Book> bookForm = Form.form(Book.class).bindFromRequest();
         Http.MultipartFormData body = request().body().asMultipartFormData();
         Http.MultipartFormData.FilePart picture = body.getFile("imagePath");
@@ -42,6 +52,7 @@ public class Administrator extends Controller {
         else{
             Book book = bookForm.get();
             book.setCategory("Book");
+            book.setUserId(dbUser.getId());
             ProductRepository.insert(book, pictureFile);
         }
         return redirect("/administrator/listbook");
@@ -88,11 +99,21 @@ public class Administrator extends Controller {
             Book book = (Book) bookForm.get();
             // Take data from the database
             Book dbBook = (Book) ProductRepository.findOneById(book.getId());
-            book.setComments(dbBook.getComments());
+
+            dbBook.setName(book.getName());
+            dbBook.setType(book.getType());
+            dbBook.setDescription(book.getDescription());
+            dbBook.setCompany(book.getCompany());
+            dbBook.setPrice(book.getPrice());
+            dbBook.setRating(book.getRating());
+            dbBook.setAuthor(book.getAuthor());
+            dbBook.setPublicationDate(book.getPublicationDate());
+            dbBook.setNumPage(book.getNumPage());
+
             if(picture != null){
                 pictureFile = picture.getFile();
             }
-            ProductRepository.updateWithPicture(book, pictureFile);
+            ProductRepository.updateWithPicture(dbBook, pictureFile);
         }
         return redirect("/administrator/listbook");
     }
