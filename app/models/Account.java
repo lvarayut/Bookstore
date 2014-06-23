@@ -8,8 +8,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 * Bank account for users
 */
 public class Account {
-    @JsonProperty("_id")
-    private String id;
+    @JsonProperty("accountId")
+    private String accountId;
     @JsonProperty("type")
     private String type;
     @JsonProperty("balance")
@@ -17,17 +17,12 @@ public class Account {
 
     public Account(){}
 
-    @JsonCreator
-    public Account(@JsonProperty("balance") int balance) {
-        this.balance = balance;
+    public String getAccountId() {
+        return accountId;
     }
 
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
+    public void setAccountId(String accountId) {
+        this.accountId = accountId;
     }
 
     public String getType() {
@@ -57,7 +52,7 @@ public class Account {
     @Override
     public String toString() {
         return "Account{" +
-                "id='" + id + '\'' +
+                "id='" + accountId + '\'' +
                 ", type='" + type + '\'' +
                 ", balance=" + balance +
                 '}';

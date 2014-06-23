@@ -99,7 +99,7 @@ app.controller("BookStoreController",function($scope, $http){
 
         // Add a new address
         $scope.upsertAddress = function(){
-            console.dir($scope.editAddress);
+            // All the field are required
             if($scope.editAddress["street"] == null ||
                 $scope.editAddress["city"] == null ||
                 $scope.editAddress["country"] == null ||
@@ -138,6 +138,60 @@ app.controller("BookStoreController",function($scope, $http){
             // Remove in MongoDB
             var responsePromise = $http.post("/removeAddress", angular.toJson($scope.addresses[index]))
             $scope.addresses.splice(index,1);
+        }
+
+        // Load account of a current user
+        $scope.loadAccounts = function(){
+            var responsePromise = $http.get("/loadAccounts");
+            responsePromise.success(function(data, status, header, config){
+                $scope.accounts = data;
+            });
+            responsePromise.error(function(data, status, header, config){
+                $scope.accounts = [];
+                console.log("Error: No address found");
+            });
+        }
+
+        // Add a new account
+        $scope.upsertAccount = function(){
+            // All the field are required
+            if($scope.editAccount["accountId"] == null ||
+                $scope.editAccount["type"] == null ||
+                $scope.editAccount["balance"] == null){
+                return;
+            }
+            // Add
+            if($scope.accountIndex == null){
+                $scope.accounts.push($scope.editAccount);
+                // Add to MongoDB
+                var responsePromise = $http.post("/addAccount", angular.toJson($scope.editAccount));
+            }
+            // Edit
+            else{
+                var account = angular.copy($scope.accounts[$scope.accountIndex]);
+                // Combine objects into one
+                for(var attributeName in $scope.editAccount){
+                    account["new"+attributeName] = $scope.editAccount[attributeName];
+                }
+                var responsePromise = $http.post("/editAccount", account);
+                $scope.accounts[$scope.accountIndex] = $scope.editAccount;
+                $scope.accountIndex = null;
+            }
+            // Clear the address field
+            $scope.editAccount = null;
+        }
+
+        // Fill the form when click on the edit button
+        $scope.editAccountForm = function(index){
+            $scope.editAccount = angular.copy($scope.accounts[index]);
+            $scope.accountIndex = index;
+        }
+
+        // Remove an account
+        $scope.removeAccount = function(index){
+            // Remove in MongoDB
+            var responsePromise = $http.post("/removeAccount", angular.toJson($scope.accounts[index]))
+            $scope.accounts.splice(index,1);
         }
 
         // Add review

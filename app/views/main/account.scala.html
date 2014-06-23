@@ -1,0 +1,71 @@
+<div class="tab-pane fade" id="accounts">
+       <div class="alert alert-warning" ng-if="accounts.length == 0">
+            <strong>Warning!</strong> You didn't add any account information, please add it before buying a book.
+       </div>
+        <div class="table-responsive" ng-if="accounts.length != 0">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>Number</th>
+                        <th>Account id</th>
+                        <th>Type</th>
+                        <th>Balance</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-click="" ng-repeat="account in accounts track by $index">
+                        <td>{{ $index+1 }}</td>
+                        <td>{{ account.accountId }}</td>
+                        <td>{{ account.type }}</td>
+                        <td>{{ account.balance }}</td>
+                        <td>
+                            <a data-toggle="modal" data-target="#accountModal" class="btn btn-sm btn-primary" ng-click="editAccountForm($index)">Edit <i class="fa fa-edit"></i></a>
+                            <a href="#" class="btn btn-danger" style="margin-left: 5px;" ng-click="removeAccount($index)">Delete <i class="fa fa-trash-o"></i></a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>            
+
+        <!-- Modal -->
+        <div class="form-group">
+            <button class="btn btn-success" data-toggle="modal" data-target="#accountModal">Add a new account</button>
+            <div class="modal fade" id="accountModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title" id="myModalLabel">Add a new address</h4>
+                  </div>
+                  <div class="modal-body">
+                      <form name="addressForm" class="form-horizontal" action="" method="POST" ng-init="loadAccounts()">
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">id</label>
+                            <div class="col-sm-7">
+                                <input name='accountId' class="form-control" type="text"  placeholder="Account id" ng-model="editAccount.accountId" value='' required>
+                            </div>
+                        </div>         
+                        <div class="form-group" >
+                            <label class="col-sm-2 control-label">Type</label>
+                            <div class="col-sm-7">
+                                <input name="type" class="form-control" type="text"  placeholder="Type" ng-model="editAccount.type" value='' required>
+                            </div>
+                        </div>            
+                        <div class="form-group" >
+                            <label class="col-sm-2 control-label">Balance</label>
+                            <div class="col-sm-7">
+                                <input name="balance" class="form-control" type="number"  placeholder="Balance" ng-model="editAccount.balance" value='' required>
+                            </div>
+                        </div>
+                      </form>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" ng-click="upsertAccount()" data-dismiss="modal">Save</button>
+                  </div>
+                </div>
+              </div>
+            </div>            
+        </div>                                                    
+             
+</div>

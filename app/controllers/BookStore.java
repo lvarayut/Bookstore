@@ -165,7 +165,7 @@ public class BookStore extends Controller{
         // Get a new address, JSON
         JsonNode data = request().body().asJson();
 
-        // Create an address
+        // Create an old address
         Address oldAddress = new Address();
         oldAddress.setStreet(data.path("street").textValue());
         oldAddress.setCity(data.path("city").textValue());
@@ -228,6 +228,128 @@ public class BookStore extends Controller{
                address.getCountry().equals(newAddress.getCountry()) &&
                address.getZipcode().equals(newAddress.getZipcode())){
                 dbUser.getAddresses().remove(address);
+                break;
+            }
+        }
+
+        // Update to MongoDB
+        UserRepository.update(dbUser);
+
+        return ok();
+    }
+
+
+    /**
+     * Load accounts of a current user
+     * @return JSON
+     */
+    @SecureSocial.SecuredAction
+    public static Result loadAccounts(){
+        Identity userIdentity =(Identity) ctx().args.get(SecureSocial.USER_KEY);
+        User currentUser = Util.transformIdentityToUser(userIdentity);
+        User dbUser = UserRepository.findByEmail(currentUser.getEmail());
+        return ok(Json.toJson(dbUser.getAccounts()));
+    }
+
+    /**
+     * Add a new account
+     * @return HTML status
+     */
+    @SecureSocial.SecuredAction
+    public static Result addAccount(){
+        // Get a current user
+        Identity userIdentity =(Identity) ctx().args.get(SecureSocial.USER_KEY);
+        User currentUser = Util.transformIdentityToUser(userIdentity);
+        User dbUser = UserRepository.findByEmail(currentUser.getEmail());
+
+        // Get a new account, JSON
+        Http.RequestBody body = request().body();
+        JsonNode data = request().body().asJson();
+        String accountId = data.path("accountId").textValue();
+        String type = data.path("type").textValue();
+        float balance = (float)data.path("balance").doubleValue();
+
+        // Create a new account
+        Account newAccount = new Account();
+        newAccount.setAccountId(accountId);
+        newAccount.setType(type);
+        newAccount.setBalance(balance);
+
+        dbUser.getAccounts().add(newAccount);
+        // Update to MongoDB
+        UserRepository.update(dbUser);
+        return ok();
+    }
+
+    /**
+     * Edit a requested account
+     * @return HTML status
+     */
+    @SecureSocial.SecuredAction
+    public static Result editAccount(){
+        // Get a current user
+        Identity userIdentity =(Identity) ctx().args.get(SecureSocial.USER_KEY);
+        User currentUser = Util.transformIdentityToUser(userIdentity);
+        User dbUser = UserRepository.findByEmail(currentUser.getEmail());
+
+        // Get a new account, JSON
+        JsonNode data = request().body().asJson();
+
+        // Create  an old account
+        Account oldAccount = new Account();
+        oldAccount.setAccountId(data.path("accountId").textValue());
+        oldAccount.setType(data.path("type").textValue());
+        oldAccount.setBalance((float)data.path("balance").doubleValue());
+
+        // Create  n new account
+        Account newAccount = new Account();
+        newAccount.setAccountId(data.path("newaccountId").textValue());
+        newAccount.setType(data.path("newtype").textValue());
+        newAccount.setBalance((float)data.path("newbalance").doubleValue());
+
+        List<Account> accounts = new ArrayList<Account>(dbUser.getAccounts());
+        for(int i = 0; i<accounts.size(); i++){
+            if(accounts.get(i).getAccountId().equals(oldAccount.getAccountId()) &&
+                    accounts.get(i).getType().equals(oldAccount.getType()) &&
+                    accounts.get(i).getBalance() == oldAccount.getBalance()){
+                dbUser.getAccounts().remove(i);
+                dbUser.getAccounts().add(i, newAccount);
+                break;
+            }
+        }
+
+        // Update to MongoDB
+        UserRepository.update(dbUser);
+        return ok();
+    }
+
+    /**
+     * Remove a requested account
+     * @return HTML status
+     */
+    @SecureSocial.SecuredAction
+    public static Result removeAccount(){
+        // Get a current user
+        Identity userIdentity =(Identity) ctx().args.get(SecureSocial.USER_KEY);
+        User currentUser = Util.transformIdentityToUser(userIdentity);
+        User dbUser = UserRepository.findByEmail(currentUser.getEmail());
+
+        // Get a new account, JSON
+        JsonNode data = request().body().asJson();
+
+        // Create  an  account
+        Account removedAccount = new Account();
+        removedAccount.setAccountId(data.path("accountId").textValue());
+        removedAccount.setType(data.path("type").textValue());
+        removedAccount.setBalance((float) data.path("balance").doubleValue());
+
+        List<Account> accounts = new ArrayList<Account>(dbUser.getAccounts());
+        // Remove the requested account.
+        for(Account account : accounts){
+            if(account.getAccountId().equals(removedAccount.getAccountId()) &&
+                    account.getType().equals(removedAccount.getType()) &&
+                    account.getBalance() == removedAccount.getBalance()){
+                dbUser.getAccounts().remove(account);
                 break;
             }
         }
