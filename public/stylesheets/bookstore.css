@@ -330,6 +330,17 @@ html{
     color: #FFFFFF;
   }
 
+  /*
+   * Payment
+   */
+
+   .bs-total-price *{
+        font-size: 25px;
+   }
+   .bs-payment-modal h5{
+        font-weight: bold;
+   }
+
 /*
  * Administrator
  */

@@ -24,6 +24,8 @@ POST    /addReview                          controllers.BookStore.addReview()
 POST     /loadComments                       controllers.BookStore.loadComments()
 GET     /loadCart                           controllers.BookStore.loadCart()
 POST    /addToCart                          controllers.BookStore.addToCart()
+GET     /payment                            controllers.BookStore.payment()
+POST    /handlePayment                      controllers.BookStore.handlePayment()
 # Login page
 GET         /login                         securesocial.controllers.LoginPage.login
 GET         /logout                        securesocial.controllers.LoginPage.logout

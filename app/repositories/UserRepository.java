@@ -31,4 +31,8 @@ public class UserRepository {
     public static User findByEmail(String email){
         return users().findOne("{email: #}", email).as(User.class);
     }
+
+    public static User findById(String userId){
+        return users().findOne("{_id: #}", userId).as(User.class);
+    }
 }

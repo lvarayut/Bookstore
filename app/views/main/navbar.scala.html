@@ -55,13 +55,15 @@
                     <div class="dropdown-menu dropdown-menu-right bs-navbar-dropdown-container">
                         <div class="bs-navbar-wishlist-header">
                             <h5>Your Shopping Cart</h5>
-                            <a class="" href="#"><i class="glyphicon glyphicon-cog"></i></a>
+                            <a class="" href="@routes.BookStore.payment()"><i class="fa fa-credit-card"></i></a>
                         </div>
                         <div class="bs-navbar-wishlist-body">
-                            <a href="#" ng-repeat="item in cart">
-                                <img align="left" width="50" height="50" ng-src="/getImage/{{ item.imageName }}">
-                                <span><b>{{ item.name }}</b> - {{ item.description | ellipsis }}</span>
-                            </a>
+                            <div  ng-repeat="item in cart">
+                                <a href="/description/{{ item._id }}">
+                                    <img align="left" width="50" height="50" ng-src="/getImage/{{ item.imageName }}">
+                                    <span><b>{{ item.name }}</b> - {{ item.description | ellipsis }}</span>
+                                </a>
+                            </div>
                         </div>
                     </div>
                 </li>

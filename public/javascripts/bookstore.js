@@ -313,10 +313,28 @@ app.controller("BookStoreController",function($scope, $http){
             var responsePromise = $http.post("/addToCart", angular.toJson(product));
             responsePromise.success(function(data, status, header, config){
                 $scope.cart.push(data);
-                console.dir($scope.cart);
             });
             responsePromise.error(function(data, status, header, config){
                 console.log("Error: No product found")
+            });
+        }
+
+        // Calculate the total price in cart
+        $scope.getTotalPriceInCart = function(){
+            var totalPrice = 0;
+            for(var i=0; i<$scope.cart.length; i++){
+                totalPrice += $scope.cart[i].price;
+            }
+            return totalPrice;
+        }
+
+        $scope.handlePayment = function(){
+            var responsePromise = $http.post("/handlePayment", angular.toJson($scope.payment));
+            responsePromise.success(function(data, status, header, config){
+
+            });
+            responsePromise.error(function(data, status, header, config){
+
             });
         }
 });

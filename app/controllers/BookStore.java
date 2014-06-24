@@ -8,6 +8,7 @@ import models.*;
 import repositories.*;
 import views.html.*;
 import views.html.defaultpages.badRequest;
+import views.html.defaultpages.error;
 import views.html.main.*;
 import views.html.book.*;
 import interceptors.WithProvider;
@@ -402,6 +403,10 @@ public class BookStore extends Controller{
         return ok(Json.toJson(product.getComments()));
     }
 
+    /**
+     * Add an item to cart
+     * @return
+     */
     @SecureSocial.SecuredAction
     public static Result addToCart(){
         // Get a current user
@@ -433,6 +438,10 @@ public class BookStore extends Controller{
         return ok(Json.toJson(product));
     }
 
+    /**
+     * Load all items for a current user
+     * @return
+     */
     @SecureSocial.SecuredAction
     public static Result loadCart(){
         // Get a current user
@@ -440,6 +449,7 @@ public class BookStore extends Controller{
         User currentUser = Util.transformIdentityToUser(userIdentity);
         User dbUser = UserRepository.findByEmail(currentUser.getEmail());
 
+        // Get products in the cart
         Order order = OrderRepository.findOneByUserId(dbUser.getId());
         List<String> productIds = order.getProductIds();
         List<Product> product = new ArrayList<Product>();
@@ -449,5 +459,48 @@ public class BookStore extends Controller{
         }
 
         return ok(Json.toJson(product));
+    }
+
+    @SecureSocial.SecuredAction
+    public static Result payment(){
+        return ok(payment.render());
+    }
+
+    @SecureSocial.SecuredAction
+    public static Result handlePayment(){
+        // Get a current user
+        Identity userIdentity =(Identity) ctx().args.get(SecureSocial.USER_KEY);
+        User currentUser = Util.transformIdentityToUser(userIdentity);
+        User dbUser = UserRepository.findByEmail(currentUser.getEmail());
+
+        // Get post data
+        JsonNode data = request().body().asJson();
+        int addressIndex = data.path("address").asInt();
+        int accountIndex = data.path("account").asInt();
+
+        // Get products in the cart
+        Order order = OrderRepository.findOneByUserId(dbUser.getId());
+        List<String> productIds = order.getProductIds();
+
+        // Manage transactions
+        for(String id : productIds){
+            Product product = ProductRepository.findOneById(id);
+            User seller = UserRepository.findById(product.getUserId());
+
+            // Deposit money to seller and Withdraw money from buyer
+            boolean isSuccess = TransactionRepository.buyProduct(dbUser, seller, accountIndex, product.getPrice());
+            if(isSuccess){
+                // Add to history
+
+                // Remove the Order
+                //order.getProductIds().re
+                // Remove the product
+            }
+            else{
+                // Return Status: 500
+                return internalServerError();
+            }
+        }
+        return ok();
     }
 }
