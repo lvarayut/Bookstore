@@ -21,7 +21,7 @@ $(".bs-navbar-wishlist-body a span").html(function(index, currentText){
 $("#reviewStar").rating();
 
 // AngularJS
-var app = angular.module("BookStore",["infinite-scroll"]);
+var app = angular.module("BookStore",["infinite-scroll", "ngSanitize"]);
 //app.directive("scroll",function($window){
 //    return function(scope, element, attrs){
 //        angular.element($window).bind("scroll", function(){
@@ -42,7 +42,7 @@ app.filter("ellipsis" , function(){
     };
 });
 
-app.controller("BookStoreController",function($scope, $http){
+app.controller("BookStoreController",function($scope, $http, $timeout){
         var busy = false;
         var count = 0;
 
@@ -328,14 +328,30 @@ app.controller("BookStoreController",function($scope, $http){
             return totalPrice;
         }
 
+        // Handle payment
         $scope.handlePayment = function(){
-            var responsePromise = $http.post("/handlePayment", angular.toJson($scope.payment));
-            responsePromise.success(function(data, status, header, config){
+            if(typeof $scope.payment == 'undefined' ||
+               typeof $scope.payment.account == 'undefined' ||
+               typeof $scope.payment.address == 'undefined'){
+                 $scope.modalBody = '<div class="alert alert-danger"><strong>Warning!</strong> please choose both an address and account</div>'
+                 $timeout(function(){
+                    $scope.modalBody = "";
+                    }, 2000);
+               }
+            else{
+                var responsePromise = $http.post("/handlePayment", angular.toJson($scope.payment));
+                responsePromise.success(function(data, status, header, config){
+                    $scope.modalBody = '<div class="alert alert-success"><strong>Done!</strong>Thanks you for trusting us</div><p>Redirecting... <i class="fa fa-spinner fa-spin"></i><p>'
+                    // Delay 2 seconds before redirect
+                    $timeout(function(){
+                        window.location.href = "/";
+                    }, 2000);
 
-            });
-            responsePromise.error(function(data, status, header, config){
-
-            });
+                });
+                responsePromise.error(function(data, status, header, config){
+                        $scope.modalBody = '<div class="alert alert-danger"><strong>Error!</strong>You already bought some books, however, the other have errors, please check your <a href="/setting" class="alert-link">bank account</a> and try again.</div>'
+                });
+            }
         }
 });
 

@@ -471,7 +471,7 @@ public class BookStore extends Controller{
         // Get a current user
         Identity userIdentity =(Identity) ctx().args.get(SecureSocial.USER_KEY);
         User currentUser = Util.transformIdentityToUser(userIdentity);
-        User dbUser = UserRepository.findByEmail(currentUser.getEmail());
+        User buyer = UserRepository.findByEmail(currentUser.getEmail());
 
         // Get post data
         JsonNode data = request().body().asJson();
@@ -479,8 +479,15 @@ public class BookStore extends Controller{
         int accountIndex = data.path("account").asInt();
 
         // Get products in the cart
-        Order order = OrderRepository.findOneByUserId(dbUser.getId());
-        List<String> productIds = order.getProductIds();
+        Order order = OrderRepository.findOneByUserId(buyer.getId());
+        List<String> productIds = new ArrayList<String>(order.getProductIds());
+
+        // Create History
+        History history = new History();
+        history.setBuyer(buyer);
+        history.setQuantity(1);
+        history.setTotal(order.getTotal());
+        history.setPaymentMethod("Credit card");
 
         // Manage transactions
         for(String id : productIds){
@@ -488,19 +495,29 @@ public class BookStore extends Controller{
             User seller = UserRepository.findById(product.getUserId());
 
             // Deposit money to seller and Withdraw money from buyer
-            boolean isSuccess = TransactionRepository.buyProduct(dbUser, seller, accountIndex, product.getPrice());
+            boolean isSuccess = TransactionRepository.buyProduct(buyer, seller, accountIndex, product.getPrice());
             if(isSuccess){
                 // Add to history
+                history.getProducts().add(product);
 
                 // Remove the Order
-                //order.getProductIds().re
+                order.getProductIds().remove(id);
+
                 // Remove the product
+                ProductRepository.removeById(id);
             }
             else{
                 // Return Status: 500
+                // Update in DB
+                OrderRepository.update(order);
+                HistoryRepository.insert(history);
                 return internalServerError();
             }
         }
+
+        // Update in DB
+        OrderRepository.removeById(order);
+        HistoryRepository.insert(history);
         return ok();
     }
 }

@@ -5,7 +5,7 @@
 <div class="table-responsive">
     <div class="pull-right">
         <a href="@routes.BookStore.index()" class="btn btn-warning">Continue Shopping <i class="fa fa-briefcase"></i></a>
-        <a data-toggle="modal" data-target="#paymentModal"  href="#" ng-click="handlePayment()" class="btn btn-success">Check out ! <i class="fa fa-credit-card"></i></a>
+        <a data-toggle="modal" data-target="#paymentModal"  href="#" class="btn btn-success">Check out ! <i class="fa fa-credit-card"></i></a>
     </div>
     <div class="clearfix"></div>
     <br>
@@ -53,14 +53,14 @@
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                     <h4 class="modal-title" id="myModalLabel">Payment information</h4>
                 </div>
-                <div class="modal-body">
-
+                <div class="modal-body" >
+                    <div ng-bind-html="modalBody"></div>
                     <!-- Warning message-->
                     <div class="alert alert-danger" ng-if="addresses.length == 0 || accounts.length == 0">
                         <strong>Warning!</strong> You must add both<a href="@routes.BookStore.setting()" class="alert-link">an address and account</a> before continue paying process.
                     </div>
 
-                    <form name="addressForm" class="form-horizontal" action="" method="POST" ng-if="addresses.length != 0 && accounts.length != 0">
+                    <form name="addressForm" class="form-horizontal" action="" method="POST" ng-if="addresses.length != 0 && accounts.length != 0 && !modalBody">
                         <h5>Choosing your address</h5>
                         <div class="radio" ng-repeat="address in addresses track by $index">
                             <label>

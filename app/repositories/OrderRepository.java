@@ -32,7 +32,7 @@ public class OrderRepository {
 
 
     public static void removeById(Order order){
-        orders().remove(order.getId());
+        orders().remove("{_id: #}",order.getId());
     }
 
     public static Iterable<Order> findAll(){
