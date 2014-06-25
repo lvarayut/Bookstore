@@ -485,7 +485,7 @@ public class BookStore extends Controller{
         // Create History
         History history = new History();
         history.setBuyer(buyer);
-        history.setQuantity(1);
+        history.setQuantity(order.getQuantity());
         history.setTotal(order.getTotal());
         history.setPaymentMethod("Credit card");
 
@@ -519,5 +519,26 @@ public class BookStore extends Controller{
         OrderRepository.removeById(order);
         HistoryRepository.insert(history);
         return ok();
+    }
+
+    @SecureSocial.SecuredAction
+    public static Result history(){
+        return ok(history.render());
+    }
+
+    /**
+     * Load history for a current user
+     * @return
+     */
+    @SecureSocial.SecuredAction
+    public static Result loadHistory(){
+        // Get a current user
+        Identity userIdentity =(Identity) ctx().args.get(SecureSocial.USER_KEY);
+        User currentUser = Util.transformIdentityToUser(userIdentity);
+        User dbUser = UserRepository.findByEmail(currentUser.getEmail());
+
+        // Get products in the cart
+        List<History> histories = Util.iterableToList(HistoryRepository.findByUserId(dbUser.getId()));
+        return ok(Json.toJson(histories));
     }
 }

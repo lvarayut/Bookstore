@@ -353,5 +353,18 @@ app.controller("BookStoreController",function($scope, $http, $timeout){
                 });
             }
         }
+
+        // Load items in cart
+        $scope.history = [];
+        $scope.loadHistory = function(){
+            var responsePromise = $http.get("/loadHistory");
+            responsePromise.success(function(data, status, header, config){
+                $scope.history = data;
+                console.dir($scope.history);
+            });
+            responsePromise.error(function(data, status, header, config){
+                console.log("Error: no item found in the cart")
+            });
+        }
 });
 

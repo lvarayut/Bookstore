@@ -31,6 +31,10 @@ public class HistoryRepository {
         return histories().find().as(History.class);
     }
 
+    public static Iterable<History> findByUserId(String id){
+        return histories().find("{buyer._id:#}", id).as(History.class);
+    }
+
     public static History findOneById(String id){
         return histories().findOne("{_id:#}", id).as(History.class);
     }

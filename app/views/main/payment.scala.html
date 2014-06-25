@@ -73,7 +73,7 @@
                         <div class="radio" ng-repeat="account in accounts track by $index">
                             <label>
                                 <input type="radio" name="accountRadio" id="account-{{ $index }}" ng-value="$index" ng-model="$parent.$parent.payment.account">
-                                {{ account.accountId }}, {{ account.type }} (Balance: {{ account.balance }} euros)
+                                {{ account.accountId }}, {{ account.type }} (Balance: {{ account.balance | number:2 }} euros)
                             </label>
                         </div>
                     </form>

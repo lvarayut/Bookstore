@@ -26,6 +26,9 @@ GET     /loadCart                           controllers.BookStore.loadCart()
 POST    /addToCart                          controllers.BookStore.addToCart()
 GET     /payment                            controllers.BookStore.payment()
 POST    /handlePayment                      controllers.BookStore.handlePayment()
+GET     /history                            controllers.BookStore.history()
+GET     /loadHistory                        controllers.BookStore.loadHistory()
+
 # Login page
 GET         /login                         securesocial.controllers.LoginPage.login
 GET         /logout                        securesocial.controllers.LoginPage.logout
