@@ -293,3 +293,19 @@ html{
         border-right: solid #c7c7c7 1px;
     }
  }
+
+.carousel-control.right{
+ background-image:none;
+ }
+
+.carousel-control.left{
+ background-image:none;
+ }
+
+ .carousel-control{
+     width: 5%;
+     color: #6D071A;
+ }
+
+
+

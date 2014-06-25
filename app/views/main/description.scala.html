@@ -1,4 +1,5 @@
 @(product: Book, similarProducts: List[Book])
+@import java.math.BigInteger; var i=2
 @base("description") {
 @*Navbar*@
 @*@navbar(identity)*@
@@ -20,7 +21,6 @@
             <!-- Small picture -->
             <a data-toggle="modal" data-target="#myModal"><img alt="Click to view the lightbox"  class="img-responsive" src="@routes.BookStore.getImage(product.getImageName())"></a>
             </button>
-
             <!-- Big picture Modal -->
             <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                 <div class="modal-dialog">
@@ -82,15 +82,65 @@
         </div>
     </div>-->
     <hr>
+
     <div class="row bs-recommendation-container visible-md visible-lg">
         <h4>Book recommendations, frequently brought together</h4>
-        <div class="">
-            <h3>
-                @for(book <- similarProducts) {
-                <li>@book.getName()</li>
-                }</h3>
+        <div class=""><div class="col-xs-12 col-sm-12 col-md-12 bs-book-container">
+            <div id="carousel-example-generic" class="carousel slide" data-ride="carousel" style="width:100%;">
+
+                <div class="carousel-inner">
+                    <!--<img alt="Second slide" data-src="holder.js/900x200/auto/#666:#444/text:Second slide" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI5MDAiIGhlaWdodD0iNTAwIj48cmVjdCB3aWR0aD0iOTAwIiBoZWlnaHQ9IjUwMCIgZmlsbD0iIzY2NiIvPjx0ZXh0IHRleHQtYW5jaG9yPSJtaWRkbGUiIHg9IjQ1MCIgeT0iMjUwIiBzdHlsZT0iZmlsbDojNDQ0O2ZvbnQtd2VpZ2h0OmJvbGQ7Zm9udC1zaXplOjU2cHg7Zm9udC1mYW1pbHk6QXJpYWwsSGVsdmV0aWNhLHNhbnMtc2VyaWY7ZG9taW5hbnQtYmFzZWxpbmU6Y2VudHJhbCI+U2Vjb25kIHNsaWRlPC90ZXh0Pjwvc3ZnPg==">-->
+                    @for((item, index) <- similarProducts.zipWithIndex) {
+                    @if(index == 0) {
+                        <div class="item active">
+                        <div class="col-sm-6 col-md-1">
+                        </div>
+                        }
+                    @if((index%5) == 0 && index !=0){
+                        <div class="item">
+                        <div class="col-sm-6 col-md-1">
+                        </div>
+                        }
+                            <div class="col-sm-6 col-md-2">
+                                <a href="@routes.BookStore.description(item.getId())">
+                                    <div class="thumbnail">
+                                        <img class="img-responsive" src="@routes.BookStore.getImage(item.getImageName())">
+                                        <div class="caption">
+                                            <h5 class="title">@item.getName()</h5>
+                                            <small>@item.getAuthor()</small>
+                                            <!--<p class="bs-rating"><i class="fa fa-star" ng-repeat="i in getRating(product.rating) track by $index"></i></p>-->
+                                            <small>Paper back</small>
+                                            <small class="bs-price"><i class="glyphicon glyphicon-euro"></i>@item.getPrice()</small>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                    @if((index%5) == 4){
+                            <div class="col-sm-6 col-md-1">
+                            </div>
+                        </div>
+                        }
+                    }
+                            <!--<div class="col-sm-6 col-md-1">
+                             </div>-->
+                     </div>
+                </div>
+
+                <a class="left carousel-control" href="#carousel-example-generic" data-slide="prev">
+                    <span class="glyphicon glyphicon-chevron-left"></span>
+                </a>
+                <a class="right carousel-control" href="#carousel-example-generic" data-slide="next">
+                    <span class="glyphicon glyphicon-chevron-right"></span>
+                </a>
+            </div>
+            </div>
+
+
         </div>
     </div>
+
+
+
 </main>
 <!-- Javascripts -->
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
