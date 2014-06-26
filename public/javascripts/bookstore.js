@@ -299,7 +299,10 @@ app.controller("BookStoreController",function($scope, $http, $timeout){
         $scope.loadCart = function(){
             var responsePromise = $http.get("/loadCart");
             responsePromise.success(function(data, status, header, config){
-                $scope.cart = data;
+                // Verify if the page is not redirected
+                if(typeof data[0] != "undefined" && typeof data[0]._id != "undefined"){
+                    $scope.cart = data;
+                }
             });
             responsePromise.error(function(data, status, header, config){
                 console.log("Error: no item found in the cart")

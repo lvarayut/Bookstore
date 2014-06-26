@@ -59,7 +59,7 @@
                         </div>
                         <div class="bs-navbar-wishlist-body">
                             <p ng-if="!cart.length">No item in cart...</p>
-                            <div  ng-repeat="item in cart">
+                            <div  ng-repeat="item in cart track by $index">
                                 <a href="/description/{{ item._id }}">
                                     <img align="left" width="50" height="50" ng-src="/getImage/{{ item.imageName }}">
                                     <span><b>{{ item.name }}</b> - {{ item.description | ellipsis }}</span>

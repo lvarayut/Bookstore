@@ -451,14 +451,18 @@ public class BookStore extends Controller{
 
         // Get products in the cart
         Order order = OrderRepository.findOneByUserId(dbUser.getId());
-        List<String> productIds = order.getProductIds();
-        List<Product> product = new ArrayList<Product>();
+        List<Product> product = null;
+        if(order != null){
+            List<String> productIds = order.getProductIds();
+            product = new ArrayList<Product>();
 
-        for(String id : productIds){
-            product.add(ProductRepository.findOneById(id));
+            for(String id : productIds){
+                product.add(ProductRepository.findOneById(id));
+            }
+            return ok(Json.toJson(product));
         }
+        return ok();
 
-        return ok(Json.toJson(product));
     }
 
     @SecureSocial.SecuredAction
