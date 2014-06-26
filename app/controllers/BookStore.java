@@ -84,7 +84,7 @@ public class BookStore extends Controller{
 
 
     /**
-     * product: description of the product
+     * product: Description of the product
      * similarProducts: Return books with the same keywords
      * @param id
      * @return
@@ -95,15 +95,9 @@ public class BookStore extends Controller{
         Book product = (Book)ProductRepository.findOneById(id);
         String[] words = product.getName().split(" ");
         List<Book> similarProducts = new ArrayList<Book>();
-       // List<String> mySet = new ArrayList<String>();
         for (int i = 0; i < words.length; i++) {
             List <Product> products = Util.iterableToList(ProductRepository.findByName(words[i]));
-            //System.out.println("                   Al products                          ");
-            //System.out.println("Al products "+products);
-            //System.out.println("Add to list "+products.get(i));
-            //System.out.println("Add to list "+words[i]+products.size());
             for (int j=0; j<products.size();j++) {
-                //System.out.println("Add to list " + products.get(j).getName());
                 boolean isProductExist = false;
                 if (similarProducts.size()==0)
                 {
@@ -112,7 +106,6 @@ public class BookStore extends Controller{
                 else{
                     for (int k = 0; k < similarProducts.size(); k++) {
                         if (products.get(j).getName().equals(similarProducts.get(k).getName())) {
-                            //System.out.println("products1" + products.get(j).getName() + " different from sP " + similarProducts.get(k).getName());
                             isProductExist = true;
                             break;
                         }
@@ -122,12 +115,6 @@ public class BookStore extends Controller{
                     }
                 }
             }
-        }
-//        for (int k = 0; k < similarProducts.size(); k++) {
-//            System.out.println(similarProducts.get(k).getName());
-//        }
-        /*Set<Book> mySet = new HashSet<Book>(similarProducts);
-        List<Book> array_L2 = new ArrayList<Book>(mySet);*/
         return ok(description.render(product,similarProducts));
     }
 
