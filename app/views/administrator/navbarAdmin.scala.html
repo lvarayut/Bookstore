@@ -1,0 +1,39 @@
+@*@(identity:securesocial.core.Identity)*@
+<div class="navbar navbar-inverse" role="navigation" style="border-radius: 0">
+    <div class="container">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+        </button>
+        <div class="navbar-header">
+            <a class="navbar-brand" href="@routes.Administrator.index()">BookStore Administrator</a>
+        </div>
+        <div class="navbar-collapse collapse bs-navbar-collapse">
+            <!-- Normal Navbar  -->
+            <!--<ul class="nav navbar-nav navbar-right visible-md visible-lg">-->
+                <!--<li><a href="@routes.Administrator.index()">Book management</a></li>-->
+                <!--<li>-->
+                    <!--<a href="#" class="dropdown-toggle" data-toggle="dropdown">@*identity.firstname*@Varayut <i class="fa fa-caret-down"></i></a>-->
+                    <!--<ul class="dropdown-menu bs-navbar-dropdown-menu
+                        <!--<li><a href="@routes.BookStore.setting()"><i class="fa fa-cog"></i> Setting</a></li>-->
+                        <!--<li><a href="/logout"><i class="fa fa-sign-out"></i> Logout</a></li>-->
+                    <!--</ul>-->
+                <!--</li>-->
+            <!--</ul>-->
+            <!-- Navbar Collapsed -->
+            <ul class="nav navbar-nav navbar-right bs-admin-menu-wrapper">
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-book"></i> Book</a>
+                    <ul class="dropdown-menu">
+                        <li><a href="@routes.Administrator.addBook()"><i class="fa fa-plus-square"></i> Add books</a></li>
+                        <li><a href="@routes.Administrator.listBook()"><i class="fa fa-minus-square"></i> Edit/Delete books</a></li>
+                    </ul>
+                </li>
+                <li><a href="@routes.BookStore.setting()"><i class="fa fa-cog"></i> Setting</a></li>
+                <li><a href="/logout"><i class="fa fa-sign-out"></i> Logout</a></li>
+            </ul>
+        </div>
+    </div>
+</div>

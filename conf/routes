@@ -12,16 +12,22 @@ GET         /description/:id                    controllers.BookStore.descriptio
 #POST        /sign-up                              controllers.Introduction.signUp()
 #GET     /lists                      controllers.Application.bookList()
 #GET     /order                      controllers.Application.buy(bookName,bookPrice: Float)
-GET     /addbook                           controllers.BookStore.addBook()
-POST    /addbook                           controllers.BookStore.handleAddBook()
-GET     /listbook                          controllers.BookStore.listBook()
-GET     /updatebook/:id                  controllers.BookStore.updateBook(id: String)
-POST    /updatebook                        controllers.BookStore.handleUpdateBook()
-GET     /deleteBook                        controllers.BookStore.deleteBook(id: String)
 GET     /loadAddresses					   controllers.BookStore.loadAddresses()
 POST 	/addAddress			                controllers.BookStore.addAddress()
 POST 	/editAddress						controllers.BookStore.editAddress()
 POST    /removeAddress                      controllers.BookStore.removeAddress()
+GET     /loadAccounts					    controllers.BookStore.loadAccounts()
+POST 	/addAccount			                controllers.BookStore.addAccount()
+POST 	/editAccount						controllers.BookStore.editAccount()
+POST    /removeAccount                      controllers.BookStore.removeAccount()
+POST    /addReview                          controllers.BookStore.addReview()
+POST     /loadComments                       controllers.BookStore.loadComments()
+GET     /loadCart                           controllers.BookStore.loadCart()
+POST    /addToCart                          controllers.BookStore.addToCart()
+GET     /payment                            controllers.BookStore.payment()
+POST    /handlePayment                      controllers.BookStore.handlePayment()
+GET     /history                            controllers.BookStore.history()
+GET     /loadHistory                        controllers.BookStore.loadHistory()
 
 # Login page
 GET         /login                         securesocial.controllers.LoginPage.login
@@ -48,6 +54,15 @@ GET         /not-authorized                securesocial.controllers.ProviderCont
 GET			/loadProducts/:count		   controllers.BookStore.loadProducts(count: Int)
 GET         /searchProducts                controllers.BookStore.searchProducts(name: String ?= "")
 GET         /getImage/:name                controllers.BookStore.getImage(name: String)
+
+# Admin
+GET         /administrator                 controllers.Administrator.index()
+GET         /administrator/addbook         controllers.Administrator.addBook()
+POST        /administrator/addbook         controllers.Administrator.handleAddBook()
+GET         /administrator/listbook        controllers.Administrator.listBook()
+GET         /administrator/updatebook/:id  controllers.Administrator.updateBook(id: String)
+POST        /administrator/updatebook      controllers.Administrator.handleUpdateBook()
+GET         /deleteBook                    controllers.Administrator.deleteBook(id: String)
 
 # Map static resources from the /public folder to the /assets URL path
 GET         /assets/*file                  controllers.Assets.at(path="/public", file)

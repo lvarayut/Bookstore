@@ -6,7 +6,10 @@ import jackson.ObjectIdSerializer;
 import org.jongo.marshall.jackson.oid.*;
 import jackson.*;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
+
 @JsonTypeInfo(use= JsonTypeInfo.Id.CLASS,property="_class")
 public class Product {
     @JsonProperty("_id")
@@ -27,8 +30,13 @@ public class Product {
     protected String imageName;
     @JsonProperty("rating")
     protected float rating;
+    @JsonProperty("comments")
+    protected List<Comment> comments;
+    @JsonProperty("userId")
+    protected String userId;
 
     public Product() {
+        comments = new ArrayList<Comment>();
     }
 
     public String getId() {
@@ -101,6 +109,22 @@ public class Product {
 
     public void setRating(float rating) {
         this.rating = rating;
+    }
+
+    public List<Comment> getComments() {
+        return comments;
+    }
+
+    public void setComments(List<Comment> comments) {
+        this.comments = comments;
+    }
+
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
     }
 
     @Override

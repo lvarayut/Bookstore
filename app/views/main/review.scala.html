@@ -1,0 +1,75 @@
+@(product : Book)
+<!--Set data for angularJs-->
+<div ng-init="loadComments()">
+<hr>
+<h2>Customer Reviews</h2>
+<div class="col-xs-12 col-sm-4 bs-detail-char-right bs-rating-wrapper">
+    <h4>Average rating {{ rating.average }}</h4>
+    <div><i ng-repeat="i in getRating(rating.average) track by $index" class="fa fa-star"></i> ({{ rating.all }})</div>
+    <div>
+        <div class="bs-rating-text">5 star</div>
+        <div class="bs-rating-bar">
+            <div class="bs-rating-bar-measure" style="width: {{ rating.fivePc }}%"></div>
+        </div>
+        <a href="#"> ({{ rating.five }})</a>
+    </div>
+    <div>
+        <div class="bs-rating-text">4 star</div>
+        <div class="bs-rating-bar">
+            <div class="bs-rating-bar-measure" style="width: {{ rating.fourPc }}%"></div>
+        </div>
+        <a href="#"> ({{ rating.four }})</a>
+    </div>
+    <div>
+        <div class="bs-rating-text">3 star</div>
+        <div class="bs-rating-bar">
+            <div class="bs-rating-bar-measure" style="width: {{ rating.threePc }}%"></div>
+        </div>
+        <a href="#"> ({{ rating.three }})</a>
+    </div>
+    <div>
+        <div class="bs-rating-text">2 star</div>
+        <div class="bs-rating-bar">
+            <div class="bs-rating-bar-measure" style="width: {{ rating.twoPc }}%"></div>
+        </div>
+        <a href="#">({{ rating.two }})</a>
+    </div>
+    <div>
+        <div class="bs-rating-text">1 star</div>
+        <div class="bs-rating-bar">
+            <div class="bs-rating-bar-measure" style="width: {{ rating.onePc }}%"></div>
+        </div>
+        <a href="#"> ({{ rating.one }})</a>
+    </div>
+</div>
+
+<div class="col-xs-12 col-sm-8 bs-review-wrapper">
+    <form role="form">
+        <div class="form-group">
+            <div class="alert alert-danger" ng-if="isLogin == false">
+                <strong>Warning!</strong> You must <a href="/login" class="alert-link">login</a> before adding a comment.
+            </div>
+            <label>Rating: </label>
+            <input ng-model="reviewField.rating" id="reviewRating" type="number" class="rating form-control" min=0 max=5 step=1 data-size="xs">
+        </div>
+        <div class="form-group">
+            <textarea ng-model="reviewField.description" class="form-control" placeholder="Let other people know what you think!" required=""></textarea>
+        </div>
+        <button ng-click="addReview()" type="submit" class="btn btn-primary pull-right">Comment!</button>
+    </form>
+</div>
+<div>
+    <div ng-repeat="review in reviews track by $index">
+        <div class="clearfix"></div>
+        <hr>
+        <div class="col-xs-12 col-sm-2">
+            <h5>{{ review.user }}</h5>
+            <p>Posted {{ review.publicationDate | date : 'd MMMM, yyyy'}}</p>
+        </div>
+        <div class="col-xs-12 col-sm-10 bs-detail-char-left">
+            <span> <i ng-repeat="i in getRating(review.rating) track by $index" class="fa fa-star bs-rating-star"></i><strong style="font-size: 1.1em;"> {{ review.title }}</strong></span>
+            <p>{{ review.description }}</p>
+        </div>
+    </div>
+</div>
+

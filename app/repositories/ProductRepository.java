@@ -23,22 +23,8 @@ public class ProductRepository {
         return PlayJongo.jongo().getCollection("products");
     }
 
-    public static void insert(Product product){
-        String puncPattern = "[^a-zA-Z]";
-        String duplicateDashPattern = "-+";
-        String trimPunc = "(^-|-$)";
-        String imageName = product.getName().replaceAll(puncPattern,"-").replaceAll(duplicateDashPattern,"-").replaceAll(trimPunc,"").toLowerCase();
-        product.setImageName(imageName);
-        GridFS gfs = PlayJongo.gridfs();
-        File imagePath = new File(product.getImagePath());
-        try {
-            GridFSInputFile gfsFile = gfs.createFile(imagePath);
-            gfsFile.setFilename(imageName);
-            gfsFile.save();
-        } catch (IOException e) {
-            System.out.println(e.toString());
-            e.printStackTrace();
-        }
+    public static void insert(Product product, File pictureFile){
+        utilHandleImage(product,pictureFile);
         products().save(product);
     }
 
@@ -47,6 +33,13 @@ public class ProductRepository {
     }
 
     public static void update(Product product){
+        products().update("{_id: #}",product.getId()).with(product);
+    }
+
+    public static void updateWithPicture(Product product, File pictureFile){
+        if(pictureFile != null){
+            utilHandleImage(product,pictureFile);
+        }
         products().update("{_id: #}",product.getId()).with(product);
     }
 
@@ -79,6 +72,36 @@ public class ProductRepository {
         GridFS gfs = PlayJongo.gridfs();
         GridFSDBFile gfsDBFile = gfs.findOne(name);
         return gfsDBFile.getInputStream();
+    }
+
+    public static void utilHandleImage(Product product, File pictureFile){
+        String puncPattern = "[^a-zA-Z]";
+        String duplicateDashPattern = "-+";
+        String trimPunc = "(^-|-$)";
+        String imageName = product.getName().replaceAll(puncPattern,"-").replaceAll(duplicateDashPattern,"-").replaceAll(trimPunc,"").toLowerCase();
+        product.setImageName(imageName);
+        GridFS gfs = PlayJongo.gridfs();
+        File imagePath;
+        if(pictureFile == null){
+            imagePath = new File(product.getImagePath());
+        }
+        else{
+            imagePath = pictureFile;
+        }
+        try {
+            // Delete the old file, if exist
+            GridFSDBFile gfsDBFile = gfs.findOne(product.getImageName());
+            if(gfsDBFile != null){
+                gfs.remove(gfsDBFile);
+            }
+            // Create a new image
+            GridFSInputFile gfsFile = gfs.createFile(imagePath);
+            gfsFile.setFilename(imageName);
+            gfsFile.save();
+        } catch (IOException e) {
+            System.out.println(e.toString());
+            e.printStackTrace();
+        }
     }
 
 }

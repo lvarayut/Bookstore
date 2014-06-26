@@ -1,5 +1,5 @@
 @*@(identity:securesocial.core.Identity)*@
-<div class="navbar navbar-default" role="navigation">
+<div class="navbar navbar-default" role="navigation" ng-init="loadCart()">
     <div class="container">
         <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
             <span class="sr-only">Toggle navigation</span>
@@ -55,17 +55,16 @@
                     <div class="dropdown-menu dropdown-menu-right bs-navbar-dropdown-container">
                         <div class="bs-navbar-wishlist-header">
                             <h5>Your Shopping Cart</h5>
-                            <a class="" href="#"><i class="glyphicon glyphicon-cog"></i></a>
+                            <a class="" href="@routes.BookStore.payment()"><i class="fa fa-credit-card"></i></a>
                         </div>
                         <div class="bs-navbar-wishlist-body">
-                            <a href="#">
-                                <img align="left" width="50" height="50" src="@routes.Assets.at("images/play-for-java.png")">
-                                <span>Play framework for java</span>
-                            </a>
-                            <a href="#">
-                                <img align="left" width="50" height="50" src="@routes.Assets.at("images/mongodb.png")">
-                                <span>MongoDB</span>
-                            </a>
+                            <p ng-if="!cart.length">No item in cart...</p>
+                            <div  ng-repeat="item in cart">
+                                <a href="/description/{{ item._id }}">
+                                    <img align="left" width="50" height="50" ng-src="/getImage/{{ item.imageName }}">
+                                    <span><b>{{ item.name }}</b> - {{ item.description | ellipsis }}</span>
+                                </a>
+                            </div>
                         </div>
                     </div>
                 </li>
@@ -74,18 +73,18 @@
                     <ul class="dropdown-menu bs-navbar-dropdown-menu">
                         <li><a href="@routes.BookStore.setting()"><i class="fa fa-cog"></i> Setting</a></li>
                         <li><a href="#"><i class="fa fa-heart"></i> Watchlist</a> </li>
-                        <li><a href="#"><i class="fa fa-clock-o"></i> History</a></li>
+                        <li><a href="@routes.BookStore.history()"><i class="fa fa-clock-o"></i> History</a></li>
                         <li><a href="/logout"><i class="fa fa-sign-out"></i> Logout</a></li>
                     </ul>
                 </li>
             </ul>
             <!-- Navbar Collapsed -->
             <ul class="nav navbar-nav navbar-right visible-xs visible-sm">
-                <li><a href="#"><i class="glyphicon glyphicon-bell"></i> Setting</a></li>
+                <li><a href="#"><i class="glyphicon glyphicon-bell"></i> Notification</a></li>
                 <li><a href="@routes.BookStore.setting()"><i class="fa fa-cog"></i> Setting</a></li>
                 <li><a href="#"><i class="fa fa-heart"></i> Watchlist</a> </li>
-                <li><a href="#"><i class="glyphicon glyphicon-shopping-cart"></i> Setting</a></li>
-                <li><a href="#"><i class="fa fa-clock-o"></i> History</a></li>
+                <li><a href="#"><i class="glyphicon glyphicon-shopping-cart"></i> Cart</a></li>
+                <li><a href="@routes.BookStore.history()"><i class="fa fa-clock-o"></i> History</a></li>
                 <li><a href="/logout"><i class="fa fa-sign-out"></i> Logout</a></li>
             </ul>
         </div>

@@ -14,6 +14,7 @@
     <link rel="stylesheet" href='@routes.Assets.at("stylesheets/jquery.fullPage.css")'>
     <link rel="stylesheet" href='@routes.Assets.at("stylesheets/font-awesome.min.css")'>
     <link rel="stylesheet" href='@routes.Assets.at("stylesheets/bootstrap-social.css")'>
+    <link rel="stylesheet" href='@routes.Assets.at("stylesheets/star-rating.min.css")'>
     <link rel="stylesheet" href='@routes.Assets.at("stylesheets/bookstore.css")'>
     <link rel="shortcut icon" type="image/png" href='@routes.Assets.at("images/favicon.png")'>
 
@@ -24,7 +25,7 @@
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
     </head>
-    <body ng-controller="BookStoreController" infinite-scroll="loadBooks()">
+    <body ng-controller="BookStoreController">
         @navbarMenu
         @content
         <footer>
@@ -34,7 +35,9 @@
         <script src='@routes.Assets.at("javascripts/jquery-1.11.0.min.js")'></script>
         <script src='@routes.WebJarAssets.at(WebJarAssets.locate("js/bootstrap.min.js"))'></script>
         <script src='@routes.WebJarAssets.at(WebJarAssets.locate("angular.min.js"))'></script>
+        <script src='@routes.WebJarAssets.at(WebJarAssets.locate("angular-sanitize.min.js"))'></script>
         <script src='@routes.Assets.at("javascripts/ng-infinite-scroll.min.js")'></script>
+        <script src='@routes.Assets.at("javascripts/star-rating.min.js")'></script>
         <script src='@routes.Assets.at("javascripts/bookstore.js")'></script>
         @javascript
     </body>

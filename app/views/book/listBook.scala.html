@@ -1,6 +1,7 @@
 @*@(identity:securesocial.core.Identity)*@
 @(books : List[Book])
-@layout{
+@import views.html.administrator._
+@layoutAdmin{
     <h2>All Products</h2>
     <hr>
     <div class="table-responsive">
@@ -19,7 +20,7 @@
             </thead>
             <tbody>
             @for(book <- books){
-                <tr ng-click="editBook($event)" href="@routes.BookStore.updateBook(book.getId())">
+                <tr ng-click="editBook($event)" data-redirect="@routes.Administrator.updateBook(book.getId())" href="#">
                     <td>@book.getName()</td>
                     <td>@book.getType()</td>
                     <td>@book.getDescription()</td>

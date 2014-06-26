@@ -289,11 +289,69 @@ html{
   }
 
  @media(min-width:768px){
-    .bs-detail-char{
-        border-right: solid #c7c7c7 1px;
+    .bs-detail-char-right{
+        border-right: dashed #c7c7c7 1px;
+    }
+    .bs-detail-char-left{
+        border-left: dashed #c7c7c7 1px;
     }
  }
 
+ .bs-review-wrapper> form textarea{
+    min-height: 85px;
+ }
+ .bs-rating-wrapper .bs-rating-text{
+    font-weight: bold;
+    display: inline-block;
+ }
+
+ .bs-rating-star{
+    color: #fde16d;
+    text-shadow: 0 0 1px rgba(0,0,0,.7)
+ }
+  .bs-rating-wrapper .bs-rating-bar{
+     display: inline-block;
+     width:178px;
+     background-color:#f4f4cf;
+     overflow: hidden;
+     height:11px
+     border: 1px solid #ccc;
+  }
+  .bs-rating-wrapper .bs-rating-bar > .bs-rating-bar-measure{
+    background-color:#ffcc66;
+    height:11px;
+    transition: all .5s ease-out;
+    -o-transition: all .5s ease-out;
+    -moz-transition: all .5s ease-out;
+    -webkit-transition: all .5s ease-out;
+  }
+  .bs-rating-wrapper .badge{
+    background-color: #3276b1;
+    border-color: #285e8e;
+    color: #FFFFFF;
+  }
+
+  /*
+   * Payment
+   */
+
+   .bs-total-price *{
+        font-size: 25px;
+   }
+   .bs-payment-modal h5{
+        font-weight: bold;
+   }
+
+/*
+ * Administrator
+ */
+ .bs-admin-menu-wrapper > .dropdown > .dropdown-menu{
+    text-align: left;
+ }
+
+/*
+ *  Similar Product /description
+ */
 .carousel-control.right{
  background-image:none;
  }
@@ -305,7 +363,5 @@ html{
  .carousel-control{
      width: 5%;
      color: #6D071A;
- }
 
-
-
+}
