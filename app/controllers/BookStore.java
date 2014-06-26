@@ -14,6 +14,10 @@ import views.html.book.*;
 import interceptors.WithProvider;
 import securesocial.core.Identity;
 import securesocial.core.java.SecureSocial;
+import java.util.ArrayList;
+import java.util.Set;
+import java.util.List;
+import java.util.HashSet;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -92,18 +96,35 @@ public class BookStore extends Controller{
     }
 
 
+    /**
+     * product: Description of the product
+     * similarProducts: Return books with the same keywords
+     * @param id
+     * @return
+     */
+
 
     public static Result description(String id){
         Book product = (Book)ProductRepository.findOneById(id);
         String[] words = product.getName().split(" ");
         List<Book> similarProducts = new ArrayList<Book>();
-        System.out.println("Before Add to list ");
         for (int i = 0; i < words.length; i++) {
-            List <Product> products = Util.iterableToList(ProductRepository.findByName(words[i]));
-            System.out.println("Add to list "+words[i]+products.size());
-            for (int j=0; j<products.size();j++){
-                System.out.println("Add to list "+products.get(j));
-                similarProducts.add((Book)products.get(j));
+            List<Product> products = Util.iterableToList(ProductRepository.findByName(words[i]));
+            for (int j = 0; j < products.size(); j++) {
+                boolean isProductExist = false;
+                if (similarProducts.size() == 0) {
+                    similarProducts.add((Book) products.get(j));
+                } else {
+                    for (int k = 0; k < similarProducts.size(); k++) {
+                        if (products.get(j).getName().equals(similarProducts.get(k).getName())) {
+                            isProductExist = true;
+                            break;
+                        }
+                    }
+                    if (!isProductExist) {
+                        similarProducts.add((Book) products.get(j));
+                    }
+                }
             }
         }
         return ok(description.render(product,similarProducts));
@@ -117,7 +138,7 @@ public class BookStore extends Controller{
     public static Result loadAddresses(){
         Identity userIdentity =(Identity) ctx().args.get(SecureSocial.USER_KEY);
         User currentUser = Util.transformIdentityToUser(userIdentity);
-        User dbUser = UserRepository.findByEmail(currentUser.getEmail()); 
+        User dbUser = UserRepository.findByEmail(currentUser.getEmail());
         return ok(Json.toJson(dbUser.getAddresses()));
     }
 
@@ -197,7 +218,7 @@ public class BookStore extends Controller{
         return ok();
     }
 
-    /** 
+    /**
      * Remove a requested address
      * @return HTML status
      */

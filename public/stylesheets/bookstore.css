@@ -304,6 +304,7 @@ html{
     font-weight: bold;
     display: inline-block;
  }
+
  .bs-rating-star{
     color: #fde16d;
     text-shadow: 0 0 1px rgba(0,0,0,.7)
@@ -348,5 +349,19 @@ html{
     text-align: left;
  }
 
+/*
+ *  Similar Product /description
+ */
+.carousel-control.right{
+ background-image:none;
+ }
 
+.carousel-control.left{
+ background-image:none;
+ }
 
+ .carousel-control{
+     width: 5%;
+     color: #6D071A;
+
+}
